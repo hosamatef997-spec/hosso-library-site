@@ -1,0 +1,12 @@
+{
+  "_note": "Font pairs from the font showcase (fontshow.mp4). Files live in C:/Users/mrsem/insta-reel/فونط. Build the showcase again: node make-fontshow.mjs",
+  "pairs": [
+    { "id": 1, "arabic": "Cairo Black", "latin": "Quicksand Bold", "motion": "slam: punch + shake", "use": "الهوك، الهوية الأساسية" },
+    { "id": 2, "arabic": "Alexandria", "latin": "Unbounded Black", "motion": "mask rise: words rise out of a line", "use": "حلقات التكنولوجيا وClaude" },
+    { "id": 3, "arabic": "El Messiri", "latin": "Playfair Display Italic", "motion": "blur stagger + gold underline", "use": "الفن والمونتاج" },
+    { "id": 4, "arabic": "Reem Kufi", "latin": "Space Grotesk", "motion": "typewriter + scramble decode", "use": "الأوامر والكود" },
+    { "id": 5, "arabic": "Lalezar", "latin": "Bebas Neue", "motion": "poster punch: stretch + gold block", "use": "الأرقام والصدمة" },
+    { "id": 6, "arabic": "Readex Pro", "latin": "JetBrains Mono", "motion": "word rotate: 3D cylinder", "use": "القوايم واللي بيتغير" },
+    { "id": 7, "arabic": "Aref Ruqaa", "latin": "Instrument Serif Italic", "motion": "ink wipe: written right to left", "use": "الحكي والتوقيع" }
+  ]
+}
