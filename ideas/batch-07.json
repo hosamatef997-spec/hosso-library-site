@@ -154,7 +154,8 @@
     ],
     "source": "023",
     "at": 15,
-    "studio": "todo"
+    "studio": "built",
+    "builder": "morph"
   },
   {
     "id": "023-camera-through-layers",
