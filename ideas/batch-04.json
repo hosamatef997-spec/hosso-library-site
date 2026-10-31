@@ -11,7 +11,7 @@
     ],
     "source": "012",
     "at": 0.5,
-    "studio": "todo"
+    "studio": "guide"
   },
   {
     "id": "012-pop-out",
@@ -40,7 +40,7 @@
     ],
     "source": "012",
     "at": 5,
-    "studio": "todo"
+    "studio": "guide"
   },
   {
     "id": "012-red-word-caption",
@@ -69,7 +69,7 @@
     ],
     "source": "013",
     "at": 1,
-    "studio": "todo"
+    "studio": "guide"
   },
   {
     "id": "013-ui-portfolio-ad",

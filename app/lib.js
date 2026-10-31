@@ -114,7 +114,7 @@
       keys.forEach((k) => {
         const m = MOVES[k];
         const el = h(`<article class="card"><div class="stage mstage"><div class="line" style="${MONO.has(k) ? "font-family:var(--mono);direction:ltr" : ""}">${MOVE_TEXT[k]}</div><button class="replay">${ICON_REPLAY}</button></div>
-          <div class="meta"><div class="meta-row"><h3>${esc(m.ar)}</h3>${code(m.name, `"textMotion": "${k}"`)}</div><p>${esc(m.use)}</p><div class="tags">${k === "slam" ? '<span class="tag gold">في الاستوديو</span>' : '<span class="tag soon">مكتبة · جاهزة للإضافة</span>'}</div></div></article>`);
+          <div class="meta"><div class="meta-row"><h3>${esc(m.ar)}</h3>${code(m.name, `{ "type": "line", "move": "${k}", "text": "…" }`)}</div><p>${esc(m.use)}</p><div class="tags"><span class="tag gold">في الاستوديو</span></div></div></article>`);
         grid.append(el);
         const line = $(".line", el), html = line.innerHTML;
         loop(() => { line.innerHTML = html; gsap.set(line, { clearProps: "all" }); return m.run(line); }, el);
@@ -235,7 +235,7 @@
     },
     ideas() {
       const SEC = { ideas: "أفكار ريلز", hooks: "الهوك", "speaker-text": "الكلام مع المتكلم", motion: "الموشن", story: "القصة والكلام", edit: "المونتاج", profile: "البروفايل والبايو", sound: "الصوت", shoot: "التصوير والألوان" };
-      const ST = { built: ['<span class="tag gold">في الاستوديو</span>'], todo: ['<span class="tag soon">هتتبني في الاستوديو</span>'], "n/a": ['<span class="tag">للتصوير والكتابة</span>'] };
+      const ST = { built: ['<span class="tag gold">في الاستوديو</span>'], guide: ['<span class="tag gold">في دليل الكتابة</span>'], todo: ['<span class="tag soon">هتتبني في الاستوديو</span>'], "n/a": ['<span class="tag">للتصوير</span>'] };
       const list = C.ideas || [];
       let sec = "all", st = "all", q = "";
       const secs = $("#secs");

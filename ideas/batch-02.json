@@ -107,7 +107,7 @@
     ],
     "source": "007",
     "at": 1,
-    "studio": "todo"
+    "studio": "guide"
   },
   {
     "id": "007-sandwich",
@@ -121,7 +121,7 @@
     ],
     "source": "007",
     "at": 8,
-    "studio": "todo"
+    "studio": "guide"
   },
   {
     "id": "007-ai-origami-film",
@@ -135,6 +135,6 @@
     ],
     "source": "007",
     "at": 20,
-    "studio": "todo"
+    "studio": "guide"
   }
 ]

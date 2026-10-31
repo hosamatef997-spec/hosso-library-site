@@ -39,7 +39,7 @@
     ],
     "source": "027",
     "at": 0.5,
-    "studio": "todo"
+    "studio": "guide"
   },
   {
     "id": "028-three-shots-rule",
@@ -67,7 +67,7 @@
     ],
     "source": "028",
     "at": 5,
-    "studio": "todo"
+    "studio": "guide"
   },
   {
     "id": "029-dot-to-circle-reveal",
@@ -96,7 +96,7 @@
     ],
     "source": "029",
     "at": 3,
-    "studio": "todo"
+    "studio": "guide"
   },
   {
     "id": "030-effects-episode",
@@ -111,7 +111,7 @@
     ],
     "source": "030",
     "at": 2,
-    "studio": "todo"
+    "studio": "guide"
   },
   {
     "id": "030-glass-widgets-head",
@@ -211,6 +211,7 @@
     ],
     "source": "030",
     "at": 22,
-    "studio": "todo"
+    "studio": "built",
+    "builder": "timeline"
   }
 ]

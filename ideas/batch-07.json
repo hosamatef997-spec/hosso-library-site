@@ -67,7 +67,7 @@
     ],
     "source": "022",
     "at": 10,
-    "studio": "todo"
+    "studio": "guide"
   },
   {
     "id": "022-bubble-title",
@@ -95,7 +95,7 @@
     ],
     "source": "023",
     "at": 0.5,
-    "studio": "todo"
+    "studio": "guide"
   },
   {
     "id": "023-pause-highlight",
@@ -109,7 +109,8 @@
     ],
     "source": "023",
     "at": 2,
-    "studio": "todo"
+    "studio": "built",
+    "builder": "line highlight"
   },
   {
     "id": "023-cut-on-word",

@@ -12,7 +12,7 @@
     ],
     "source": "019",
     "at": 20,
-    "studio": "todo"
+    "studio": "guide"
   },
   {
     "id": "019-explainer-split-layout",
@@ -136,6 +136,6 @@
     ],
     "source": "020",
     "at": 0.5,
-    "studio": "todo"
+    "studio": "guide"
   }
 ]

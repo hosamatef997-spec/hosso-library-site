@@ -55,7 +55,8 @@
     ],
     "source": "024",
     "at": 9,
-    "studio": "todo"
+    "studio": "built",
+    "builder": "connect"
   },
   {
     "id": "024-aurora-sections",
