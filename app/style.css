@@ -148,3 +148,22 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .tools { top: 54px; }
   .brand span { display: none; }
 }
+
+/* ---------- house style (hossovisuals.online): the warm dark of the portfolio's film sections, its gold, and its fonts */
+:root {
+  --bg: #13100b; --panel: #1a160f; --card: #1f1a12; --line: #3a3022; --line-2: #4a3d2a;
+  --text: #f3ecdd; --dim: #b8a88a; --mute: #7d6f57;
+  --gold: #c9a44c; --gold-hi: #e7c879; --gold-lo: #8c6a1c; --glow: rgba(201, 164, 76, 0.32);
+  --ui: "El Messiri", "Inter", "Cairo", system-ui, sans-serif; --serif: "Playfair Display", "El Messiri", serif; --accent: "Cormorant Garamond", serif;
+}
+body { background: radial-gradient(1200px 600px at 80% -10%, rgba(201, 164, 76, 0.12), transparent 60%), var(--bg); }
+h1, h2, .group-title { font-family: var(--serif); font-weight: 500; letter-spacing: .01em; }
+.top { background: rgba(19, 16, 11, 0.86); border-bottom-color: var(--line); }
+.top .brand span { font-family: var(--accent); letter-spacing: .3em; color: var(--gold-hi); }
+.top .nav a { font-family: var(--ui); }
+.top .nav a.on { color: var(--gold-hi); }
+.home-link { margin-inline-start: auto; font-family: "Inter", sans-serif; font-size: 13px; letter-spacing: .08em; color: var(--gold-hi); border: 1px solid var(--line-2); border-radius: 999px; padding: 7px 14px; white-space: nowrap; }
+.home-link:hover { border-color: var(--gold); }
+.card { border-radius: 14px; }
+.tag.gold, .chip.on { background: linear-gradient(135deg, #c9a44c, #9c7a26); color: #241f17; border-color: transparent; }
+::selection { background: var(--gold); color: #241f17; }
