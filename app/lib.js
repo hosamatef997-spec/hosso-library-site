@@ -20,6 +20,18 @@
   });
   const code = (v, copy) => `<button class="code" data-copy='${esc(copy ?? v)}'>${esc(v)}</button>`;
   const setCount = (n) => { const el = $("#count"); if (el) el.textContent = `${n} items`; };
+  // cards for demo clips (overlays, scene effects): plays while on screen, sound on demand
+  const demos = (list, keyOf) => {
+    setCount(list.length);
+    list.forEach((d) => {
+      const el = h(`<article class="card"><div class="stage"><div class="phone"><video muted playsinline loop preload="none" poster="${d.poster}" src="${d.video}"></video><button class="sound-toggle">SOUND OFF</button></div></div>
+        <div class="meta"><div class="meta-row"><h3>${esc(d.name)}</h3>${keyOf(d) ? code(keyOf(d)) : ""}</div><p>${esc(d.info)}</p></div></article>`);
+      grid.append(el);
+      const v = el.querySelector("video");
+      onView(el, () => { v.preload = "auto"; v.play().catch(() => {}); }, () => v.pause());
+      el.querySelector(".sound-toggle").addEventListener("click", (e) => { v.muted = !v.muted; e.target.textContent = v.muted ? "SOUND OFF" : "SOUND ON"; });
+    });
+  };
 
   // run an animation only while its card is on screen
   const onView = (el, start, stop) => new IntersectionObserver((es) => es.forEach((e) => (e.isIntersecting ? start() : stop && stop())), { rootMargin: "120px" }).observe(el);
@@ -144,6 +156,9 @@
     },
     scenes() {
       setCount(C.scenes.length);
+      // search by name or by what it does
+      const q = $("#q");
+      if (q) q.addEventListener("input", () => { const t = q.value.trim().toLowerCase(); [...grid.children].forEach((el, i) => { const s = C.scenes[i]; el.style.display = !t || `${s.id} ${s.info}`.toLowerCase().includes(t) ? "" : "none"; }); });
       C.scenes.forEach((s) => {
         const el = h(`<article class="card"><div class="stage"><div class="phone">${s.clip ? `<video muted playsinline loop preload="none" poster="${s.clip.poster}" src="${s.clip.video}"></video><button class="sound-toggle">SOUND OFF</button>` : '<div class="no-clip">لسه مفيش كليب مترندر للمشهد ده<br/>(بيتعمل في ريل التجربة الجاي)</div>'}</div></div>
           <div class="meta"><div class="meta-row"><h3>${esc(s.id)}</h3>${code(`"type": "${s.id}"`)}</div><p>${esc(s.info)}</p>${s.clip ? `<div class="tags"><span class="tag">من ${esc(s.clip.from)}</span></div>` : ""}</div></article>`);
@@ -154,6 +169,14 @@
         onView(el, () => { if (v.preload === "none") { v.preload = "auto"; v.currentTime = s.clip.start; } v.play().catch(() => {}); }, () => v.pause());
         $(".sound-toggle", el).addEventListener("click", (e) => { v.muted = !v.muted; e.target.textContent = v.muted ? "SOUND OFF" : "SOUND ON"; });
       });
+    },
+    // overlays and scene effects: a clip of each, the name, and the exact key to write in the scene
+    overlays() { demos(C.overlays || [], (d) => d.section === "overlays" ? `"${d.id}": { … }` : ""); },
+    effects() { demos(C.effects || [], (d) => d.id.startsWith("skin-") ? `"skin": "${d.id.slice(5)}"` : d.id.startsWith("bg-") ? `"bg": "${d.id.slice(3)}"` : `"${d.id}": true`); },
+    carousels() {
+      setCount((C.carousels || []).length);
+      (C.carousels || []).forEach((c) => grid.append(h(`<article class="card"><div class="stage" style="height:auto;padding:0"><img loading="lazy" src="${c.img}" alt="" style="width:100%;display:block"/></div>
+        <div class="meta"><div class="meta-row"><h3>${esc(c.job)}</h3></div><div class="tags"><span class="tag gold">${esc(c.style)}</span></div></div></article>`)));
     },
     stickers() {
       const ENTER = {
@@ -284,7 +307,7 @@
       draw();
     },
     home() {
-      const n = { fonts: C.fonts.length, pairs: C.pairs.length, motion: Object.keys(MOVES).length, transitions: C.transitions.length, scenes: C.scenes.length, stickers: C.stickers.length, sounds: C.sounds.length, typing: 6, ideas: (C.ideas || []).length, inspiration: (C.inspiration || []).length, backgrounds: C.backgrounds.length };
+      const n = { fonts: C.fonts.length, pairs: C.pairs.length, motion: Object.keys(MOVES).length, transitions: C.transitions.length, scenes: C.scenes.length, stickers: C.stickers.length, sounds: C.sounds.length, typing: 6, ideas: (C.ideas || []).length, inspiration: (C.inspiration || []).length, backgrounds: C.backgrounds.length, overlays: (C.overlays || []).length, effects: (C.effects || []).length, carousels: (C.carousels || []).length };
       document.querySelectorAll("[data-n]").forEach((el) => (el.textContent = n[el.dataset.n] ?? ""));
       const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
       // each scene is its own small clip now: loop it, show its poster until it plays
