@@ -145,7 +145,7 @@
     scenes() {
       setCount(C.scenes.length);
       C.scenes.forEach((s) => {
-        const el = h(`<article class="card"><div class="stage"><div class="phone">${s.clip ? `<video muted playsinline preload="none" src="${s.clip.video}#t=${s.clip.start}"></video><button class="sound-toggle">SOUND OFF</button>` : '<div class="no-clip">لسه مفيش كليب مترندر للمشهد ده<br/>(بيتعمل في ريل التجربة الجاي)</div>'}</div></div>
+        const el = h(`<article class="card"><div class="stage"><div class="phone">${s.clip ? `<video muted playsinline loop preload="none" poster="${s.clip.poster}" src="${s.clip.video}"></video><button class="sound-toggle">SOUND OFF</button>` : '<div class="no-clip">لسه مفيش كليب مترندر للمشهد ده<br/>(بيتعمل في ريل التجربة الجاي)</div>'}</div></div>
           <div class="meta"><div class="meta-row"><h3>${esc(s.id)}</h3>${code(`"type": "${s.id}"`)}</div><p>${esc(s.info)}</p>${s.clip ? `<div class="tags"><span class="tag">من ${esc(s.clip.from)}</span></div>` : ""}</div></article>`);
         grid.append(el);
         const v = $("video", el);
@@ -286,23 +286,54 @@
     home() {
       const n = { fonts: C.fonts.length, pairs: C.pairs.length, motion: Object.keys(MOVES).length, transitions: C.transitions.length, scenes: C.scenes.length, stickers: C.stickers.length, sounds: C.sounds.length, typing: 6, ideas: (C.ideas || []).length, inspiration: (C.inspiration || []).length, backgrounds: C.backgrounds.length };
       document.querySelectorAll("[data-n]").forEach((el) => (el.textContent = n[el.dataset.n] ?? ""));
-      // a clip that plays only its own scene, on a loop
-      const clipEl = (s) => { const v = h(`<video muted playsinline autoplay preload="metadata" src="${s.clip.video}#t=${s.clip.start},${s.clip.end}"></video>`);
-        v.addEventListener("timeupdate", () => { if (v.currentTime >= s.clip.end - 0.05) { v.currentTime = s.clip.start; v.play(); } }); return v; };
+      const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      // each scene is its own small clip now: loop it, show its poster until it plays
+      const clipEl = (s, loop = true) => h(`<video muted playsinline ${still ? "" : "autoplay"} ${loop ? "loop" : ""} preload="metadata" poster="${s.clip.poster}" src="${s.clip.video}"></video>`);
       const withClip = C.scenes.filter((s) => s.clip);
       const pick = (ids) => ids.map((id) => withClip.find((s) => s.id === id)).filter(Boolean);
       const reel = [...pick(["shapemorph", "world", "composer", "burst", "glassicons"]), ...withClip].filter((s, i, a) => a.indexOf(s) === i).slice(0, 3);
       reel.forEach((s) => { const p = h(`<a class="h-phone" href="scenes.html" title="${esc(s.id)}"></a>`); p.append(clipEl(s)); $(".h-reel").append(p); });
-      const sc = pick(["phonegrid", "carousel3d", "hud"])[0] || withClip[3];
-      if (sc) $(".h-clip").append(clipEl(sc));
-      (C.ideas || []).filter((i) => i.frame).slice(-4).forEach((i) => $(".h-mosaic").append(h(`<img loading="lazy" src="${i.frame}" alt=""/>`)));
-      (C.inspiration || []).filter((x) => x.thumb).slice(0, 8).forEach((x) => $(".h-strip").append(h(
-        `<a class="h-card" href="inspiration.html"><img loading="lazy" src="${x.thumb}" alt=""/><span>${esc(x.title || "")}</span></a>`)));
-      if (!matchMedia("(prefers-reduced-motion: reduce)").matches)
+
+      // the three rooms, each shown the way it looks inside a reel
+      // scenes: a playlist of other scenes, one after another
+      const list = pick(["letters", "headline", "phonegrid", "carousel3d", "hud", "coindrop", "stickman", "typearch"]);
+      if (list.length) { let k = 0; const v = clipEl(list[0], false); $(".h-scenes").append(v);
+        v.addEventListener("ended", () => { k = (k + 1) % list.length; v.poster = list[k].clip.poster; v.src = list[k].clip.video; v.play().catch(() => {}); }); }
+      // ideas: the newest idea cards with a frame, turning like slides
+      const ideaList = (C.ideas || []).filter((i) => i.frame).slice(-8);
+      ideaList.forEach((i, k) => $(".h-ideas").append(h(`<figure class="${k ? "" : "on"}"><img loading="lazy" src="${i.frame}" alt=""/><figcaption>${esc(i.title)}</figcaption></figure>`)));
+      // fonts: one word through the identity fonts and a few from the catalog
+      const FAMS = ["Aref Ruqaa", "Reem Kufi", "Lalezar", "Rakkas", "Marhey"];
+      const fontList = FAMS.map((fam) => C.fonts.find((f) => f.file && f.family === fam)).filter(Boolean);
+      const word = $(".h-word"), fname = $(".h-fname");
+      let fontsAsked = false; // the font files are heavy: fetch them only when the fonts phone comes on screen
+      onView($(".h-fonts"), () => { if (fontsAsked) return; fontsAsked = true; fontList.forEach((f) => new FontFace(`lib-${f.id}`, `url("${f.file}")`).load().then((ff) => document.fonts.add(ff)).catch(() => {})); });
+      if (!still) {
+        let fi = 0, ii = 0;
+        setInterval(() => {
+          if (fontList.length) { fi = (fi + 1) % fontList.length; word.style.fontFamily = `lib-${fontList[fi].id}, "El Messiri"`; fname.textContent = fontList[fi].name; }
+          const figs = document.querySelectorAll(".h-ideas figure");
+          if (figs.length) { figs[ii].classList.remove("on"); ii = (ii + 1) % figs.length; figs[ii].classList.add("on"); }
+        }, 1800);
         gsap.from(".h-phone", { y: 60, opacity: 0, duration: 1.1, stagger: 0.12, ease: "expo.out" });
-      else document.querySelectorAll("video").forEach((v) => v.removeAttribute("autoplay"));
+      }
+      if (fontList[0]) fname.textContent = fontList[0].name;
+
+      // latest additions: newest scenes, ideas, fonts and sounds, each with a preview and its date
+      const KIND = { scene: "مشهد", idea: "فكرة", font: "خط", sound: "صوت" };
+      (C.latest || []).forEach((u) => {
+        let prev = "";
+        if (u.kind === "scene") prev = `<img loading="lazy" src="${u.poster}" alt=""/><video muted playsinline loop preload="none" src="${u.video}"></video>`;
+        else if (u.kind === "font") { onView($(".h-feed"), () => new FontFace(`lib-${u.id}`, `url("${u.file}")`).load().then((ff) => document.fonts.add(ff)).catch(() => {})); prev = `<span class="h-fw" style="font-family:'lib-${u.id}','El Messiri'">حكاية</span>`; }
+        else if (u.kind === "sound") prev = `<img class="wave" loading="lazy" src="${u.poster}" alt=""/><audio preload="none" src="${u.file}"></audio>`;
+        else prev = u.poster ? `<img loading="lazy" src="${u.poster}" alt=""/>` : `<span class="h-it">${esc(u.title)}</span>`;
+        const el = h(`<a class="h-up ${u.kind}" href="${u.href}"><div class="h-prev">${prev}</div><div class="h-meta"><span class="h-kind">${KIND[u.kind]}</span><time>${esc(u.date.slice(5).split("-").reverse().join("/"))}</time></div><b>${esc(u.title)}</b></a>`);
+        const media = el.querySelector("video, audio");
+        if (media) { el.addEventListener("mouseenter", () => media.play().catch(() => {})); el.addEventListener("mouseleave", () => media.pause()); }
+        $(".h-feed").append(el);
+      });
     },
   };
-  $("#built") && ($("#built").textContent = C.built);
+  document.querySelectorAll("#built, .built").forEach((b) => (b.textContent = C.built));
   render[page]?.();
 })();
