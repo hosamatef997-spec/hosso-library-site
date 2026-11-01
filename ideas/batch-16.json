@@ -72,7 +72,8 @@
   ],
   "source": "DfF4DrSRBXy",
   "at": 2.2,
-  "studio": "todo"
+  "studio": "built",
+  "builder": "letters"
  },
  {
   "id": "042-browser-window-frame",
@@ -86,7 +87,8 @@
   ],
   "source": "DfF4DrSRBXy",
   "at": 2.2,
-  "studio": "todo"
+  "studio": "built",
+  "builder": "letters"
  },
  {
   "id": "043-timeline-ui-captions",
@@ -442,7 +444,8 @@
   ],
   "source": "engabdulrahmanofficial/DfJwPpjiF1B",
   "at": 1,
-  "studio": "todo"
+  "studio": "built",
+  "builder": "headline"
  },
  {
   "id": "058-drop-morph-icon",
