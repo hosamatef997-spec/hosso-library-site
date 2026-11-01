@@ -51,7 +51,9 @@
    "Phone"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "floodIn (any scene)",
+  "lab": "jobs/_lab/2026-11-01-pm3"
  },
  {
   "id": "pm-003-landing-page-3d-flyover",
@@ -76,7 +78,9 @@
    "Music"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "flyover",
+  "lab": "jobs/_lab/2026-11-01-pm3"
  },
  {
   "id": "pm-004-engraving-paint-over-photos",
@@ -99,7 +103,9 @@
    "Photos"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "engrave",
+  "lab": "jobs/_lab/2026-11-01-pm3"
  },
  {
   "id": "pm-005-recipe-pour-diagram",
@@ -122,7 +128,9 @@
    "Diagrams"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "recipe",
+  "lab": "jobs/_lab/2026-11-01-pm3"
  },
  {
   "id": "pm-006-hero-object-thread",
@@ -146,7 +154,9 @@
    "Music"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "dotthread",
+  "lab": "jobs/_lab/2026-11-01-pm2"
  },
  {
   "id": "pm-007-ball-guides-ui",
@@ -169,7 +179,9 @@
    "Music"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "ballui",
+  "lab": "jobs/_lab/2026-11-01-pm2"
  },
  {
   "id": "pm-008-single-world-camera",
@@ -193,7 +205,9 @@
    "Music"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "world",
+  "lab": "jobs/_lab/2026-11-01-pm2"
  },
  {
   "id": "pm-009-cursor-driven-ui",
@@ -220,7 +234,9 @@
    "Phone"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "screen.cursor",
+  "lab": "jobs/_lab/2026-11-01-pm3"
  },
  {
   "id": "pm-010-liquid-glass-controls",
@@ -246,7 +262,9 @@
    "Phone"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "glassbar",
+  "lab": "jobs/_lab/2026-11-01-pm2"
  },
  {
   "id": "pm-011-ai-composer-glow",
@@ -301,7 +319,7 @@
    "Charts"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "guide"
  },
  {
   "id": "pm-013-iris-blades-transition",
@@ -326,7 +344,9 @@
    "Music"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "bladesIn (any scene)",
+  "lab": "jobs/_lab/2026-11-01-pm3"
  },
  {
   "id": "pm-014-spring-graph-sync",
@@ -350,7 +370,9 @@
    "Music"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "springgraph",
+  "lab": "jobs/_lab/2026-11-01-pm2"
  },
  {
   "id": "pm-015-type-as-architecture",
@@ -372,7 +394,9 @@
    "Kinetic type"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "typearch",
+  "lab": "jobs/_lab/2026-11-01-pm2"
  },
  {
   "id": "pm-016-masked-word-hook",
@@ -398,7 +422,9 @@
    "Photos"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "maskhook",
+  "lab": "jobs/_lab/2026-11-01-pm2"
  },
  {
   "id": "pm-017-3d-carousel-reflection",
@@ -423,7 +449,9 @@
    "Music"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "carousel3d",
+  "lab": "jobs/_lab/2026-11-01-pm2"
  },
  {
   "id": "pm-018-scan-line-picks",
@@ -448,7 +476,9 @@
    "Music"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "scanpick",
+  "lab": "jobs/_lab/2026-11-01-pm2"
  },
  {
   "id": "pm-019-dot-to-universe-zoom",
@@ -473,7 +503,9 @@
    "Particles"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "dotzoom",
+  "lab": "jobs/_lab/2026-11-01-pm2"
  },
  {
   "id": "pm-020-logo-slow-assemble",
@@ -497,7 +529,9 @@
    "Particles"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "logoassemble",
+  "lab": "jobs/_lab/2026-11-01-pm2"
  },
  {
   "id": "pm-021-badge-unlock-3d",
@@ -577,7 +611,9 @@
    "Phone"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "devicegrow",
+  "lab": "jobs/_lab/2026-11-01-pm2"
  },
  {
   "id": "pm-024-before-after-drag-slider",
@@ -632,7 +668,9 @@
    "Code"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "bars / stat / odometer (existing)",
+  "lab": ""
  },
  {
   "id": "pm-026-code-terminal-reveal",
@@ -687,7 +725,9 @@
    "Charts"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "whiteboard",
+  "lab": "jobs/_lab/2026-11-01-pm3"
  },
  {
   "id": "pm-028-paper-marker-notes",
@@ -711,7 +751,9 @@
    "Music"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "marker",
+  "lab": "jobs/_lab/2026-11-01-pm3"
  },
  {
   "id": "pm-029-pixel-art-scenes",
@@ -737,7 +779,9 @@
    "Diagrams"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "pixel",
+  "lab": "jobs/_lab/2026-11-01-pm3"
  },
  {
   "id": "pm-030-shadow-theatre-cutout",
@@ -759,7 +803,9 @@
    "Characters"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "shadow",
+  "lab": "jobs/_lab/2026-11-01-pm3"
  },
  {
   "id": "pm-031-style-skins",
@@ -784,7 +830,9 @@
    "Charts"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "skin: scope|riso (any scene)",
+  "lab": "jobs/_lab/2026-11-01-pm3"
  },
  {
   "id": "pm-032-procedural-character",
@@ -809,7 +857,9 @@
    "Particles"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "stickman",
+  "lab": "jobs/_lab/2026-11-01-pm3"
  },
  {
   "id": "pm-033-threejs-world-scenes",
@@ -835,7 +885,9 @@
    "Product UI"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "Blender lib3d pipeline (PREMIUM.md)",
+  "lab": ""
  },
  {
   "id": "pm-034-concept-math-explainer",
@@ -862,7 +914,7 @@
    "Code"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "guide"
  },
  {
   "id": "pm-035-history-timeline",
@@ -890,7 +942,9 @@
    "Charts"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "timeline (existing)",
+  "lab": ""
  },
  {
   "id": "pm-036-beat-grid-cuts",
@@ -917,7 +971,7 @@
    "Phone"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "guide"
  },
  {
   "id": "pm-037-subframe-motion-blur",
@@ -944,7 +998,7 @@
    "Photos"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "guide"
  },
  {
   "id": "pm-038-enter-moving-cuts",
@@ -968,7 +1022,7 @@
    "Music"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "guide"
  },
  {
   "id": "pm-039-gallery-match-cut",
@@ -991,7 +1045,7 @@
    "Music"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "guide"
  },
  {
   "id": "pm-040-talking-head-punchy-edit",
@@ -1013,7 +1067,9 @@
    "Photos"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "talk + tools/words.mjs",
+  "lab": ""
  },
  {
   "id": "pm-041-lyrics-sync",
@@ -1036,7 +1092,9 @@
    "Music"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "caption / talk word-synced lines",
+  "lab": ""
  },
  {
   "id": "pm-042-sfx-by-measured-peak",
@@ -1063,7 +1121,9 @@
    "Photos"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "make-reel cue(): sfx placed on its peak",
+  "lab": ""
  },
  {
   "id": "pm-043-music-sections-follow-visuals",
@@ -1089,7 +1149,7 @@
    "Product UI"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "guide"
  },
  {
   "id": "pm-044-voiceover-word-captions",
@@ -1113,7 +1173,9 @@
    "Music"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "tts.mjs + verify-vo.mjs + words.mjs",
+  "lab": ""
  },
  {
   "id": "pm-045-collision-music-machine",
@@ -1137,7 +1199,7 @@
    "Particles"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "guide"
  },
  {
   "id": "pm-046-sound-tells-half",
@@ -1159,7 +1221,7 @@
    "Characters"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "guide"
  },
  {
   "id": "pm-047-chat-to-result-story",
@@ -1186,7 +1248,7 @@
    "Kinetic type"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "guide"
  },
  {
   "id": "pm-048-launch-vo-formula",
@@ -1210,7 +1272,7 @@
    "Music"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "guide"
  },
  {
   "id": "pm-049-four-act-product-story",
@@ -1236,7 +1298,7 @@
    "Music"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "guide"
  },
  {
   "id": "pm-050-invented-short-film",
@@ -1262,7 +1324,7 @@
    "Code"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "guide"
  },
  {
   "id": "pm-051-genre-switch-explainer",
@@ -1285,7 +1347,7 @@
    "Code"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "guide"
  },
  {
   "id": "pm-052-what-happens-in-a-second",
@@ -1309,7 +1371,7 @@
    "Particles"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "guide"
  },
  {
   "id": "pm-053-news-roundup-motion",
@@ -1331,7 +1393,7 @@
    "Charts"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "guide"
  },
  {
   "id": "pm-054-article-to-video",
@@ -1358,7 +1420,7 @@
    "Kinetic type"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "guide"
  },
  {
   "id": "pm-055-website-as-footage",
@@ -1385,7 +1447,9 @@
    "Phone"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "tools/record-web.py",
+  "lab": ""
  },
  {
   "id": "pm-056-ai-pov-hook",
@@ -1412,7 +1476,7 @@
    "Particles"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "guide"
  },
  {
   "id": "pm-057-anti-showreel",
@@ -1434,7 +1498,7 @@
    "Characters"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "guide"
  },
  {
   "id": "pm-058-showreel-one-liner",
