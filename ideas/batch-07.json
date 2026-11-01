@@ -183,7 +183,8 @@
     ],
     "source": "023",
     "at": 25,
-    "studio": "todo"
+    "studio": "built",
+    "builder": "odometer"
   },
   {
     "id": "023-progress-dashes",

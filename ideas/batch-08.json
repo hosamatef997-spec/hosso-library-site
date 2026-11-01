@@ -168,7 +168,9 @@
   ],
   "source": "026",
   "at": 2,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "shrinktitle",
+  "lab": "jobs/_lab/2026-11-01-batch3"
  },
  {
   "id": "026-skill-counter-badge",

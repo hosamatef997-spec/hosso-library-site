@@ -112,7 +112,9 @@
   ],
   "source": "014",
   "at": 1,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "poetic",
+  "lab": "jobs/_lab/2026-11-01-batch3"
  },
  {
   "id": "015-letterbox-motivation",
@@ -126,7 +128,9 @@
   ],
   "source": "015",
   "at": 6,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "letterbox: true (any scene)",
+  "lab": "jobs/_lab/2026-11-01-batch3"
  },
  {
   "id": "015-bw-to-color",
@@ -140,7 +144,9 @@
   ],
   "source": "015",
   "at": 9,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "colorAt: <s> (any scene)",
+  "lab": "jobs/_lab/2026-11-01-batch3"
  },
  {
   "id": "015-creator-broll",

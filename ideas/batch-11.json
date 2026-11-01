@@ -186,7 +186,9 @@
   ],
   "source": "037",
   "at": 6,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "months",
+  "lab": "jobs/_lab/2026-11-01-batch3"
  },
  {
   "id": "037-chat-story",
