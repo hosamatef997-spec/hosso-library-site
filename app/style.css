@@ -265,15 +265,16 @@ a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
   .h-feed { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
-/* ---------- hover: a card grows in place so you can see it properly (pointer devices only) */
+/* ---------- hover: only the picture comes forward, smoothly, after a short pause (the words under it stay put) */
 @media (hover: hover) and (pointer: fine) {
-  .grid .card, .h-feed .h-up { transition: transform .28s cubic-bezier(.2,.8,.2,1), box-shadow .28s, border-color .2s; transform-origin: center; }
-  .grid .card:hover, .h-feed .h-up:hover { transform: scale(1.35); z-index: 30; box-shadow: 0 40px 90px rgba(0, 0, 0, .75), 0 0 0 1px var(--gold-lo); }
-  .grid .card:hover { border-color: var(--gold); }
-  .grid > .card:nth-child(4n + 1):hover { transform-origin: right center; }
-  .grid > .card:nth-child(4n):hover { transform-origin: left center; }
+  .grid .card { overflow: visible; }
+  .grid .card .stage { border-radius: 14px 14px 0 0; transition: transform .55s cubic-bezier(.22, 1, .36, 1) .12s, box-shadow .55s cubic-bezier(.22, 1, .36, 1) .12s; transform-origin: center bottom; will-change: transform; }
+  .grid .card:hover { z-index: 30; }
+  .grid .card:hover .stage { transform: scale(1.14) translateY(-10px); border-radius: 16px; box-shadow: 0 34px 80px rgba(0, 0, 0, .7), 0 0 0 1px rgba(201, 164, 76, .55); }
+  .h-feed .h-up .h-prev { transition: transform .55s cubic-bezier(.22, 1, .36, 1) .12s, box-shadow .55s; }
+  .h-feed .h-up:hover .h-prev { transform: scale(1.12) translateY(-8px); box-shadow: 0 30px 70px rgba(0, 0, 0, .7); z-index: 5; }
 }
-@media (prefers-reduced-motion: reduce) { .grid .card:hover, .h-feed .h-up:hover { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .grid .card:hover .stage, .h-feed .h-up:hover .h-prev { transform: none; } }
 /* the top menu wraps instead of hiding sections off the edge */
 .top-in { flex-wrap: wrap; }
 .nav { flex-wrap: wrap; overflow: visible; row-gap: 4px; }
@@ -283,3 +284,26 @@ a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 .h-new .h-feed { grid-template-columns: repeat(6, minmax(0, 1fr)); }
 @media (max-width: 1100px) { .h-new .h-feed { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 720px) { .h-new .h-feed { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* ---------- carousels as Instagram posts */
+.grid.ig-grid { grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 28px; }
+.ig-post { background: #0e0c09; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; direction: rtl; }
+.ig-post header { display: flex; align-items: center; gap: 10px; padding: 12px 14px; }
+.ig-post header img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); padding: 1px; }
+.ig-post header b { display: block; font: 600 14px "Inter", sans-serif; direction: ltr; text-align: right; }
+.ig-post header small { color: var(--mute); font-size: 12px; }
+.ig-count { margin-inline-start: auto; font: 500 12px "Inter", sans-serif; color: var(--dim); background: rgba(255,255,255,.06); border-radius: 999px; padding: 3px 9px; direction: ltr; }
+.ig-view { position: relative; aspect-ratio: 4 / 5; overflow: hidden; direction: ltr; background: #000; }
+.ig-track { display: flex; height: 100%; transition: transform .45s cubic-bezier(.22, 1, .36, 1); touch-action: pan-y; cursor: grab; }
+.ig-track img { flex: 0 0 100%; width: 100%; height: 100%; object-fit: cover; user-select: none; -webkit-user-drag: none; }
+.ig-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 30px; height: 30px; border-radius: 50%; background: rgba(243, 236, 221, .85); color: #13100b; font-size: 22px; line-height: 28px; opacity: 0; transition: opacity .2s; }
+.ig-nav.prev { left: 10px; } .ig-nav.next { right: 10px; }
+.ig-post:hover .ig-nav { opacity: 1; }
+.ig-bar { display: flex; align-items: center; padding: 10px 12px 4px; direction: ltr; }
+.ig-bar svg { width: 24px; height: 24px; fill: none; stroke: var(--text); stroke-width: 1.8; stroke-linejoin: round; margin-right: 14px; }
+.ig-dots { flex: 1; display: flex; justify-content: center; gap: 4px; }
+.ig-dots i { width: 6px; height: 6px; border-radius: 50%; background: #4a4236; transition: background .2s; }
+.ig-dots i.on { background: var(--gold); }
+.ig-save svg { margin: 0 0 0 14px; }
+.ig-cap { padding: 4px 14px 16px; font-size: 14px; line-height: 1.6; color: var(--text); }
+.ig-cap b { font-family: "Inter", sans-serif; font-weight: 600; margin-left: 6px; direction: ltr; unicode-bidi: isolate; }

@@ -196,10 +196,36 @@
       $("#q").addEventListener("input", (e) => { q = e.target.value.trim().toLowerCase(); draw(); });
       draw();
     },
+    // each carousel as the Instagram post people will see: header, swipeable 4:5 slides, dots, actions, caption
     carousels() {
-      setCount((C.carousels || []).length);
-      (C.carousels || []).forEach((c) => grid.append(h(`<article class="card"><div class="stage" style="height:auto;padding:0"><img loading="lazy" src="${c.img}" alt="" style="width:100%;display:block"/></div>
-        <div class="meta"><div class="meta-row"><h3>${esc(c.job)}</h3></div><div class="tags"><span class="tag gold">${esc(c.style)}</span></div></div></article>`)));
+      const list = C.carousels || [];
+      setCount(list.length);
+      grid.classList.add("ig-grid");
+      const ICON = {
+        heart: '<svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.6-9.3C.9 8.3 3.1 4.5 6.9 4.5c2.1 0 3.6 1.2 5.1 3 1.5-1.8 3-3 5.1-3 3.8 0 6 3.8 4.5 7.2C19.5 16.4 12 21 12 21z"/></svg>',
+        comment: '<svg viewBox="0 0 24 24"><path d="M20.5 11.6a8.4 8.4 0 0 1-12.3 7.4L3.5 20.5l1.5-4.4A8.4 8.4 0 1 1 20.5 11.6z"/></svg>',
+        share: '<svg viewBox="0 0 24 24"><path d="M22 3 9.5 14.5M22 3l-7 18-4-8.5L2.5 8.5z"/></svg>',
+        save: '<svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V4.5A1.5 1.5 0 0 1 6.5 3h11A1.5 1.5 0 0 1 19 4.5z"/></svg>',
+      };
+      list.forEach((c) => {
+        const n = c.slides.length;
+        const el = h(`<article class="ig-post">
+          <header><img src="${C.portrait}" alt=""/><div><b>hossovisuals.ae</b><small>${esc(c.style)}</small></div><span class="ig-count">1/${n}</span></header>
+          <div class="ig-view"><div class="ig-track">${c.slides.map((s) => `<img loading="lazy" src="${s}" alt=""/>`).join("")}</div>
+            <button class="ig-nav prev" aria-label="السابق">‹</button><button class="ig-nav next" aria-label="التالي">›</button></div>
+          <div class="ig-bar"><span class="ig-acts">${ICON.heart}${ICON.comment}${ICON.share}</span><span class="ig-dots">${c.slides.map((_, i) => `<i class="${i ? "" : "on"}"></i>`).join("")}</span><span class="ig-save">${ICON.save}</span></div>
+          <p class="ig-cap"><b>hossovisuals.ae</b> ${esc(c.title)}</p></article>`);
+        grid.append(el);
+        const track = el.querySelector(".ig-track"), dots = el.querySelectorAll(".ig-dots i"), count = el.querySelector(".ig-count");
+        let k = 0;
+        const go = (i) => { k = Math.max(0, Math.min(n - 1, i)); track.style.transform = `translateX(${-k * 100}%)`; dots.forEach((d, j) => d.classList.toggle("on", j === k)); count.textContent = `${k + 1}/${n}`; };
+        // RTL page: "next" moves the strip the Instagram way (swipe left = next slide)
+        el.querySelector(".next").addEventListener("click", () => go(k + 1));
+        el.querySelector(".prev").addEventListener("click", () => go(k - 1));
+        let x0 = null;
+        track.addEventListener("pointerdown", (e) => (x0 = e.clientX));
+        track.addEventListener("pointerup", (e) => { if (x0 !== null && Math.abs(e.clientX - x0) > 30) go(k + (e.clientX < x0 ? 1 : -1)); x0 = null; });
+      });
     },
     stickers() {
       const ENTER = {
@@ -343,7 +369,7 @@
       if (!still) gsap.from(".h-phone", { y: 60, opacity: 0, duration: 1.1, stagger: 0.12, ease: "expo.out" });
 
       // latest additions: newest scenes, ideas, fonts and sounds, each with a preview and its date
-      const KIND = { scene: "مشهد", overlay: "فوق المتكلم", idea: "فكرة", font: "خط", sound: "صوت", asset: "ملحق" };
+      const KIND = { scene: "قالب موشن", overlay: "توكينج هيد", idea: "فكرة", font: "خط", sound: "صوت", asset: "ملحق" };
       (C.latest || []).forEach((u) => {
         let prev = "";
         if (u.kind === "scene" || u.kind === "overlay" || (u.kind === "asset" && u.video)) prev = `<img loading="lazy" src="${u.poster}" alt=""/><video muted playsinline loop preload="none" src="${u.video}"></video>`;
