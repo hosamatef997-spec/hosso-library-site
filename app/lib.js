@@ -286,9 +286,21 @@
     home() {
       const n = { fonts: C.fonts.length, pairs: C.pairs.length, motion: Object.keys(MOVES).length, transitions: C.transitions.length, scenes: C.scenes.length, stickers: C.stickers.length, sounds: C.sounds.length, typing: 6, ideas: (C.ideas || []).length, inspiration: (C.inspiration || []).length, backgrounds: C.backgrounds.length };
       document.querySelectorAll("[data-n]").forEach((el) => (el.textContent = n[el.dataset.n] ?? ""));
-      $("#total").textContent = Object.values(n).reduce((a, b) => a + b, 0);
-      gsap.from(".hero > *", { y: 30, opacity: 0, duration: 0.9, stagger: 0.08, ease: "expo.out" });
-      gsap.from(".tile", { y: 40, opacity: 0, duration: 0.8, stagger: 0.05, ease: "expo.out", delay: 0.2 });
+      // a clip that plays only its own scene, on a loop
+      const clipEl = (s) => { const v = h(`<video muted playsinline autoplay preload="metadata" src="${s.clip.video}#t=${s.clip.start},${s.clip.end}"></video>`);
+        v.addEventListener("timeupdate", () => { if (v.currentTime >= s.clip.end - 0.05) { v.currentTime = s.clip.start; v.play(); } }); return v; };
+      const withClip = C.scenes.filter((s) => s.clip);
+      const pick = (ids) => ids.map((id) => withClip.find((s) => s.id === id)).filter(Boolean);
+      const reel = [...pick(["shapemorph", "world", "composer", "burst", "glassicons"]), ...withClip].filter((s, i, a) => a.indexOf(s) === i).slice(0, 3);
+      reel.forEach((s) => { const p = h(`<a class="h-phone" href="scenes.html" title="${esc(s.id)}"></a>`); p.append(clipEl(s)); $(".h-reel").append(p); });
+      const sc = pick(["phonegrid", "carousel3d", "hud"])[0] || withClip[3];
+      if (sc) $(".h-clip").append(clipEl(sc));
+      (C.ideas || []).filter((i) => i.frame).slice(-4).forEach((i) => $(".h-mosaic").append(h(`<img loading="lazy" src="${i.frame}" alt=""/>`)));
+      (C.inspiration || []).filter((x) => x.thumb).slice(0, 8).forEach((x) => $(".h-strip").append(h(
+        `<a class="h-card" href="inspiration.html"><img loading="lazy" src="${x.thumb}" alt=""/><span>${esc(x.title || "")}</span></a>`)));
+      if (!matchMedia("(prefers-reduced-motion: reduce)").matches)
+        gsap.from(".h-phone", { y: 60, opacity: 0, duration: 1.1, stagger: 0.12, ease: "expo.out" });
+      else document.querySelectorAll("video").forEach((v) => v.removeAttribute("autoplay"));
     },
   };
   $("#built") && ($("#built").textContent = C.built);
