@@ -26,7 +26,9 @@
   ],
   "source": "005",
   "at": 2.5,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "talk.glass",
+  "lab": "jobs/_lab/2026-11-01-talkx"
  },
  {
   "id": "005-3d-keycap-sticker",
@@ -39,7 +41,9 @@
   ],
   "source": "005",
   "at": 4,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "keycap",
+  "lab": "jobs/_lab/2026-11-01-batch4"
  },
  {
   "id": "005-glass-arch",
@@ -53,7 +57,9 @@
   ],
   "source": "005",
   "at": 12,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "talk.arch",
+  "lab": "jobs/_lab/2026-11-01-talkx"
  },
  {
   "id": "005-result-first",

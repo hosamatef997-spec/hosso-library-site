@@ -41,7 +41,9 @@
   ],
   "source": "019",
   "at": 24,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "neonicons",
+  "lab": "jobs/_lab/2026-11-01-batch4"
  },
  {
   "id": "019-script-cards-grid",
@@ -55,7 +57,9 @@
   ],
   "source": "019",
   "at": 10,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "scriptgrid",
+  "lab": "jobs/_lab/2026-11-01-batch4"
  },
  {
   "id": "019-sans-serif-italic-title",

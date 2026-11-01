@@ -85,7 +85,9 @@
   ],
   "source": "024",
   "at": 7,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "topbar",
+  "lab": "jobs/_lab/2026-11-01-batch4"
  },
  {
   "id": "024-pill-captions",
@@ -99,7 +101,9 @@
   ],
   "source": "024",
   "at": 2,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "talk.pill",
+  "lab": "jobs/_lab/2026-11-01-talkx"
  },
  {
   "id": "025-pip-result-hook",
@@ -154,7 +158,9 @@
   ],
   "source": "026",
   "at": 5,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "bg: \"dots\" (any scene)",
+  "lab": "jobs/_lab/2026-11-01-batch4"
  },
  {
   "id": "026-sentence-shrinks-to-title",

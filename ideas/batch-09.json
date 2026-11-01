@@ -11,7 +11,9 @@
   ],
   "source": "027",
   "at": 3,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "soundline",
+  "lab": "jobs/_lab/2026-11-01-batch4"
  },
  {
   "id": "027-sfx-chain",
@@ -141,7 +143,9 @@
   ],
   "source": "030",
   "at": 5,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "talk.doc",
+  "lab": "jobs/_lab/2026-11-01-talkx"
  },
  {
   "id": "030-split-chart",
@@ -169,7 +173,9 @@
   ],
   "source": "030",
   "at": 15,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "spotlight",
+  "lab": "jobs/_lab/2026-11-01-batch4"
  },
  {
   "id": "030-orbit-cards",
@@ -198,7 +204,9 @@
   ],
   "source": "030",
   "at": 18,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "talk.checklist",
+  "lab": "jobs/_lab/2026-11-01-talkx"
  },
  {
   "id": "030-render-timeline-overlay",

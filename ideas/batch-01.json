@@ -27,7 +27,9 @@
   ],
   "source": "001",
   "at": 0.5,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "burst",
+  "lab": "jobs/_lab/2026-11-01-batch4"
  },
  {
   "id": "001-logo-in-blur",
@@ -40,7 +42,9 @@
   ],
   "source": "001",
   "at": 9,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "logoWhip: true (any scene)",
+  "lab": "jobs/_lab/2026-11-01-batch4"
  },
  {
   "id": "001-dental-macro",
@@ -84,7 +88,9 @@
   ],
   "source": "002",
   "at": 3,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "strips",
+  "lab": "jobs/_lab/2026-11-01-batch4"
  },
  {
   "id": "002-name-behind-object",
@@ -98,7 +104,9 @@
   ],
   "source": "002",
   "at": 7,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "behindobj",
+  "lab": "jobs/_lab/2026-11-01-batch4"
  },
  {
   "id": "002-one-color",
@@ -170,7 +178,9 @@
   ],
   "source": "003",
   "at": 3.5,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "talk.photos",
+  "lab": "jobs/_lab/2026-11-01-talkx"
  },
  {
   "id": "003-team-invite",

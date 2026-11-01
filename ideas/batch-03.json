@@ -25,7 +25,9 @@
   ],
   "source": "008",
   "at": 1.5,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "talk.avatar",
+  "lab": "jobs/_lab/2026-11-01-talkx"
  },
  {
   "id": "008-proof-reel",
@@ -53,7 +55,9 @@
   ],
   "source": "009",
   "at": 0.2,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "talk.toolcard",
+  "lab": "jobs/_lab/2026-11-01-talkx"
  },
  {
   "id": "009-bold-promise-hook",
@@ -109,7 +113,9 @@
   ],
   "source": "010",
   "at": 2,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "phonegrid",
+  "lab": "jobs/_lab/2026-11-01-batch4"
  },
  {
   "id": "010-product-header",
@@ -181,7 +187,9 @@
   ],
   "source": "011",
   "at": 11,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "glassicons",
+  "lab": "jobs/_lab/2026-11-01-batch4"
  },
  {
   "id": "011-ribbon-perspective-text",
@@ -194,7 +202,9 @@
   ],
   "source": "011",
   "at": 18,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "ribbons",
+  "lab": "jobs/_lab/2026-11-01-batch4"
  },
  {
   "id": "011-torn-paper-number",
@@ -236,6 +246,8 @@
   ],
   "source": "011",
   "at": 27,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "talk.nameIntro",
+  "lab": "jobs/_lab/2026-11-01-talkx"
  }
 ]

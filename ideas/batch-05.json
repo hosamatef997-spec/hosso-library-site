@@ -25,7 +25,9 @@
   ],
   "source": "016",
   "at": 0.3,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "assemble",
+  "lab": "jobs/_lab/2026-11-01-batch4"
  },
  {
   "id": "016-gold-light-sweep",
@@ -69,7 +71,9 @@
   ],
   "source": "016",
   "at": 12,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "hud",
+  "lab": "jobs/_lab/2026-11-01-batch4"
  },
  {
   "id": "016-secrets-format",

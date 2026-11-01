@@ -98,7 +98,9 @@
   ],
   "source": "035",
   "at": 5,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "talk.progress",
+  "lab": "jobs/_lab/2026-11-01-talkx"
  },
  {
   "id": "036-editorial-serif-italic",
@@ -127,7 +129,9 @@
   ],
   "source": "036",
   "at": 5,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "talk.faces",
+  "lab": "jobs/_lab/2026-11-01-talkx"
  },
  {
   "id": "036-mockup-on-desk",
@@ -218,7 +222,9 @@
   ],
   "source": "037",
   "at": 20,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "crossword",
+  "lab": "jobs/_lab/2026-11-01-batch4"
  },
  {
   "id": "037-silence-cut-wave",
@@ -232,7 +238,9 @@
   ],
   "source": "037",
   "at": 26,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "silencecut",
+  "lab": "jobs/_lab/2026-11-01-batch4"
  },
  {
   "id": "037-paper-print-texture",
@@ -246,6 +254,8 @@
   ],
   "source": "037",
   "at": 3,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "bg: \"paper\" (any scene)",
+  "lab": "jobs/_lab/2026-11-01-batch4"
  }
 ]
