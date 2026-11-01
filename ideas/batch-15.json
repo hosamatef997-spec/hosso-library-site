@@ -22,7 +22,9 @@
    "Charts"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "shapemorph",
+  "lab": "jobs/_lab/2026-11-01-pm"
  },
  {
   "id": "pm-002-one-take-scene-growth",
@@ -269,7 +271,9 @@
    "Music"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "composer",
+  "lab": "jobs/_lab/2026-11-01-pm"
  },
  {
   "id": "pm-012-perfect-loop",
@@ -517,7 +521,9 @@
    "Particles"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "badge",
+  "lab": "jobs/_lab/2026-11-01-pm"
  },
  {
   "id": "pm-022-status-pill-morph",
@@ -543,7 +549,9 @@
    "Phone"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "statuspill",
+  "lab": "jobs/_lab/2026-11-01-pm"
  },
  {
   "id": "pm-023-device-grows-from-screen",
@@ -594,7 +602,9 @@
    "Music"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "beforeafter",
+  "lab": "jobs/_lab/2026-11-01-pm"
  },
  {
   "id": "pm-025-self-drawing-charts",
@@ -649,7 +659,9 @@
    "Music"
   ],
   "at": 0,
-  "studio": "todo"
+  "studio": "built",
+  "scene": "terminal",
+  "lab": "jobs/_lab/2026-11-01-pm"
  },
  {
   "id": "pm-027-whiteboard-explainer",
