@@ -172,6 +172,30 @@
     },
     // overlays and scene effects: a clip of each, the name, and the exact key to write in the scene
     overlays() { demos(C.overlays || [], (d) => d.section === "overlays" ? `"${d.id}": { … }` : ""); },
+    // the editing assets pack: filter by folder, search by name; video previews play while on screen, the path copies
+    assets() {
+      const all = C.assets || [];
+      const folders = [...new Set(all.map((a) => a.folder))];
+      let only = "all", q = "";
+      $("#secs").innerHTML = `<button class="chip on" data-f="all">الكل</button>` + folders.map((f) => `<button class="chip" data-f="${esc(f)}">${esc(f)}</button>`).join("");
+      const draw = () => {
+        grid.innerHTML = "";
+        const list = all.filter((a) => (only === "all" || a.folder === only) && (!q || `${a.name} ${a.folder}`.toLowerCase().includes(q)));
+        setCount(list.length);
+        list.slice(0, 400).forEach((a) => {
+          const prev = a.preview ? `<video muted playsinline loop preload="none" poster="${a.poster}" src="${a.preview}" style="width:100%;height:100%;object-fit:contain"></video>` : a.poster ? `<img loading="lazy" src="${a.poster}" alt=""/>` : `<div class="no-clip">${esc(a.ext.toUpperCase())}${a.dur ? ` · ${a.dur}s` : ""}</div>`;
+          const el = h(`<article class="card"><div class="stage" style="height:260px;background:repeating-conic-gradient(#1a160f 0 25%, #13100b 0 50%) 50%/24px 24px">${prev}</div>
+            <div class="meta"><div class="meta-row"><h3 style="font-size:15px">${esc(a.name)}</h3>${code(a.ext, a.file)}</div>
+            <div class="tags"><span class="tag gold">${esc(a.folder)}</span>${a.alpha ? `<span class="tag">شفاف (alpha)</span>` : ""}${a.dur ? `<span class="tag">${a.dur}s</span>` : ""}</div></div></article>`);
+          grid.append(el);
+          const v = el.querySelector("video");
+          if (v) onView(el, () => { v.preload = "auto"; v.play().catch(() => {}); }, () => v.pause());
+        });
+      };
+      document.querySelectorAll("#secs .chip").forEach((c) => c.addEventListener("click", () => { document.querySelectorAll("#secs .chip").forEach((x) => x.classList.toggle("on", x === c)); only = c.dataset.f; draw(); }));
+      $("#q").addEventListener("input", (e) => { q = e.target.value.trim().toLowerCase(); draw(); });
+      draw();
+    },
     carousels() {
       setCount((C.carousels || []).length);
       (C.carousels || []).forEach((c) => grid.append(h(`<article class="card"><div class="stage" style="height:auto;padding:0"><img loading="lazy" src="${c.img}" alt="" style="width:100%;display:block"/></div>
@@ -201,7 +225,7 @@
       });
     },
     sounds() {
-      const CAT = { whoosh: "Whoosh · سحبة", transition: "Transition · انتقال", click: "Click · كليك", ui: "UI · واجهة", impact: "Impact · ضربة", hit: "Hit · خبطة", riser: "Riser · صعود", glitch: "Glitch · جليتش", bundled: "Basics · أساسيات" };
+      const CAT = { whoosh: "Whoosh · سحبة", transition: "Transition · انتقال", click: "Click · كليك", ui: "UI · واجهة", impact: "Impact · ضربة", hit: "Hit · خبطة", riser: "Riser · صعود", glitch: "Glitch · جليتش", chime: "Chime · نغمة", alert: "Alert · تنبيه", scifi: "Sci-Fi · خيال علمي", foley: "Foley · فولي", jingle: "Jingle · جينجل", musical: "Musical · موسيقي", bundled: "Basics · أساسيات" };
       let only = "all", cur = null;
       const draw = () => {
         grid.innerHTML = "";
