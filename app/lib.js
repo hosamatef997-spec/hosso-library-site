@@ -161,7 +161,7 @@
       if (q) q.addEventListener("input", () => { const t = q.value.trim().toLowerCase(); [...grid.children].forEach((el, i) => { const s = C.scenes[i]; el.style.display = !t || `${s.id} ${s.info}`.toLowerCase().includes(t) ? "" : "none"; }); });
       C.scenes.forEach((s) => {
         const el = h(`<article class="card"><div class="stage"><div class="phone">${s.clip ? `<video muted playsinline loop preload="none" poster="${s.clip.poster}" src="${s.clip.video}"></video><button class="sound-toggle">SOUND OFF</button>` : '<div class="no-clip">لسه مفيش كليب مترندر للمشهد ده<br/>(بيتعمل في ريل التجربة الجاي)</div>'}</div></div>
-          <div class="meta"><div class="meta-row"><h3>${esc(s.name || s.id)}</h3>${code(s.key || `"type": "${s.id}"`)}</div><p>${esc(s.info)}</p>${s.clip ? `<div class="tags">${s.effect ? `<span class="tag gold">مؤثر</span>` : ""}<span class="tag">${s.effect ? esc(s.clip.from) : `من ${esc(s.clip.from)}`}</span>${s.clip.date ? `<span class="tag">${esc(s.clip.date)}</span>` : ""}</div>` : ""}</div></article>`);
+          <div class="meta"><div class="meta-row"><h3>${esc(s.name || s.id)}</h3>${code(s.key || `"type": "${s.id}"`)}</div><p>${esc(s.info)}</p>${s.clip ? `<div class="tags">${s.effect ? `<span class="tag gold">مؤثر</span>` : ""}${s.tag ? `<span class="tag gold">${esc(s.tag)}</span>` : ""}<span class="tag">${s.effect || s.tag ? esc(s.clip.from) : `من ${esc(s.clip.from)}`}</span>${s.clip.date ? `<span class="tag">${esc(s.clip.date)}</span>` : ""}</div>` : ""}</div></article>`);
         grid.append(el);
         const v = $("video", el);
         if (!v) return;
