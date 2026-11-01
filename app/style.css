@@ -264,3 +264,22 @@ a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
   .h-screen { width: 62%; }
   .h-feed { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+
+/* ---------- hover: a card grows in place so you can see it properly (pointer devices only) */
+@media (hover: hover) and (pointer: fine) {
+  .grid .card, .h-feed .h-up { transition: transform .28s cubic-bezier(.2,.8,.2,1), box-shadow .28s, border-color .2s; transform-origin: center; }
+  .grid .card:hover, .h-feed .h-up:hover { transform: scale(1.35); z-index: 30; box-shadow: 0 40px 90px rgba(0, 0, 0, .75), 0 0 0 1px var(--gold-lo); }
+  .grid .card:hover { border-color: var(--gold); }
+  .grid > .card:nth-child(4n + 1):hover { transform-origin: right center; }
+  .grid > .card:nth-child(4n):hover { transform-origin: left center; }
+}
+@media (prefers-reduced-motion: reduce) { .grid .card:hover, .h-feed .h-up:hover { transform: none; } }
+/* the top menu wraps instead of hiding sections off the edge */
+.top-in { flex-wrap: wrap; }
+.nav { flex-wrap: wrap; overflow: visible; row-gap: 4px; }
+.nav a { padding: 7px 11px; font-size: 13.5px; }
+/* home: the latest-updates feed sits in the middle now, bigger */
+.h-new { margin-top: 40px; }
+.h-new .h-feed { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+@media (max-width: 1100px) { .h-new .h-feed { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 720px) { .h-new .h-feed { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

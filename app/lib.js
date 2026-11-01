@@ -161,7 +161,7 @@
       if (q) q.addEventListener("input", () => { const t = q.value.trim().toLowerCase(); [...grid.children].forEach((el, i) => { const s = C.scenes[i]; el.style.display = !t || `${s.id} ${s.info}`.toLowerCase().includes(t) ? "" : "none"; }); });
       C.scenes.forEach((s) => {
         const el = h(`<article class="card"><div class="stage"><div class="phone">${s.clip ? `<video muted playsinline loop preload="none" poster="${s.clip.poster}" src="${s.clip.video}"></video><button class="sound-toggle">SOUND OFF</button>` : '<div class="no-clip">لسه مفيش كليب مترندر للمشهد ده<br/>(بيتعمل في ريل التجربة الجاي)</div>'}</div></div>
-          <div class="meta"><div class="meta-row"><h3>${esc(s.id)}</h3>${code(`"type": "${s.id}"`)}</div><p>${esc(s.info)}</p>${s.clip ? `<div class="tags"><span class="tag">من ${esc(s.clip.from)}</span></div>` : ""}</div></article>`);
+          <div class="meta"><div class="meta-row"><h3>${esc(s.name || s.id)}</h3>${code(s.key || `"type": "${s.id}"`)}</div><p>${esc(s.info)}</p>${s.clip ? `<div class="tags">${s.effect ? `<span class="tag gold">مؤثر</span>` : ""}<span class="tag">${s.effect ? esc(s.clip.from) : `من ${esc(s.clip.from)}`}</span>${s.clip.date ? `<span class="tag">${esc(s.clip.date)}</span>` : ""}</div>` : ""}</div></article>`);
         grid.append(el);
         const v = $("video", el);
         if (!v) return;
@@ -172,7 +172,6 @@
     },
     // overlays and scene effects: a clip of each, the name, and the exact key to write in the scene
     overlays() { demos(C.overlays || [], (d) => d.section === "overlays" ? `"${d.id}": { … }` : ""); },
-    effects() { demos(C.effects || [], (d) => d.id.startsWith("skin-") ? `"skin": "${d.id.slice(5)}"` : d.id.startsWith("bg-") ? `"bg": "${d.id.slice(3)}"` : `"${d.id}": true`); },
     carousels() {
       setCount((C.carousels || []).length);
       (C.carousels || []).forEach((c) => grid.append(h(`<article class="card"><div class="stage" style="height:auto;padding:0"><img loading="lazy" src="${c.img}" alt="" style="width:100%;display:block"/></div>
@@ -317,36 +316,13 @@
       const reel = [...pick(["shapemorph", "world", "composer", "burst", "glassicons"]), ...withClip].filter((s, i, a) => a.indexOf(s) === i).slice(0, 3);
       reel.forEach((s) => { const p = h(`<a class="h-phone" href="scenes.html" title="${esc(s.id)}"></a>`); p.append(clipEl(s)); $(".h-reel").append(p); });
 
-      // the three rooms, each shown the way it looks inside a reel
-      // scenes: a playlist of other scenes, one after another
-      const list = pick(["letters", "headline", "phonegrid", "carousel3d", "hud", "coindrop", "stickman", "typearch"]);
-      if (list.length) { let k = 0; const v = clipEl(list[0], false); $(".h-scenes").append(v);
-        v.addEventListener("ended", () => { k = (k + 1) % list.length; v.poster = list[k].clip.poster; v.src = list[k].clip.video; v.play().catch(() => {}); }); }
-      // ideas: the newest idea cards with a frame, turning like slides
-      const ideaList = (C.ideas || []).filter((i) => i.frame).slice(-8);
-      ideaList.forEach((i, k) => $(".h-ideas").append(h(`<figure class="${k ? "" : "on"}"><img loading="lazy" src="${i.frame}" alt=""/><figcaption>${esc(i.title)}</figcaption></figure>`)));
-      // fonts: one word through the identity fonts and a few from the catalog
-      const FAMS = ["Aref Ruqaa", "Reem Kufi", "Lalezar", "Rakkas", "Marhey"];
-      const fontList = FAMS.map((fam) => C.fonts.find((f) => f.file && f.family === fam)).filter(Boolean);
-      const word = $(".h-word"), fname = $(".h-fname");
-      let fontsAsked = false; // the font files are heavy: fetch them only when the fonts phone comes on screen
-      onView($(".h-fonts"), () => { if (fontsAsked) return; fontsAsked = true; fontList.forEach((f) => new FontFace(`lib-${f.id}`, `url("${f.file}")`).load().then((ff) => document.fonts.add(ff)).catch(() => {})); });
-      if (!still) {
-        let fi = 0, ii = 0;
-        setInterval(() => {
-          if (fontList.length) { fi = (fi + 1) % fontList.length; word.style.fontFamily = `lib-${fontList[fi].id}, "El Messiri"`; fname.textContent = fontList[fi].name; }
-          const figs = document.querySelectorAll(".h-ideas figure");
-          if (figs.length) { figs[ii].classList.remove("on"); ii = (ii + 1) % figs.length; figs[ii].classList.add("on"); }
-        }, 1800);
-        gsap.from(".h-phone", { y: 60, opacity: 0, duration: 1.1, stagger: 0.12, ease: "expo.out" });
-      }
-      if (fontList[0]) fname.textContent = fontList[0].name;
+      if (!still) gsap.from(".h-phone", { y: 60, opacity: 0, duration: 1.1, stagger: 0.12, ease: "expo.out" });
 
       // latest additions: newest scenes, ideas, fonts and sounds, each with a preview and its date
-      const KIND = { scene: "مشهد", idea: "فكرة", font: "خط", sound: "صوت" };
+      const KIND = { scene: "مشهد", overlay: "فوق المتكلم", idea: "فكرة", font: "خط", sound: "صوت", asset: "ملحق" };
       (C.latest || []).forEach((u) => {
         let prev = "";
-        if (u.kind === "scene") prev = `<img loading="lazy" src="${u.poster}" alt=""/><video muted playsinline loop preload="none" src="${u.video}"></video>`;
+        if (u.kind === "scene" || u.kind === "overlay" || (u.kind === "asset" && u.video)) prev = `<img loading="lazy" src="${u.poster}" alt=""/><video muted playsinline loop preload="none" src="${u.video}"></video>`;
         else if (u.kind === "font") { onView($(".h-feed"), () => new FontFace(`lib-${u.id}`, `url("${u.file}")`).load().then((ff) => document.fonts.add(ff)).catch(() => {})); prev = `<span class="h-fw" style="font-family:'lib-${u.id}','El Messiri'">حكاية</span>`; }
         else if (u.kind === "sound") prev = `<img class="wave" loading="lazy" src="${u.poster}" alt=""/><audio preload="none" src="${u.file}"></audio>`;
         else prev = u.poster ? `<img loading="lazy" src="${u.poster}" alt=""/>` : `<span class="h-it">${esc(u.title)}</span>`;
