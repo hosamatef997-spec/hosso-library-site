@@ -234,7 +234,7 @@
       });
     },
     ideas() {
-      const SEC = { ideas: "أفكار ريلز", hooks: "الهوك", "speaker-text": "الكلام مع المتكلم", motion: "الموشن", story: "القصة والكلام", edit: "المونتاج", profile: "البروفايل والبايو", sound: "الصوت", shoot: "التصوير والألوان" };
+      const SEC = { ideas: "أفكار ريلز", hooks: "الهوك", "speaker-text": "الكلام مع المتكلم", motion: "الموشن", story: "القصة والكلام", edit: "المونتاج", profile: "البروفايل والبايو", sound: "الصوت", shoot: "التصوير والألوان", prompting: "كتابة البرومبت" };
       const ST = { built: ['<span class="tag gold">في الاستوديو</span>'], guide: ['<span class="tag gold">في دليل الكتابة</span>'], todo: ['<span class="tag soon">هتتبني في الاستوديو</span>'], "n/a": ['<span class="tag">للتصوير</span>'] };
       const list = C.ideas || [];
       let sec = "all", st = "all", q = "";
@@ -249,10 +249,10 @@
           const items = shown.filter((c) => c.section === g);
           if (!items.length) return;
           grid.append(h(`<div class="group-title" style="grid-column:1/-1">${esc(SEC[g])} <small>${items.length}</small></div>`));
-          items.forEach((c) => grid.append(h(`<article class="card"><div class="stage" style="height:230px">${c.frame ? `<img loading="lazy" src="${c.frame}" alt="" style="width:100%;height:100%;object-fit:cover;opacity:.92"/>` : ""}<span class="code" style="position:absolute;top:10px;left:10px">ريل #${esc(c.source)} · ${Math.round(c.at)}ث</span></div>
+          items.forEach((c) => grid.append(h(`<article class="card"><div class="stage" style="height:230px">${c.frame ? `<img loading="lazy" src="${c.frame}" alt="" style="width:100%;height:100%;object-fit:cover;opacity:.92"/>` : ""}<span class="code" style="position:absolute;top:10px;left:10px">${/^prompt-motion\//.test(c.source) ? "prompt-motion" : `ريل #${esc(c.source)} · ${Math.round(c.at)}ث`}</span></div>
             <div class="meta"><h3>${esc(c.title)}</h3><p>${esc(c.what)}</p>
             ${c.how?.length ? `<p style="font-size:13px;color:var(--text)">${c.how.map((x, i) => `<b style="color:var(--gold)">${i + 1}.</b> ${esc(x)}`).join("<br/>")}</p>` : ""}
-            <div class="tags">${(ST[c.studio] || []).join("")}<span class="tag">${esc(SEC[c.section] || c.section)}</span></div></div></article>`)));
+            <div class="tags">${(ST[c.studio] || []).join("")}<span class="tag">${esc(SEC[c.section] || c.section)}</span>${(c.examples || []).slice(0, 3).map((u, i) => `<a class="tag" href="${esc(u)}" target="_blank" rel="noopener">المصدر ${i + 1} ↗</a>`).join("")}</div></div></article>`)));
         });
       };
       $("#q").addEventListener("input", (e) => { q = e.target.value.trim().toLowerCase(); draw(); });

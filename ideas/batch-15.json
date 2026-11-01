@@ -1,0 +1,1782 @@
+[
+ {
+  "id": "pm-001-shape-morph-ui-states",
+  "section": "motion",
+  "title": "شكل واحد بيتحول لكل الـUI",
+  "what": "عنصر واحد بس عمره ما بيتقطع: زرار يبقى لودر، يبقى علامة صح، يبقى مشغل موسيقى، سلايدر، تابات، شارت، ⌘K… وكل ده نفس الشكل بيغير حجمه وكورنراته ولونه والمحتوى جواه بيتبدل بلمسة blur خفيفة. شكله Dribbble-level وينفع جداً كـ«Claude عمل الـUI ده كله في برومبت واحد».",
+  "how": [
+   "حدد 8–12 حالة UI بالترتيب واكتبهم على beat grid (حاجة على كل بيت)",
+   "عنصر div واحد بيتحرك width/height/border-radius/background بـGSAP، والمحتوى جواه layers بتدخل وتخرج بتوقيت لوحدها",
+   "كيرسر حقيقي بيعمل click وdrag قبل كل تحويل، والكاميرا (scale على الـstage) تقرّب عشان كل حالة تملا الكادر",
+   "springs بأوفرشوت صغير؛ ومؤشر التابات/التوجل حافته الأمامية على spring أسرع من الخلفية فيتمط زي السائل",
+   "آخر فريم = أول فريم عشان الريل يلف loop"
+  ],
+  "source": "prompt-motion/twoclipping-5cba86",
+  "examples": [
+   "https://prompt-motion.com/twoclipping-5cba86",
+   "https://prompt-motion.com/demonugc-4c5753"
+  ],
+  "tags": [
+   "Product UI",
+   "Music",
+   "Charts"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-002-one-take-scene-growth",
+  "section": "motion",
+  "title": "مشهد بيطلع من جوه اللي قبله (من غير ولا قطع)",
+  "what": "فيلم لونج تيك: مفيش fade ولا cut، كل مشهد بيتولد من عنصر في المشهد اللي قبله. زرار يكبر ويبقى صفحة، لون يغرق الكادر من عنصر وينكمش جوه عنصر تاني، نص يطلع من خط ماسك. ده بيدي إحساس keynote غالي، ومناسب لريل بيشرح خطوات شغل مع Claude من غير ما المشاهد يتوه.",
+  "how": [
+   "ارسم سلسلة «العنصر الحامل»: كل مشهد بيخلص على عنصر هو اللي بيبدأ المشهد الجاي",
+   "للانتقال: circle/pill يعمل scale لحد ما يغطي الكادر (color flood) وبعدين ينكمش لشكل المشهد الجديد",
+   "text reveal من mask line (overflow hidden + yPercent من 100 لـ0)",
+   "حركة كاميرا واحدة eased لكل مشهد، ومتعكسش الاتجاه ورا بعض",
+   "امنع crossfade وblur-in وأي hold أكتر من ثانية"
+  ],
+  "source": "prompt-motion/twoclipping-221cab",
+  "examples": [
+   "https://prompt-motion.com/twoclipping-221cab",
+   "https://prompt-motion.com/ultimaxbt-2ddf1e",
+   "https://prompt-motion.com/notdwd-c2037d"
+  ],
+  "tags": [
+   "Product UI",
+   "Photos",
+   "Music",
+   "Phone"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-003-landing-page-3d-flyover",
+  "section": "motion",
+  "title": "طيران 3D فوق صفحة لاندينج",
+  "what": "صفحة الموقع كلها نايمة على أرضية ستوديو فاتحة، والكاميرا بتزحف عليها من الهيرو لتحت بسرعة ثابتة وبعمق ميدان رفيع جداً، والكروت والصور بتقوم وتقف ناحية العدسة وهي معدية. في الآخر الكاميرا تطلع فوق تشوف الصفحة كلها شريط واحد وتغطس في الهيرو ويبقى كارت تحت عنوان. ينفع نعرض بيه موقع عمله Claude.",
+  "how": [
+   "خد screenshot طويل للصفحة (Playwright بعرض 1440) وقصّ العناصر اللي هتطير PNG شفاف مع مكانها في JSON",
+   "حط الصفحة plane في three.js أو CSS 3D بـrotateX ~56° وظل ناعم وكورنرات 24px",
+   "الكاميرا: ease-in في الأول، سرعة ثابتة في النص، ease-out عند الفوتر؛ بعدين rise لفوق ثم dive للهيرو",
+   "العناصر تعمل translateZ + rotateX لما تعدي نص الكادر، وblur أكتر للي قريب من العدسة",
+   "لـ9:16: خلي الصفحة أضيق والكاميرا أقرب، والعنوان الأخير بالعربي"
+  ],
+  "source": "prompt-motion/twoclipping-d89be5",
+  "examples": [
+   "https://prompt-motion.com/twoclipping-d89be5",
+   "https://prompt-motion.com/pankajstwt-49978ed"
+  ],
+  "tags": [
+   "Product UI",
+   "Kinetic type",
+   "Music"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-004-engraving-paint-over-photos",
+  "section": "motion",
+  "title": "إعلان سريع: رسم فوق الصور بستايل نقش",
+  "what": "إعلان 10–15 ثانية سريع جداً: صور تحريرية/فنية، وعناصر مرسومة بتترسم فوقيها (خطوط نقش، أشكال SVG)، نصوص بتعمل morph لبعضها، صور صغيرة وكبيرة وكذا واحدة مع بعض. الفكرة إنك تاخد تقنيات من ريفرنس بس تغير التصميم كله. ستايل حلو لبراند أسود×دهبي.",
+  "how": [
+   "اجمع صور بستايل واحد (أبيض وأسود أو sepia) وحوّلها لـengraving بفلتر SVG (feTurbulence + threshold) أو halftone خطوط",
+   "ارسم فوقيها paths دهبي بـstroke-dashoffset على البيت",
+   "text morph بين كلمتين بـSplitText أو تبديل حروف مع blur بسيط",
+   "قطعات كل 0.3–0.6 ثانية، وصور بتتكاثر (1 → 3 → 9)",
+   "اختم على لوجو Claude أو HOSSO"
+  ],
+  "source": "prompt-motion/lexnlin-038035",
+  "examples": [
+   "https://prompt-motion.com/lexnlin-038035"
+  ],
+  "tags": [
+   "Kinetic type",
+   "Photos"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-005-recipe-pour-diagram",
+  "section": "motion",
+  "title": "الوصفة كرسمة: من كوباية فاضية لكوباية جاهزة",
+  "what": "المكونات بتنزل في الكوباية واحد ورا التاني، وكل مكون جنبه المقدار بالمللي، والسائل بيعلى بطبقات ألوان. explainer نضيف 30 ثانية. ينفع نقلبه: «وصفة البرومبت» — كل مكون في البرومبت بينزل في الكوباية والنتيجة تطلع في الآخر.",
+  "how": [
+   "ارسم كوباية SVG وجواها rect للسائل بـclipPath على شكل الكوباية",
+   "كل مكون: أيقونة تنزل من فوق + label بالمقدار + الطبقة تعلى بـheight/y",
+   "الألوان بتمتزج بـgradient بيتغير مع كل إضافة",
+   "آخر مشهد: تزيين (ليمونة/تلج) + اسم الوصفة",
+   "للنسخة التعليمية: المكونات = دور، سياق، أمثلة، قيود → «برومبت جاهز»"
+  ],
+  "source": "prompt-motion/ror-fly-9950f1",
+  "examples": [
+   "https://prompt-motion.com/ror-fly-9950f1",
+   "https://prompt-motion.com/sarut0bisasuke-cefa43"
+  ],
+  "tags": [
+   "Diagrams"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-006-hero-object-thread",
+  "section": "motion",
+  "title": "عنصر واحد بيربط الفيلم كله (النقطة البرتقاني)",
+  "what": "نقطة واحدة بلون الأكسنت بتمشي في الفيلم كله: تبدأ في سويتش UI، تبقى النقطة اللي فوق حرف i، ترسم جراف spring، تكبر لشكل يملا الكادر، وترجع في كارت النهاية. بيدي الفيديو وحدة بصرية رهيبة. عندنا ممكن تبقى «نقطة دهبي» هي الـthread بتاع الهوية.",
+  "how": [
+   "اختار عنصر بطل واحد بلون الأكسنت (عندنا الدهبي)",
+   "اكتب كل مشهد كـ«النقطة بتعمل إيه»: تقفز، ترسم، تكبر، تتحول",
+   "الكلمات تتحرك حرف حرف لحد ما يفضل كلمة واحدة والنقطة لازقة فيها",
+   "ممنوع أي حركة مش مربوطة بعنصر موجود على الشاشة",
+   "النهاية: الكلمات تلف حوالين النقطة وتتفرط لحقل نقط halftone أحجامه بتتفاعل معاها، يكبر لبرا الكادر ويكشف كارت النهاية، والنقطة ترجع لمكانها عشان loop"
+  ],
+  "source": "prompt-motion/ultimaxbt-bbebf5",
+  "examples": [
+   "https://prompt-motion.com/ultimaxbt-bbebf5"
+  ],
+  "tags": [
+   "Kinetic type",
+   "Shapes",
+   "Music"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-007-ball-guides-ui",
+  "section": "motion",
+  "title": "كورة بيضا بتقود الـUI",
+  "what": "كورة صغيرة بتنط من سويتش لسلايدر لكروت إشعارات لكيبورد وتخبط في الحروف عشان تكتب رد، وكل لمسة ليها صوت UI صغير. الكاميرا بتتبعها في عالم واحد، وفي الآخر بتبعد تورّي كل حاجة مع بعض. ممتع ومناسب لشرح «Claude بيعمل الخطوات دي لوحده».",
+  "how": [
+   "حط كل الكومبوننتس في layout واحد كبير (world)",
+   "الكورة ليها مسار واحد متصل؛ landing بـspring وsquash خفيف عند الخبطة",
+   "قيمة السلايدر والرقم محسوبين من مكان الكورة الأفقي",
+   "الكتابة: كل ضغطة زرار ليها وقت ثابت والنص المعروض = اللي اتكتب لحد اللحظة دي",
+   "آخر لقطة pull-back للعالم كله ثم الكورة ترجع لأول سويتش"
+  ],
+  "source": "prompt-motion/rossaxbt-94583b",
+  "examples": [
+   "https://prompt-motion.com/rossaxbt-94583b"
+  ],
+  "tags": [
+   "Product UI",
+   "Music"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-008-single-world-camera",
+  "section": "motion",
+  "title": "عالم واحد وكاميرا واحدة (zoom لوغاريتمي)",
+  "what": "بدل مشاهد منفصلة، كل العناصر متوزعة في مساحة واحدة كبيرة، وكل close-up هو مجرد حركة كاميرا جوه العالم ده. الزوم بيتحسب بـlog-scale فبيحس طبيعي، والانتقالات كلها مضمونة ومتسقة. ده أساس ممتاز لسيستم مشاهد HyperFrames عندنا.",
+  "how": [
+   "اعمل div اسمه world وحط فيه كل المشاهد بإحداثيات ثابتة",
+   "الكاميرا = transform على world: translate(-focusX,-focusY) scale(exp(logZoom))",
+   "اعمل tween للـlogZoom مش للـscale مباشرة عشان الزوم يبقى ناعم",
+   "حركة كاميرا واحدة في المرة، متعملش pan وzoom مختلفين في نفس الوقت",
+   "للـmatch cut: border-radius العنصر يروح 0 لما يملا الكادر"
+  ],
+  "source": "prompt-motion/rossaxbt-94583b",
+  "examples": [
+   "https://prompt-motion.com/rossaxbt-94583b",
+   "https://prompt-motion.com/antonio-kodheli-490109"
+  ],
+  "tags": [
+   "Product UI",
+   "Music"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-009-cursor-driven-ui",
+  "section": "motion",
+  "title": "كيرسر حقيقي + زوم Screen Studio",
+  "what": "كل تغيير في الـUI بيحصل بكيرسر بيعمل click وdrag وlong-press بجد، والكاميرا بتقرب على مكان الأكشن زي Screen Studio والكيرسر بيكبر معاها. الكيرسر بيلف ناحية المكان اللي رايحله ويكبر على hover. أساسي لأي ريل بيعرض شغل Claude على الشاشة.",
+  "how": [
+   "SVG كيرسر بمسار bezier ناعم بين الأهداف (مش خط مستقيم)",
+   "قبل الكليك: hover scale 1.15، الكليك: scale 0.9 + ripple صغير",
+   "الكاميرا تتبع الكيرسر بـlag بسيط وتعمل zoom على منطقة الأكشن",
+   "الكيرسر يتعمله scale عكسي مع الزوم عشان يفضل حجمه منطقي",
+   "صوت click خفيف جداً على كل ضغطة"
+  ],
+  "source": "prompt-motion/twoclipping-221cab",
+  "examples": [
+   "https://prompt-motion.com/twoclipping-221cab",
+   "https://prompt-motion.com/notdwd-c2037d",
+   "https://prompt-motion.com/antonio-kodheli-490109"
+  ],
+  "tags": [
+   "Product UI",
+   "Music",
+   "Photos",
+   "Phone"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-010-liquid-glass-controls",
+  "section": "motion",
+  "title": "كنترولز Liquid Glass",
+  "what": "شريط البرومبت والإعدادات والكابشن معمولين زجاج سميك: بيعمل frost للي وراه، وبيلوي الخلفية عند الحرف، وعليه لمعة فوق وحافة منورة وظل. نصيحة مهمة: الزجاج بيختفي على أبيض سادة، فلازم aura ملونة أو صورة مغبشة وراه. على الأسود عندنا يبقى زجاج دخاني بحافة دهبي.",
+  "how": [
+   "backdrop-filter: blur(20px) saturate(1.4) + خلفية شفافة 10–15%",
+   "حافة: border 1px بـgradient فاتح من فوق + inset shadow",
+   "refraction: SVG filter feDisplacementMap على الحرف بس",
+   "حط وراه aura ملونة بتتحرك ببطء أو صورة blurred",
+   "تأكد إن الكلام فوق الزجاج مقروء (contrast)"
+  ],
+  "source": "prompt-motion/rossaxbt-3085b7",
+  "examples": [
+   "https://prompt-motion.com/rossaxbt-3085b7",
+   "https://prompt-motion.com/twoclipping-221cab"
+  ],
+  "tags": [
+   "Product UI",
+   "Photos",
+   "Music",
+   "Phone"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-011-ai-composer-glow",
+  "section": "motion",
+  "title": "صندوق كتابة بتوهج Apple Intelligence",
+  "what": "صندوق إدخال عليه توهج قزحي بيلف (conic gradient مغبش) والكاميرا بتقرب عليه 3x والطلب بيتكتب بإيقاع كيبورد طبيعي. بعد الإرسال ripple يحول الرسالة لبابل شات ويبان التليفون حواليها. ده المشهد المثالي لافتتاح أي ريل «اكتب لـClaude كذا».",
+  "how": [
+   "div بخلفية conic-gradient (ألوان البراند أو دهبي/عنبري) + filter blur(24px) + rotate بيلف",
+   "الكتابة بتوقيتات ضغط متفاوتة شوية (مش ثابتة) عشان تحس بشرية",
+   "زرار send يعمل ripple لوني يحول النص لبابل",
+   "pull-back واحد يكشف إطار التليفون",
+   "بالعربي: اتجاه RTL والكيرسر بيمشي من اليمين"
+  ],
+  "source": "prompt-motion/ultimaxbt-2ddf1e",
+  "examples": [
+   "https://prompt-motion.com/ultimaxbt-2ddf1e"
+  ],
+  "tags": [
+   "Product UI",
+   "Kinetic type",
+   "Photos",
+   "Music"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-012-perfect-loop",
+  "section": "motion",
+  "title": "لوب مثالي: آخر فريم = أول فريم",
+  "what": "الفيلم بيخلص بالظبط زي ما بدأ: نفس مكان الكيرسر ونفس سرعته ونفس حالة السويتش، فالريل بيلف من غير ما تحس بالقطع. ده بيزود وقت المشاهدة على إنستجرام لأن الناس بتتفرج مرتين من غير ما تاخد بالها.",
+  "how": [
+   "خطط من الأول إن المشهد الأخير «بيرجع» للأول (العنصر البطل يرجع مكانه)",
+   "قارن فريم 0 بآخر فريم بصرياً (screenshot diff)",
+   "مش بس المكان: السرعة كمان لازم تطابق، وإلا اللوب يتهز",
+   "اخفي أي reset تحت لحظة تغطية كاملة (full occlusion)",
+   "الصوت: خلّي الموسيقى تتقطع على بار كامل"
+  ],
+  "source": "prompt-motion/twoclipping-5cba86",
+  "examples": [
+   "https://prompt-motion.com/twoclipping-5cba86",
+   "https://prompt-motion.com/ultimaxbt-bbebf5",
+   "https://prompt-motion.com/rossaxbt-94583b",
+   "https://prompt-motion.com/gdgtify-287ddf"
+  ],
+  "tags": [
+   "Music",
+   "Product UI",
+   "Kinetic type",
+   "Charts"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-013-iris-blades-transition",
+  "section": "motion",
+  "title": "انتقال شفرات العدسة (Iris)",
+  "what": "ست شفرات زي عدسة الكاميرا بتقفل على العنصر وتفتح على صورة جديدة. انتقال سينمائي وواضح ومتعلق بالصور/التصوير، وممكن يبقى توقيع انتقالات للستوديو.",
+  "how": [
+   "6 مثلثات/شفرات SVG حوالين مركز، كل واحدة rotate حوالين نقطتها",
+   "قفل: rotate 0→60° لحد ما الفتحة تختفي (0.25s)، بدّل المحتوى، افتح",
+   "حط shadow خفيف على الحواف عشان تبان طبقات",
+   "ركّب الانتقال على البيت بالظبط",
+   "بديل أسهل: clip-path circle بيصغر ويكبر"
+  ],
+  "source": "prompt-motion/twoclipping-221cab",
+  "examples": [
+   "https://prompt-motion.com/twoclipping-221cab"
+  ],
+  "tags": [
+   "Product UI",
+   "Phone",
+   "Photos",
+   "Music"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-014-spring-graph-sync",
+  "section": "motion",
+  "title": "الجراف مرسوم من نفس الـspring اللي بيحرك العنصر",
+  "what": "النقطة بتنط وتعدي الهدف وترجع تستقر، وفي نفس اللحظة جراف بيترسم لنفس المنحنى بالظبط مع callout زي «+22%». لما الجراف والحركة من نفس الدالة الإحساس بيبقى صادق. ممتاز لشرح «إيه هو الـeasing» أو أي فكرة تقنية.",
+  "how": [
+   "اكتب دالة spring(t) closed-form (damped oscillation)",
+   "استخدمها لـy بتاع النقطة ولـpath بتاع الجراف في نفس الوقت",
+   "الجراف بيترسم بـstroke-dashoffset متزامن مع الزمن",
+   "callout بيظهر عند أعلى نقطة (overshoot)",
+   "لو الجراف والنقطة مختلفين حتى سنة، الحركة هتبان مزيفة"
+  ],
+  "source": "prompt-motion/ultimaxbt-bbebf5",
+  "examples": [
+   "https://prompt-motion.com/ultimaxbt-bbebf5"
+  ],
+  "tags": [
+   "Kinetic type",
+   "Shapes",
+   "Music"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-015-type-as-architecture",
+  "section": "motion",
+  "title": "الكلام بيبني مبنى (Typography معمارية)",
+  "what": "خطبة قصيرة متصورة بالخط بس: كل كلمة ليها دور إنشائي — كلمة عتبة، كلمة حِمل متعلق، كلمة عمود، حرف O يبقى فتحة نشوف منها المشهد الجاي، والجملة الأخيرة بتقف على منصة اتبنت من الكلمات اللي قبلها. أفكار قوية تبان بالعربي (الكلمات العربية كتل جميلة).",
+  "how": [
+   "اكتب 4–5 جمل، وحدد لكل كلمة مفتاحية دور: سقف/عمود/فتحة/أرضية",
+   "الأدوار تطلع من الحروف نفسها (scale/rotate/stretch) مش رسومات ورا الكلام",
+   "خط baseline بيتلوي تحت «الحِمل» وبعدين يتعدل لما الدعامة تيجي",
+   "لحظة سكون واحدة بس لما كل حاجة تتعدل",
+   "متكبسش الكلام على البيت؛ امشي على إيقاع الكلام"
+  ],
+  "source": "prompt-motion/gdgtify-287ddf",
+  "examples": [
+   "https://prompt-motion.com/gdgtify-287ddf"
+  ],
+  "tags": [
+   "Kinetic type"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-016-masked-word-hook",
+  "section": "motion",
+  "title": "هوك كلمة كلمة على البيت + كلمة تتحول لـUI",
+  "what": "أول بار: الهوك بينزل كلمة كلمة على البيتس بماسك نضيف، وتاني بار كلمة من الهوك نفسها بتتحول للـUI بتاع المنتج. بسيط ومينيمال بمساحة فاضية كبيرة ولون أكسنت واحد.",
+  "how": [
+   "كل كلمة في span جوه wrapper overflow hidden، تطلع yPercent 110→0",
+   "توقيت كل كلمة على بيت (120BPM = 0.5s)",
+   "الكلمة المختارة تعمل morph (width/radius) لحد ما تبقى input أو زرار",
+   "خط واحد sans بtracking ضيق، ومن غير نقط في آخر الجمل",
+   "عربي: خلي الحركة من تحت لفوق مش جنب عشان اتجاه القراءة"
+  ],
+  "source": "prompt-motion/twoclipping-6dd14e",
+  "examples": [
+   "https://prompt-motion.com/twoclipping-6dd14e",
+   "https://prompt-motion.com/brainextends-e19ac3"
+  ],
+  "tags": [
+   "Product UI",
+   "Music",
+   "Phone",
+   "Photos"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-017-3d-carousel-reflection",
+  "section": "motion",
+  "title": "كاروسيل 3D بانعكاس أرضي + whip",
+  "what": "فيديوهات حقيقية متصفة في دايرة 3D وتحتها انعكاس على الأرض، والكاروسيل بيلف وبعدين whip سريع بموشن بلر يقف على كليب واحد يبقى البطل. شكله premium لعرض شغل/ريلز سابقة.",
+  "how": [
+   "container بـperspective و preserve-3d، كل كارت rotateY(i*360/n) translateZ(r)",
+   "الانعكاس: نسخة مقلوبة scaleY(-1) بـmask gradient",
+   "الـwhip: rotate سريع ease-in-out + blur اتجاهي",
+   "متحطش opacity أو filter على عنصر preserve-3d (بيفرطح)؛ حطه على الـwrapper",
+   "الكارت البطل يكبر ويدخل تليفون أو full-bleed"
+  ],
+  "source": "prompt-motion/twoclipping-6dd14e",
+  "examples": [
+   "https://prompt-motion.com/twoclipping-6dd14e"
+  ],
+  "tags": [
+   "Product UI",
+   "Phone",
+   "Photos",
+   "Music"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-018-scan-line-picks",
+  "section": "motion",
+  "title": "حيطة كليبات + خط سكان بيختار الفايزين",
+  "what": "حيطة فيها كليبات كتير بتشتغل، وخط سكان بيعدي عليها ويعلّم على 3 فايزين بس. بتوصل فكرة «الأداة فرزت وختارت الأحسن» في ثانيتين. تنفع لـ«Claude قرا 100 حاجة وطلعلك أهم 3».",
+  "how": [
+   "grid كبير من thumbnails أو كليبات صغيرة بتتحرك",
+   "خط مضيء أفقي/رأسي بيعدي بسرعة ثابتة",
+   "لما يعدي على الفايز: إطار أكسنت + الباقي يخفت 40%",
+   "الـ3 فايزين يطيروا لصف لوحدهم",
+   "صوت scan خفيف + tick على كل اختيار"
+  ],
+  "source": "prompt-motion/twoclipping-6dd14e",
+  "examples": [
+   "https://prompt-motion.com/twoclipping-6dd14e"
+  ],
+  "tags": [
+   "Product UI",
+   "Phone",
+   "Photos",
+   "Music"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-019-dot-to-universe-zoom",
+  "section": "motion",
+  "title": "من نقطة لكون ورجوع (زوم متعدد المقاييس)",
+  "what": "نقطة على شاشة سودا، بتطلع منها شبابيك (شارتات، قوايم، جداول)، والكاميرا بتقرب وتبعد على كذا مستوى، وبعدين تبعد لحد ما الديسكتوب يبقى نقطة في الفضاء، وتقرب تاني تكشف تليفون. إحساس powers-of-ten مبهر.",
+  "how": [
+   "ابدأ بنقطة واحدة في النص بتعمل pulse",
+   "الشبابيك تتولد من النقطة بـscale من 0 وspring",
+   "زوم لوغاريتمي (exp) عشان يحس ثابت عبر المقاييس",
+   "zoom-out لحد ما المشهد كله يبقى نجمة وسط نجوم (canvas)",
+   "zoom-in على نجمة تانية = المشهد الجديد (موبايل)"
+  ],
+  "source": "prompt-motion/dale-vaz-cc612a",
+  "examples": [
+   "https://prompt-motion.com/dale-vaz-cc612a"
+  ],
+  "tags": [
+   "Product UI",
+   "Phone",
+   "Charts",
+   "Particles"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-020-logo-slow-assemble",
+  "section": "motion",
+  "title": "لوجو بيتجمع ببطء من قطع",
+  "what": "reveal بطيء: قطع وأشكال وجزيئات بتتجمع وبتتركب لحد ما اللوجو يكمل. مثالي لختام ريلز HOSSO أو تعريف بلوجو Claude.",
+  "how": [
+   "قسّم اللوجو SVG لقطع (paths) أو sample نقط منه على canvas",
+   "كل قطعة تبدأ في مكان عشوائي ثابت (seeded مش Math.random) وتتجه لمكانها",
+   "stagger من المركز لبرا أو بالترتيب",
+   "آخر لحظة: flash دهبي خفيف + الاسم يطلع من ماسك",
+   "للجزيئات: نقط دهبي على أسود بتتجاذب لشكل اللوجو"
+  ],
+  "source": "prompt-motion/tdinh-me-815acb",
+  "examples": [
+   "https://prompt-motion.com/tdinh-me-815acb",
+   "https://prompt-motion.com/deebeeeff-50fcd0"
+  ],
+  "tags": [
+   "Shapes",
+   "Particles"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-021-badge-unlock-3d",
+  "section": "motion",
+  "title": "بادج 3D بيتفتح + جزيئات دهبي",
+  "what": "شاشة فتح إنجاز: بادج تقيل بيتعامل كجسم 3D بيميل ناحية الكيرسر بالفيزيا، وبعدين احتفال بجزيئات دهبي. بالظبط ألوان البراند، وينفع لريل «خلصت التحدي» أو milestone للحساب.",
+  "how": [
+   "البادج طبقات (base, rim, icon) بـtranslateZ مختلف عشان parallax",
+   "rotateX/Y تتبع الكيرسر بـspring ناعم (مش bouncy)",
+   "لمعة specular بتتحرك عكس الميل (gradient overlay)",
+   "burst جزيئات دهبي من ورا البادج بجاذبية بسيطة",
+   "لو في تصميم Figma: طابق التصميم وزوّد الحركة بس"
+  ],
+  "source": "prompt-motion/bthreeagency-b9b8d9",
+  "examples": [
+   "https://prompt-motion.com/bthreeagency-b9b8d9"
+  ],
+  "tags": [
+   "Product UI",
+   "Phone",
+   "Particles"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-022-status-pill-morph",
+  "section": "motion",
+  "title": "شكل واحد بيحكي حالة الطلب",
+  "what": "شكل أسود واحد بيتحول: «اتطلب ✓» → «بيتطبع ٪» → «في الطريق» (عربية على خط) → «وصل ✓». قصة كاملة في pill واحد. ممتاز لريل «Claude بيشتغل على المهمة: بيفكر → بيكتب → بيراجع → خلص».",
+  "how": [
+   "pill واحد بيغير width حسب طول النص الجديد بـspring",
+   "الأيقونة جوه بتتبدل (spinner → نسبة بتعد → أيقونة → علامة صح)",
+   "النص القديم يخرج لفوق والجديد يدخل من تحت بتوقيت لوحده",
+   "على «وصل» الشكل يغرق الكادر ويبدأ المشهد الجاي",
+   "الحالات بالعربي: بيفكر… بيكتب… بيراجع… جاهز ✓"
+  ],
+  "source": "prompt-motion/twoclipping-221cab",
+  "examples": [
+   "https://prompt-motion.com/twoclipping-221cab",
+   "https://prompt-motion.com/ultimaxbt-2ddf1e"
+  ],
+  "tags": [
+   "Product UI",
+   "Photos",
+   "Music",
+   "Phone"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-023-device-grows-from-screen",
+  "section": "motion",
+  "title": "التليفون بيطلع من حافة الشاشة",
+  "what": "المحتوى بيبقى full-screen، وبعدين الكاميرا تبعد والبيزل بتاع التليفون «بيكبر» من حافة الشاشة نفسها، أو الـDynamic Island بتتمط وتطير تبقى شباك ماك. reveal للجهاز من غير ما تقطع.",
+  "how": [
+   "المحتوى في div بحجم الكادر، حواليه frame مخفي (border 0)",
+   "مع الـpull-back: border يكبر لـ11px والكورنرات تكبر وتظهر status bar",
+   "Dynamic Island: pill بيتمط (scaleX) ويتفصل ويطير",
+   "scale المحتوى ينزل بالتوازي مع ظهور البيزل",
+   "للريلز: تليفون جوه تليفون (9:16 جوه 9:16) شكله حلو"
+  ],
+  "source": "prompt-motion/twoclipping-221cab",
+  "examples": [
+   "https://prompt-motion.com/twoclipping-221cab",
+   "https://prompt-motion.com/ultimaxbt-2ddf1e"
+  ],
+  "tags": [
+   "Product UI",
+   "Photos",
+   "Music",
+   "Phone"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-024-before-after-drag-slider",
+  "section": "motion",
+  "title": "سلايدر بتسحبه يقلب قبل/بعد",
+  "what": "الكيرسر بيسحب نوب السلايدر والصورة بتتغير قدامك (من الضهر للغروب في الأصل)، والنوب نفسه بيتحول لعدسة زجاج وهو ماسكه. أحسن طريقة تعرض بيها «قبل Claude / بعد Claude» على شغل حقيقي.",
+  "how": [
+   "صورتين متطابقين (قبل/بعد) فوق بعض",
+   "clip-path inset على اللي فوق مربوط بمكان النوب",
+   "القيمة محسوبة من مكان الكيرسر وقت السحب، وعند الإفلات spring يرجع",
+   "النوب يكبر لعدسة زجاج (liquid glass) وانت ماسكه",
+   "قبل: برومبت عادي → بعد: برومبت منظم، أو تصميم قبل/بعد"
+  ],
+  "source": "prompt-motion/twoclipping-221cab",
+  "examples": [
+   "https://prompt-motion.com/twoclipping-221cab"
+  ],
+  "tags": [
+   "Product UI",
+   "Phone",
+   "Photos",
+   "Music"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-025-self-drawing-charts",
+  "section": "motion",
+  "title": "شارتات بترسم نفسها وأرقام بتعد",
+  "what": "بارات بتطلع، خطوط بترسم نفسها، tooltip يظهر على hover، ورقم كبير بيعد لحد «مليون زيارة». أكتر حاجة متكررة في فيديوهات الإطلاق ولسه بتشد لو اتعملت نضيفة.",
+  "how": [
+   "line chart: path بـstroke-dashoffset مربوط بالزمن",
+   "bars: scaleY من 0 مع stagger وtransform-origin bottom",
+   "counter: tween على object.value وتحديث النص كل فريم (أرقام عربية لو مناسب)",
+   "tooltip يتبع نقطة على الخط",
+   "اتجنب أرقام مخترعة؛ استخدم أرقام حقيقية بس"
+  ],
+  "source": "prompt-motion/viktoroddy-98c1d8",
+  "examples": [
+   "https://prompt-motion.com/viktoroddy-98c1d8",
+   "https://prompt-motion.com/aistocksavvy-3fb9f5",
+   "https://prompt-motion.com/sudeepsd-1a3485",
+   "https://prompt-motion.com/dale-vaz-cc612a"
+  ],
+  "tags": [
+   "Charts",
+   "Product UI",
+   "Particles",
+   "Code"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-026-code-terminal-reveal",
+  "section": "motion",
+  "title": "كود وتيرمنال بيتكتبوا قدامك",
+  "what": "تيرمنال أو editor بيتكتب فيه الكود حرف حرف، والأوامر بتشتغل، والنتيجة تطلع جنبه. ده جوهر محتوى «Claude Code بيعمل كذا» ولازم يبقى مقروء على الموبايل.",
+  "how": [
+   "شباك تيرمنال بـmonospace كبير (32px+ على 9:16)",
+   "النص المعروض = substring حسب الزمن (مش setInterval) عشان seek-safe",
+   "syntax highlight بسيط بـspans ملونة، والكيرسر بيرمش",
+   "بعد الأمر: output يطلع سطر سطر بسرعة",
+   "زوم على السطر المهم + highlight دهبي"
+  ],
+  "source": "prompt-motion/hqmank-7c61f1",
+  "examples": [
+   "https://prompt-motion.com/hqmank-7c61f1",
+   "https://prompt-motion.com/iammxfschr-d68f90",
+   "https://prompt-motion.com/ddryo-loos-300829",
+   "https://prompt-motion.com/xelandre-363f00"
+  ],
+  "tags": [
+   "Product UI",
+   "Code",
+   "Music"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-027-whiteboard-explainer",
+  "section": "motion",
+  "title": "شرح وايت بورد مرسوم باليد",
+  "what": "إيد بترسم على وايت بورد وبتشرح فكرة صعبة (فيزياء، ذكاء اصطناعي، أداة)، أو stop-motion مرسوم باليد والمنتج بيحكي عن نفسه. ستايل دافي وبيبسّط أي فكرة معقدة.",
+  "how": [
+   "كل رسمة SVG paths بـstroke-dashoffset بالترتيب",
+   "أضف jitter خفيف (filter turbulence) عشان تبان مرسومة",
+   "للـstop-motion: غير الـseed كل 2–3 فريمات (boil)",
+   "الكلام بخط يد عربي بيتكتب بنفس الطريقة",
+   "ممكن تطلبه على مرحلتين: الأول الرسم، بعدين نسخة MP4 بتعليق صوتي"
+  ],
+  "source": "prompt-motion/tak3sh8-be5012",
+  "examples": [
+   "https://prompt-motion.com/tak3sh8-be5012",
+   "https://prompt-motion.com/lemomo-ai-0d9cff",
+   "https://prompt-motion.com/nikolajankovic-ce4ff4"
+  ],
+  "tags": [
+   "Diagrams",
+   "Product UI",
+   "Charts"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-028-paper-marker-notes",
+  "section": "motion",
+  "title": "ورق فاتح وملاحظات ماركر وقلب نور/ضلمة",
+  "what": "كانفاس ورق، ملاحظات بالماركر بتترسم، كلام ضخم بيتحرك، وقلبات حادة من فاتح لغامق، وفكرة جديدة كل 1.5–2 ثانية مع صوت على كل خبطة. مكتوب أصلاً لـHyperFrames + GSAP، يعني قريب جداً من شغلنا.",
+  "how": [
+   "خلفية ورق texture + خط Anton للكلام الكبير + خط يد للملاحظات",
+   "الخط اليدوي: stroke-dashoffset على text محول لـpaths",
+   "قلبات light/dark حادة على الدروبس (الغامق = فحمي من نفس الباليت)",
+   "squash/stretch، overlap، follow-through، smear — مبادئ أنيميشن حقيقية",
+   "كل from-state متحدد عند t=0 عشان seek يشتغل"
+  ],
+  "source": "prompt-motion/ik-builds-b8bdcf",
+  "examples": [
+   "https://prompt-motion.com/ik-builds-b8bdcf"
+  ],
+  "tags": [
+   "Charts",
+   "Diagrams",
+   "Music"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-029-pixel-art-scenes",
+  "section": "motion",
+  "title": "بيكسل آرت: مشاهد وتاريخ وألعاب",
+  "what": "مشاهد بيكسل آرت: ليلة عيد بعناصر محلية، تاريخ الـLLMs كـboomerang، ساحر بيكسل، حتى لعبة كروت. ستايل نوستالجي وسهل على Claude وجذاب في الفيد. ممكن «رمضان بيكسل» أو «تاريخ Claude بيكسل».",
+  "how": [
+   "canvas بحجم صغير (160×284) واعمله scale بـimage-rendering: pixelated",
+   "باليت محدودة 8–16 لون",
+   "حركة بالفريمات (step easing) مش ناعمة",
+   "ابحث عن عناصر ثقافية للمناسبة (فوانيس، كحك…) وحوّلها sprites",
+   "خط بيكسل للعناوين"
+  ],
+  "source": "prompt-motion/hoyoyoda-3a5c08",
+  "examples": [
+   "https://prompt-motion.com/hoyoyoda-3a5c08",
+   "https://prompt-motion.com/pluginplay-3d4006",
+   "https://prompt-motion.com/0xevinho-3777d8",
+   "https://prompt-motion.com/aisongman-71ffac"
+  ],
+  "tags": [
+   "Characters",
+   "Diagrams"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-030-shadow-theatre-cutout",
+  "section": "motion",
+  "title": "مسرح خيال ظل من ورق مقصوص",
+  "what": "أنيميشن 9:16 بستايل خيال الظل والورق المقصوص، بصوت هادي معمول بالكود، عن سؤال إنساني زي «إيه اللي بيخلي المكان بيت؟». دافي جداً وقريب من الأراجوز وخيال الظل المصري.",
+  "how": [
+   "خلفية نور دافي (radial gradient برتقاني) وشخصيات silhouettes سودا SVG",
+   "مفاصل الشخصيات بتتحرك بـrotate حوالين نقط (زي العصيان)",
+   "طبقات بعمق مختلف وblur للبعيد",
+   "صوت ambient بالـWebAudio (drone + نقرات خفيفة)",
+   "السؤال يتكتب بخط عربي في الآخر"
+  ],
+  "source": "prompt-motion/x4b47x-9cc84f",
+  "examples": [
+   "https://prompt-motion.com/x4b47x-9cc84f"
+  ],
+  "tags": [
+   "Characters"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-031-style-skins",
+  "section": "motion",
+  "title": "نفس المحتوى بجلود مختلفة (ريزوجراف، أوسيلوسكوب)",
+  "what": "برومبت قصير: «اعمل عن الستوديو بستايل ريزوجراف» أو «بستايل أوسيلوسكوب». ستايل واحد قوي بيدي هوية كاملة من غير شرح كتير. فكرة سلسلة: «نفس الريل بـ5 ستايلات».",
+  "how": [
+   "ريزوجراف: ألوان spot 2–3 + grain + misregistration (إزاحة طبقة بكسلين)",
+   "أوسيلوسكوب: خطوط خضرا/دهبي مضيئة على أسود + scanlines + persistence trail",
+   "اكتب الستايل في سطر واحد وسيب Claude يفسره، بعدين صحح",
+   "ثبت المحتوى وغير الجلد بس عشان المقارنة",
+   "خلي الأسود والدهبي هو الـbase لجلود HOSSO"
+  ],
+  "source": "prompt-motion/rneayan-474bcf",
+  "examples": [
+   "https://prompt-motion.com/rneayan-474bcf",
+   "https://prompt-motion.com/rneayan-ea6129"
+  ],
+  "tags": [
+   "Kinetic type",
+   "Diagrams",
+   "Charts"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-032-procedural-character",
+  "section": "motion",
+  "title": "شخصية متحركة بالكود بس",
+  "what": "شخصية معمولة كلها JavaScript (ساموراي بيعمل كاتا وسط نار، بجعة راكبة عجلة، إنسان بيكبر من طفل لعجوز). اختبار مشهور لقدرات الموديل، وبيبهر لأنه من غير أي assets.",
+  "how": [
+   "ابني الشخصية skeleton: مفاصل وعضم بأطوال ثابتة",
+   "كل pose = زوايا المفاصل؛ اعمل interpolate بين الـposes بـeasing",
+   "أضف secondary motion (شعر، هدوم، ذيل) بـspring متأخر",
+   "مؤثرات (نار، شرار) بـparticles على canvas",
+   "قول له «خد وقتك» واطلب أعلى تفصيل"
+  ],
+  "source": "prompt-motion/chrisjdimarco-f068db",
+  "examples": [
+   "https://prompt-motion.com/chrisjdimarco-f068db",
+   "https://prompt-motion.com/axtonliu-0b861d",
+   "https://prompt-motion.com/loicrambo-ad6830"
+  ],
+  "tags": [
+   "Characters",
+   "Particles"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-033-threejs-world-scenes",
+  "section": "motion",
+  "title": "عوالم 3D بـthree.js (جولة، طيارة، شباك قطر)",
+  "what": "مشاهد 3D كاملة: جولة جوه داتا سنتر، معركة طيارات على غروب بستايل جيبلي، طيارة مفصلة، أربع فصول بتعدي من شباك قطر. ينفع لريل «إيه اللي بيحصل جوه السيرفر لما تكلم Claude».",
+  "how": [
+   "three.js scene + camera path (CatmullRomCurve3) بتتحرك بالزمن",
+   "إضاءة: ambient + directional + fog عشان العمق",
+   "مواد بسيطة لكن ألوان مدروسة (gradient sky)",
+   "الـrender بـseek(t) يحدد مكان الكاميرا مش requestAnimationFrame حر",
+   "للريل: كادر 9:16 والعنصر المهم في النص"
+  ],
+  "source": "prompt-motion/sayan-shanky-f850d8",
+  "examples": [
+   "https://prompt-motion.com/sayan-shanky-f850d8",
+   "https://prompt-motion.com/nft-chen-5f8bb0",
+   "https://prompt-motion.com/buildfastwithai-ed9447",
+   "https://prompt-motion.com/itsolelehmann-e47532"
+  ],
+  "tags": [
+   "Diagrams",
+   "Product UI"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-034-concept-math-explainer",
+  "section": "motion",
+  "title": "شرح مفهوم تقني/رياضي بالحركة",
+  "what": "شرح التفاضل بـManim، أو rate limiter بـcanvas صافي، أو Git لحد مبتدئ، أو إزاي الخط الأصفر في الكورة بيترسم. فكرة واحدة بتتبني خطوة بخطوة بأمثلة. نوع «شرح» اللي بيتحفظ ويتشير.",
+  "how": [
+   "قسّم المفهوم لـ4–6 خطوات، كل خطوة visual واحد",
+   "canvas أو SVG، وكل فريم دالة في الزمن",
+   "أمثلة ملموسة قبل التجريد",
+   "تعليق صوتي اختياري (edge-tts أو ElevenLabs)",
+   "لـClaude: «إزاي Claude بيقرا البرومبت» أو «يعني إيه tokens»"
+  ],
+  "source": "prompt-motion/linearuncle-5d2bae",
+  "examples": [
+   "https://prompt-motion.com/linearuncle-5d2bae",
+   "https://prompt-motion.com/parkerrex-1a54fe",
+   "https://prompt-motion.com/yunn260414-60d996",
+   "https://prompt-motion.com/blueoctopusai-dd17bd"
+  ],
+  "tags": [
+   "Diagrams",
+   "Charts",
+   "Code"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-035-history-timeline",
+  "section": "motion",
+  "title": "تايملاين تاريخ في دقيقة",
+  "what": "أهم لحظات في تاريخ موضوع (الذكاء الاصطناعي، بلد، حضارة) متصفة على خط زمني الكاميرا بتمشي عليه، وكل محطة بتاريخ ورسمة. سهل كبرومبت سطر واحد.",
+  "how": [
+   "خط أفقي طويل (أو رأسي لـ9:16) والكاميرا بتتحرك عليه",
+   "كل محطة: سنة كبيرة بتعد + عنوان + أيقونة",
+   "الإيقاع بيسرع قرب النهاية (الحاضر)",
+   "آخر محطة = النهاردة/Claude",
+   "اتأكد من الحقايق والتواريخ قبل الرندر"
+  ],
+  "source": "prompt-motion/kloss-xyz-fe0c31",
+  "examples": [
+   "https://prompt-motion.com/kloss-xyz-fe0c31",
+   "https://prompt-motion.com/triglyceee-bd5b08",
+   "https://prompt-motion.com/buildfastwithai-53234e",
+   "https://prompt-motion.com/pluginplay-3d4006"
+  ],
+  "tags": [
+   "Diagrams",
+   "Kinetic type",
+   "Particles",
+   "Charts"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-036-beat-grid-cuts",
+  "section": "edit",
+  "title": "تحليل الأغنية وقطع على الـbeat grid",
+  "what": "بدل ما تقطع بالعين، حلل الأغنية: التمبو، شبكة البيتس، الطاقة في كل بار، ومكان الـdrop، وصحح الشبكة على الكيك الحقيقي. كل cut على downbeat وكل حركة UI على بيت. ده اللي بيخلي الفيديو «يحس» إنه متقطع على المزيكا.",
+  "how": [
+   "حلل بـlibrosa/numpy: BPM + beat times + onset strength + drop",
+   "صحح الشبكة على مكان الكيك الفعلي (offset)",
+   "اكتب الستوري بورد بالبيتس مش بالثواني",
+   "ابدأ الأغنية قبل الـdrop بعدد بيتس محسوب",
+   "اعمل render لفريم واحد على كل بيت واتأكد"
+  ],
+  "source": "prompt-motion/twoclipping-6dd14e",
+  "examples": [
+   "https://prompt-motion.com/twoclipping-6dd14e",
+   "https://prompt-motion.com/notdwd-c2037d",
+   "https://prompt-motion.com/jhylee95-e1152f"
+  ],
+  "tags": [
+   "Product UI",
+   "Music",
+   "Photos",
+   "Phone"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-037-subframe-motion-blur",
+  "section": "edit",
+  "title": "موشن بلر حقيقي من subframes",
+  "what": "بدل blur مزيف، بيعملوا render لكل فريم 3–4 مرات بأوقات قريبة جداً ويدمجوهم بـffmpeg tmix، فالحركة السريعة تاخد موشن بلر طبيعي. الفرق واضح في الـwhips والزوم. (استخدمه بخفة، ومن غير صناديق بلر).",
+  "how": [
+   "Playwright: لكل فريم خد screenshot عند t−1/240، t، t+1/240",
+   "ادمجهم بـffmpeg -vf tmix=frames=3",
+   "أو render بـ240fps وبعدين tmix ونزل لـ60",
+   "بس على اللقطات السريعة لو الرندر تقيل",
+   "اتأكد إن النصوص الثابتة فضلت حادة"
+  ],
+  "source": "prompt-motion/twoclipping-6dd14e",
+  "examples": [
+   "https://prompt-motion.com/twoclipping-6dd14e",
+   "https://prompt-motion.com/twoclipping-5cba86",
+   "https://prompt-motion.com/xelandre-363f00"
+  ],
+  "tags": [
+   "Product UI",
+   "Music",
+   "Phone",
+   "Photos"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-038-enter-moving-cuts",
+  "section": "edit",
+  "title": "كل لقطة تدخل وهي بتتحرك",
+  "what": "الكاميرا عمرها ما بتقطع على فريم واقف: كل لقطة بتدخل وهي متحركة أصلاً (ease-out أُسّي) وبتخرج على حركة بتسرّع أو blur. والقطعات الحادة بس على الـdrop، وقبل البيت بفريمين. سر إحساس keynote الناعم.",
+  "how": [
+   "كل لقطة تبدأ بقيمة بعيدة شوية وتتحرك للهدف (12–19% من المسافة الباقية كل فريم)",
+   "الخروج: ease-in يسرّع + directional blur",
+   "hard cut بس على الـdrop أو تغيير القسم",
+   "حط القطعة قبل البيت بفريمين عشان العين تلحقها",
+   "الـblur يتبع اتجاه وسرعة الحركة"
+  ],
+  "source": "prompt-motion/notdwd-c2037d",
+  "examples": [
+   "https://prompt-motion.com/notdwd-c2037d"
+  ],
+  "tags": [
+   "Product UI",
+   "Photos",
+   "Music"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-039-gallery-match-cut",
+  "section": "edit",
+  "title": "Match cut من تايل لـfull-bleed ورجوع",
+  "what": "أول فريم ريل كامل الشاشة، والكاميرا بتبعد لحد ما يبقى مجرد أول كارت في جريد الموقع؛ وبعدين whip جوه تايل لحد ما يملا الشاشة، وفي الآخر الكليك يصغر ويرجع لمكانه. لما الكورنرات تروح لـ0 عند full-bleed، الانتقال يبقى مثالي.",
+  "how": [
+   "الجريد مترتب مرة واحدة في world coordinates",
+   "border-radius = دالة في الـscale (يوصل 0 عند ملء الشاشة)",
+   "نفس ملف الفيديو في التايل وfull-screen بنفس الـoffset عشان مفيش قفزة",
+   "قيس أماكن العناصر وقت التشغيل (getBoundingClientRect) للـmatch",
+   "ينفع لعرض مكتبة ريلز HOSSO"
+  ],
+  "source": "prompt-motion/antonio-kodheli-490109",
+  "examples": [
+   "https://prompt-motion.com/antonio-kodheli-490109"
+  ],
+  "tags": [
+   "Product UI",
+   "Music"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-040-talking-head-punchy-edit",
+  "section": "edit",
+  "title": "تحويل كليب كلام خام لإيديت punchy",
+  "what": "كليب شخص بيتكلم خام → إيديت سريع وممتع بسبتايتلز وجرافيكس ومزيكا، بطلب واحد. ده بالظبط شغل ريلز حسام: Claude يقطع السكتات ويضيف كابشن وجرافيكس.",
+  "how": [
+   "Whisper للترانسكريبت بتوقيت الكلمة",
+   "شيل السكتات والـfillers (اتش، يعني…)",
+   "كابشن كلمة كلمة بالعربي مع highlight للكلمة المهمة",
+   "punch-in zoom 1.1 على الجمل القوية + جرافيكس على الكلمات المفتاحية",
+   "مزيكا تحت الكلام بـducking"
+  ],
+  "source": "prompt-motion/sab8a-364a5a",
+  "examples": [
+   "https://prompt-motion.com/sab8a-364a5a"
+  ],
+  "tags": [
+   "Photos"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-041-lyrics-sync",
+  "section": "edit",
+  "title": "فيديو كلمات متزامن مع الصوت",
+  "what": "كلمات الأغنية بتتحرك متزامنة بالظبط مع الغُنا والإيقاع، كأنه reel مصمم موشن. نفس التكنيك ينفع للتعليق الصوتي في ريلزنا: كل كلمة تطلع لحظة ما تتقال.",
+  "how": [
+   "استخرج توقيت كل كلمة (Whisper word timestamps)",
+   "كل كلمة ليها حركة دخول حسب طاقتها (ممطوطة للكلمات الطويلة)",
+   "الكلمات المهمة أكبر وبلون الأكسنت",
+   "الخلفية بتتفاعل مع الطاقة (energy envelope)",
+   "راجع التزامن يدوي على الكلمات الأولى"
+  ],
+  "source": "prompt-motion/samaote-5e2fc2",
+  "examples": [
+   "https://prompt-motion.com/samaote-5e2fc2"
+  ],
+  "tags": [
+   "Kinetic type",
+   "Music"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-042-sfx-by-measured-peak",
+  "section": "sound",
+  "title": "حط المؤثر على الـpeak بتاعه مش بداية الملف",
+  "what": "غلطة شائعة: تحط ملف الصوت عند الحدث، بس الصوت الفعلي جواه بيبدأ متأخر شوية. الحل: قيس مكان الـpeak في كل مؤثر وخليه هو اللي يقع على الحدث. وخلي المؤثرات واطية تحت المزيكا، وماستر على -14 LUFS.",
+  "how": [
+   "لكل SFX احسب offset الـpeak (numpy/ffmpeg astats)",
+   "start = وقت الحدث − offset الـpeak",
+   "مؤثر واحد ناعم لكل عنصر بيظهر، وسكوت غير كده",
+   "loudnorm لـ-14 LUFS و-2 dBTP، وقيس تاني بعد AAC",
+   "استخدم أصوات رخصتها تسمح تجاري (CC0 أو متولدة)"
+  ],
+  "source": "prompt-motion/twoclipping-6dd14e",
+  "examples": [
+   "https://prompt-motion.com/twoclipping-6dd14e",
+   "https://prompt-motion.com/ik-builds-b8bdcf",
+   "https://prompt-motion.com/aschapmann-131210"
+  ],
+  "tags": [
+   "Music",
+   "Product UI",
+   "Phone",
+   "Photos"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-043-music-sections-follow-visuals",
+  "section": "sound",
+  "title": "المزيكا بتتقسم مع الصورة",
+  "what": "المزيكا مش خلفية ثابتة: الدرامز بتقع لما الكادر يقلب غامق أو والكورة في الهوا، وترجع تخبط على الكلام الكبير واللوجو. الصورة والمزيكا بيتنفسوا مع بعض.",
+  "how": [
+   "قسّم الفيديو أقسام ولكل قسم طاقة (هادي/بيبني/drop)",
+   "شيل الدرامز (أو low-pass) في لحظات التعليق والسكون",
+   "رجّعها بخبطة على المشهد الكبير",
+   "sub-hit تحت ظهور اللوجو",
+   "لو بتولد مزيكا (Suno): اكتب الأقسام بالثواني في البرومبت"
+  ],
+  "source": "prompt-motion/ik-builds-b8bdcf",
+  "examples": [
+   "https://prompt-motion.com/ik-builds-b8bdcf",
+   "https://prompt-motion.com/twoclipping-221cab"
+  ],
+  "tags": [
+   "Music",
+   "Charts",
+   "Diagrams",
+   "Product UI"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-044-voiceover-word-captions",
+  "section": "sound",
+  "title": "تعليق صوتي متولد + كابشن بالظبط على الكلمة",
+  "what": "يولّد التعليق من ElevenLabs بـ4 تيكات ويختار، ولو سطر وحش يعيده لوحده ويلزقه. السكتات الطويلة تتقصر، والمستوى يتوحد. وللتوقيت: يقطع الصوت عند السكتات ويعمل Whisper لكل جزء لوحده، لأن مرة واحدة ممكن تتأخر نص ثانية.",
+  "how": [
+   "ولّد كذا تيك واختار، وأعد السطور الضعيفة بس",
+   "قصّر أي سكتة أطول من 0.28s لـ0.2s",
+   "وحّد مستوى الجمل (اقرب للـmedian) بتعديل الـgain في السكتات بس",
+   "قسّم عند سكتات ≥100ms وWhisper لكل جزء وثبّت أول كلمة على الـonset",
+   "الكابشن يتكتب كلمة كلمة لحظة نطقها"
+  ],
+  "source": "prompt-motion/rossaxbt-3085b7",
+  "examples": [
+   "https://prompt-motion.com/rossaxbt-3085b7"
+  ],
+  "tags": [
+   "Product UI",
+   "Photos",
+   "Music"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-045-collision-music-machine",
+  "section": "sound",
+  "title": "آلة مزيكا: كل نوتة من خبطة",
+  "what": "ماكينة بتعزف مقطوعة أصلية وكل نوتة طالعة من تصادم حقيقي باين (كور بتخبط في مكعبات، كورة بتنزل وتنور الحاجات على الإيقاع). الصوت والصورة سبب ونتيجة، فبيبقى مُرضي جداً.",
+  "how": [
+   "اكتب المقطوعة الأول (نوتات + أوقات)",
+   "احسب مسارات الكور عكسياً بحيث الخبطة تقع على وقت النوتة",
+   "كل خبطة: flash للعنصر + صوت WebAudio بالـpitch بتاعه",
+   "three.js أو canvas 2D",
+   "نسخة HOSSO: كور دهبي على أسود"
+  ],
+  "source": "prompt-motion/kamstudiolabs-447565",
+  "examples": [
+   "https://prompt-motion.com/kamstudiolabs-447565",
+   "https://prompt-motion.com/gorden-sun-041f56"
+  ],
+  "tags": [
+   "Music",
+   "Particles"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-046-sound-tells-half",
+  "section": "sound",
+  "title": "فيلم صامت والصوت بيحكي نص القصة",
+  "what": "فيلم قصير من غير ولا كلمة، والصوت (خطوات، موج، باب، ساعة) هو اللي بيكمل الحكاية. تمرين قوي في الـsound design وبيبين قيمة الصوت.",
+  "how": [
+   "اكتب القصة كأحداث صوتية الأول",
+   "كل حدث مهم يتسمع قبل ما يتشاف (J-cut)",
+   "ambient طبقات (بعيد/قريب)",
+   "سكوت تام في لحظة واحدة مهمة",
+   "الصوت يتولد بالكود أو مكتبة CC0"
+  ],
+  "source": "prompt-motion/kamstudiolabs-0b0824",
+  "examples": [
+   "https://prompt-motion.com/kamstudiolabs-0b0824"
+  ],
+  "tags": [
+   "Characters"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-047-chat-to-result-story",
+  "section": "story",
+  "title": "قصة: طلب في الشات → تفكير → نتيجة → تنفيذ",
+  "what": "الهيكل: المستخدم بيكتب طلب بشري («جعان ومش عارف عايز إيه»)، الزرار يتحول لحاجة بتفكر، النتايج تطلع كروت ويختار الأحسن، والرد يعرض أكشن، والكيرسر يدوس وخلاص اتنفذ. بالظبط ريل «طلبت من Claude كذا وده اللي حصل».",
+  "how": [
+   "اكتب الطلب بلغة طبيعية مصرية",
+   "مشهد «بيفكر»: الأيقونة تتحول لحاجة متعلقة بالموضوع + نص بيلمع",
+   "الـdrop = النتايج تنفجر كروت ويقف على «أفضل اختيار»",
+   "الرد + زرارين (نفذ / خيارات تانية) والكيرسر يدوس",
+   "الخاتمة: الزرار يتمدد يبقى صفحة فيها جملة الختام"
+  ],
+  "source": "prompt-motion/ultimaxbt-2ddf1e",
+  "examples": [
+   "https://prompt-motion.com/ultimaxbt-2ddf1e",
+   "https://prompt-motion.com/charlesmendez-73b6e4",
+   "https://prompt-motion.com/notdwd-c2037d"
+  ],
+  "tags": [
+   "Product UI",
+   "Photos",
+   "Music",
+   "Kinetic type"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-048-launch-vo-formula",
+  "section": "story",
+  "title": "فورمولا تعليق إطلاق في 9 سطور",
+  "what": "تعليق قصير بنمط ثابت: تقديم الاسم والنوع والقيمة، بعدين سطر فعل قوي، بعدين «بيفهمك»، بعدين «بيتحسن مع الاستخدام»، بعدين التحكم في الإعدادات، والنتيجة زي ما تخيلت، وختام بالاسم و«متاح دلوقتي» والـdrop بتاع المزيكا على سطر الفعل. قالب ممكن نعربه لأي أداة.",
+  "how": [
+   "عرّب القالب بالمصري واملاه للأداة",
+   "tags عاطفية بخفة: همس على الهادي، حماس على سطر الفعل",
+   "كل مشهد يبدأ مع بداية جملة",
+   "الـdrop على أقوى سطر",
+   "آخر سطر بنقطة بسيطة من غير مبالغة"
+  ],
+  "source": "prompt-motion/rossaxbt-3085b7",
+  "examples": [
+   "https://prompt-motion.com/rossaxbt-3085b7"
+  ],
+  "tags": [
+   "Product UI",
+   "Photos",
+   "Music"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-049-four-act-product-story",
+  "section": "story",
+  "title": "قصة المنتج في 4–5 مشاهد",
+  "what": "بدل عرض فيتشرز، القصة: ليه السوق مهم → ليه الموضوع مؤلم دلوقتي → إزاي المنتج بيحله → هتاخد إيه، وكل مشهد بعنوان قصير. أو 5 مشاهد: مشكلة العميل، أنا بعمل إيه، إزاي في 3 خطوات، دليل واحد، الاسم.",
+  "how": [
+   "اختار هيكل (4 أو 5 مشاهد) واكتب عنوان لكل مشهد في 3–5 كلمات",
+   "كل مشهد يفضل كفاية عشان يتقرا",
+   "ملكش أرقام مخترعة؛ الدليل لازم حقيقي",
+   "ختم بلوجو متحرك + تاجلاين + لينك",
+   "لـHOSSO: المشكلة = «Claude بيديك كلام عام» → الحل = البرومبت الصح"
+  ],
+  "source": "prompt-motion/aschapmann-131210",
+  "examples": [
+   "https://prompt-motion.com/aschapmann-131210",
+   "https://prompt-motion.com/alex-prompter-1ea044",
+   "https://prompt-motion.com/sudo-kiran-b055de"
+  ],
+  "tags": [
+   "Product UI",
+   "Diagrams",
+   "Music"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-050-invented-short-film",
+  "section": "story",
+  "title": "فيلم قصير بقصة يخترعها Claude",
+  "what": "«اتخيل قصة واعملها أنيميشن»: بق مش عايز يتصلح، حارس فنار، حلقة كرتون فضاء 80s، أو قصة بتروّج للتطبيق بشكل خفي. Claude بيكتب ويخرج وينفذ.",
+  "how": [
+   "اطلب القصة الأول في سطرين ووافق عليها",
+   "قسمها لمشاهد (3–6) بشخصية واحدة وهدف واحد",
+   "ستايل بصري واحد ثابت (كرتون، بيكسار، ورق)",
+   "الترويج يبقى خفي: المنتج جزء من الحل مش إعلان",
+   "مدة واقعية: 45–90 ثانية أحسن من 4 دقايق"
+  ],
+  "source": "prompt-motion/kamstudiolabs-c9bb28",
+  "examples": [
+   "https://prompt-motion.com/kamstudiolabs-c9bb28",
+   "https://prompt-motion.com/anilraok-eff262",
+   "https://prompt-motion.com/ryzoft-4f85bd",
+   "https://prompt-motion.com/faroukzy-9ff23e"
+  ],
+  "tags": [
+   "Characters",
+   "Code"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-051-genre-switch-explainer",
+  "section": "ideas",
+  "title": "شرح فكرة واحدة بكل الأنواع",
+  "what": "شرح الـrecursion وكل شرح بستايل فيديو مختلف تماماً (وثائقي، أكشن، كرتون…) والفيديو نفسه self-referential. فكرة ذكية للتعليم: «اشرحلي البرومبت كأنه فيلم رعب، كوميدي، أنمي».",
+  "how": [
+   "اختار مفهوم واحد",
+   "5 ستايلات مختلفة جداً، كل واحد 3–5 ثواني",
+   "كل ستايل بخطه وألوانه ومزيكته",
+   "نكتة الـmeta: الفيديو بيشرح نفسه",
+   "بالعربي: وثائقي، ميلودراما مصرية، أنمي، نشرة أخبار، إعلان قديم"
+  ],
+  "source": "prompt-motion/emollick-8661a8",
+  "examples": [
+   "https://prompt-motion.com/emollick-8661a8"
+  ],
+  "tags": [
+   "Characters",
+   "Code"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-052-what-happens-in-a-second",
+  "section": "ideas",
+  "title": "إيه اللي بيحصل في ثانية / رحلة فوتون",
+  "what": "موضوع مقياس: إيه اللي بيحصل في العالم في ثانية واحدة، أو رحلة فوتون من الشمس للأرض. موضوعات «واو» بتبين عضلات الموشن. نسختنا: «إيه اللي بيحصل في الثانية اللي Claude بيرد فيها».",
+  "how": [
+   "اختار مقياس (زمن، مسافة، أرقام)",
+   "عداد ثابت في الكادر (ثواني/كيلومترات)",
+   "كل حدث = visual سريع ورقم",
+   "مفاجأة في الآخر (مقارنة غير متوقعة)",
+   "اتأكد من الأرقام"
+  ],
+  "source": "prompt-motion/nolkeeg-bf062e",
+  "examples": [
+   "https://prompt-motion.com/nolkeeg-bf062e",
+   "https://prompt-motion.com/apoorvjain25-d24184"
+  ],
+  "tags": [
+   "Kinetic type",
+   "Particles"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-053-news-roundup-motion",
+  "section": "ideas",
+  "title": "نشرة أخبار موشن جرافيك",
+  "what": "ملخص أخبار فترة معينة (ألعاب نزلت الأسبوع ده) في دقيقة، من وجهة نظر الجمهور، وكل خبر بكارت فيه النقطة المثيرة. فورمات ممكن يبقى أسبوعي: «أهم 5 حاجات جديدة في Claude الأسبوع ده».",
+  "how": [
+   "Claude يجمع الأخبار من مصادر ويختار 5",
+   "كل خبر: عنوان + سبب يهمك + visual",
+   "تمبليت ثابت عشان الإنتاج الأسبوعي يبقى سريع",
+   "عداد (1/5) وإيقاع ثابت",
+   "ختام: «تابع عشان الأسبوع الجاي»"
+  ],
+  "source": "prompt-motion/gigabit-million-16b3a0",
+  "examples": [
+   "https://prompt-motion.com/gigabit-million-16b3a0"
+  ],
+  "tags": [
+   "Charts"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-054-article-to-video",
+  "section": "ideas",
+  "title": "مقال يتحول لفيديو تعليمي",
+  "what": "برومبت بسيط: «اعمل فيديو تعليمي من المقال ده» أو «فيديو دقيقة عن الموقع بتعليق صوتي». Claude بيلخص ويصمم ويعلق. مصدر محتوى لا نهائي من مقالات Anthropic والدوكس.",
+  "how": [
+   "ادي المقال/اللينك واطلب سكريبت الأول",
+   "5–7 أفكار، كل فكرة مشهد",
+   "تعليق صوتي مصري + كابشن",
+   "الحقايق من المقال بس",
+   "اذكر المصدر في الآخر"
+  ],
+  "source": "prompt-motion/henkvaness-0e06af",
+  "examples": [
+   "https://prompt-motion.com/henkvaness-0e06af",
+   "https://prompt-motion.com/1stnoel-c20a89",
+   "https://prompt-motion.com/amitsingha89-150378"
+  ],
+  "tags": [
+   "Diagrams",
+   "Product UI",
+   "Phone",
+   "Kinetic type"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-055-website-as-footage",
+  "section": "ideas",
+  "title": "الموقع نفسه هو الفوتيج",
+  "what": "بدل رسومات مخترعة، Claude يصور صفحات الموقع الحقيقية (الرئيسية، موبايل، دارك مود) ويحركها جوه إطارات براوزر وتليفون، والشات بتاع الموقع يجاوب أسئلة حقيقية. «استخدم موارد البورتفوليو بس» بيطلع حاجة صادقة ومتسقة.",
+  "how": [
+   "Playwright يصور الصفحات full-page ونسخة موبايل",
+   "حطها في mockups براوزر/تليفون وحرك بـscroll",
+   "استخدم خطوط وألوان الموقع نفسه بس",
+   "الأرقام والحقايق من الموقع بس",
+   "ختم بالـURL والإيميل"
+  ],
+  "source": "prompt-motion/wani-shola-16ca7a",
+  "examples": [
+   "https://prompt-motion.com/wani-shola-16ca7a",
+   "https://prompt-motion.com/kikelopezdesign-7cc9e8",
+   "https://prompt-motion.com/madebyjmayala-b9204d",
+   "https://prompt-motion.com/antonio-kodheli-490109"
+  ],
+  "tags": [
+   "Product UI",
+   "Music",
+   "Phone"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-056-ai-pov-hook",
+  "section": "hooks",
+  "title": "هوك من وجهة نظر الـAI نفسه",
+  "what": "«اعمل فيديو من وجهة نظرك، إزاي حاسس وانت LLM بيستخدمك كل يوم» أو «مين انت كـOpus؟» أو «اعمل فيديو عن اللي تعرفه عني». الموديل بيبقى الشخصية، والناس بتحب تشوف «إحساس» الـAI.",
+  "how": [
+   "اطلب صراحة POV بصيغة المتكلم",
+   "فوضى منظمة: كلام سريع، أفكار بتتنط (brain rot مدروس)",
+   "لمسة شخصية: إيه أغرب طلب جالك",
+   "هوك أول ثانية: «أنا Claude، وده يومي معاك»",
+   "تجنب الإطارات والنصوص في الكورنرات (علامات الـAI المعتادة)"
+  ],
+  "source": "prompt-motion/kloss-xyz-15182a",
+  "examples": [
+   "https://prompt-motion.com/kloss-xyz-15182a",
+   "https://prompt-motion.com/1littlecoder-9fef89",
+   "https://prompt-motion.com/madhav-xo-f97f20"
+  ],
+  "tags": [
+   "Kinetic type",
+   "Code",
+   "Shapes",
+   "Particles"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-057-anti-showreel",
+  "section": "hooks",
+  "title": "أسوأ شوريل في الدنيا (عكس الطلب)",
+  "what": "بدل «وريني انت شاطر قد إيه»، اطلب العكس: «اعمل شوريل يخلي سيرتك الذاتية تترفض فوراً». الكوميديا في الفشل المقصود بتشد جداً، وممكن تتبعها بالنسخة الحلوة كمقارنة.",
+  "how": [
+   "اطلب النسخة الوحشة الأول (WordArt، ألوان صارخة، transitions رخيصة)",
+   "بعدين نفس المحتوى بنسخة احترافية",
+   "قص الاتنين ورا بعض: «قبل/بعد البرومبت الصح»",
+   "الهوك: «طلبت من Claude يعمل أوحش فيديو»",
+   "خلي الوحش قصير (3–5 ثواني)"
+  ],
+  "source": "prompt-motion/henkpoley-3d3407",
+  "examples": [
+   "https://prompt-motion.com/henkpoley-3d3407"
+  ],
+  "tags": [
+   "Characters"
+  ],
+  "at": 0,
+  "studio": "todo"
+ },
+ {
+  "id": "pm-058-showreel-one-liner",
+  "section": "prompting",
+  "title": "برومبت الشوريل اللي في سطر واحد",
+  "what": "أكتر برومبت متكرر في الموقع (حوالي 88 مدخل فيهم فكرته): طلب فيديو موشن قصير يثبت فيه Claude إنه مصمم موشن شاطر، على هيئة شوريل للسي في، مع تشجيع إنه يطلع كل اللي عنده. بسيط جداً ونتايجه متنوعة لأنه بيدي Claude دور وهدف وحرية. الضعف: النتيجة عامة لو مفيش موضوع أو براند.",
+  "how": [
+   "الدور: «انت مصمم موشن» + الهدف: «تثبت مهارتك»",
+   "المدة محددة (10–40 ثانية)",
+   "«go all out» بتشجع على الطموح",
+   "زوّد عليه موضوع أو براند أو ألوان عشان يبقى ليك",
+   "جرب نسخ: بورتريه، رياضيات، سايكدلك، بمزيكا متزامنة"
+  ],
+  "source": "prompt-motion/stephanlivera-df17a2",
+  "examples": [
+   "https://prompt-motion.com/stephanlivera-df17a2",
+   "https://prompt-motion.com/monokern-ade5b6",
+   "https://prompt-motion.com/math-files-39c9d0",
+   "https://prompt-motion.com/polydao-7a572b"
+  ],
+  "tags": [
+   "Kinetic type",
+   "Shapes",
+   "Music",
+   "Charts"
+  ],
+  "at": 0,
+  "studio": "guide"
+ },
+ {
+  "id": "pm-059-inputs-ask-me-first",
+  "section": "prompting",
+  "title": "بلوك <inputs>: اسألني الأول",
+  "what": "أقوى البرومبتات بتبدأ ببلوك inputs: «اسألني عن: اسم المنتج، اللوجو، الألوان، 3–5 لحظات UI، أغنية 120 BPM…» ومعاها defaults لو المستخدم مقالش. البرومبت كده بقى template ينفع لأي منتج، وClaude مش بيخمن.",
+  "how": [
+   "ابدأ بـ<inputs> فيها كل الحاجات المتغيرة",
+   "حط default لكل input («لو مقلتش، استخدم…»)",
+   "اختم بـ<start>: «اسألني الأول وبعدين وريني الستوري بورد قبل الكود»",
+   "الأقسام بالترتيب: inputs → direction → structure → build → gotchas → start",
+   "نسخة HOSSO: inputs = الموضوع، الهوك، طول الريل، المزيكا"
+  ],
+  "source": "prompt-motion/twoclipping-6dd14e",
+  "examples": [
+   "https://prompt-motion.com/twoclipping-6dd14e",
+   "https://prompt-motion.com/notdwd-c2037d",
+   "https://prompt-motion.com/ultimaxbt-2ddf1e",
+   "https://prompt-motion.com/rossaxbt-94583b"
+  ],
+  "tags": [
+   "Product UI",
+   "Music",
+   "Photos",
+   "Phone"
+  ],
+  "at": 0,
+  "studio": "guide"
+ },
+ {
+  "id": "pm-060-banned-list",
+  "section": "prompting",
+  "title": "قايمة «ممنوع» صريحة",
+  "what": "كل البرومبتات القوية فيها سطر Banned: shockwave rings، particle bursts، RGB split، camera shake، lens flares، glows، crossfades، أي حاجة شكلها template. لأن الموديل لوحده بيرجع للكليشيهات دي؛ لما تمنعها بالاسم بيطلع حاجة أنضف.",
+  "how": [
+   "اكتب 6–12 حاجة ممنوعة بالاسم",
+   "امنع كمان: أرقام مخترعة، فيتشرز مش موجودة، نقط في آخر الجمل",
+   "امنع علامات الـAI: إطارات وكلام في الكورنرات، labels صغيرة فوق العناوين",
+   "قايمة HOSSO الثابتة: no motion-blur boxes، no neon، no purple gradients",
+   "حدّث القايمة كل ما تلاقي كليشيه جديد"
+  ],
+  "source": "prompt-motion/twoclipping-6dd14e",
+  "examples": [
+   "https://prompt-motion.com/twoclipping-6dd14e",
+   "https://prompt-motion.com/ultimaxbt-bbebf5",
+   "https://prompt-motion.com/antonio-kodheli-490109",
+   "https://prompt-motion.com/1littlecoder-9fef89"
+  ],
+  "tags": [
+   "Music",
+   "Product UI",
+   "Kinetic type",
+   "Shapes"
+  ],
+  "at": 0,
+  "studio": "guide"
+ },
+ {
+  "id": "pm-061-seek-pure-function",
+  "section": "prompting",
+  "title": "قاعدة: كل فريم دالة في الزمن (seek(t))",
+  "what": "شرط بناء متكرر: ملف HTML واحد، وكل ستايل بيتحسب من الزمن جوه seek(t)؛ ممنوع CSS transitions أو timers أو state بين الفريمات. ده اللي بيخلي أي فريم يترندر لوحده بدقة، وده بالظبط منطق HyperFrames. اكتبها في كل برومبت.",
+  "how": [
+   "اكتب: «كل حاجة محسوبة من t جوه seek(t)، من غير transitions ولا setTimeout ولا Math.random»",
+   "الـsprings تبقى closed-form؛ ولو الهدف بيتغير كذا مرة = مجموع spring لكل تغيير",
+   "الكتابة/العدادات = substring/قيمة حسب t",
+   "الصور/الفيديو: seek يستنى decode الصور",
+   "مع GSAP: timeline paused وseek(t) من الرندرر"
+  ],
+  "source": "prompt-motion/twoclipping-5cba86",
+  "examples": [
+   "https://prompt-motion.com/twoclipping-5cba86",
+   "https://prompt-motion.com/parkerrex-1a54fe",
+   "https://prompt-motion.com/xelandre-363f00",
+   "https://prompt-motion.com/ik-builds-b8bdcf"
+  ],
+  "tags": [
+   "Charts",
+   "Product UI",
+   "Music",
+   "Diagrams"
+  ],
+  "at": 0,
+  "studio": "guide"
+ },
+ {
+  "id": "pm-062-storyboard-on-beats-first",
+  "section": "prompting",
+  "title": "الستوري بورد على البيتس قبل أي كود",
+  "what": "بدل ما Claude يكتب كود على طول، البرومبت يقوله: «وريني قايمة الحالات/الستوري بورد على شبكة البيتس قبل ما تكتب كود»، وبعدين «اعمل render لفريم واحد على كل بيت (أو stills عند ثواني محددة) واستنى موافقتي». بيوفر ساعات تعديل.",
+  "how": [
+   "البنية بالبيتس: «120 BPM، 7 بارات، حاجة على كل بيت»",
+   "اطلب storyboard نصي بالتوقيت الأول",
+   "بعدها stills عند لحظات محددة (0، 1.6، 2.5، 5…)",
+   "موافقة قبل الرندر النهائي",
+   "بعد الرندر: probe لـ20 فريم وصلّح أي زحمة أو تداخل"
+  ],
+  "source": "prompt-motion/twoclipping-5cba86",
+  "examples": [
+   "https://prompt-motion.com/twoclipping-5cba86",
+   "https://prompt-motion.com/pankajstwt-49978ed",
+   "https://prompt-motion.com/twoclipping-6dd14e"
+  ],
+  "tags": [
+   "Product UI",
+   "Music",
+   "Charts",
+   "Phone"
+  ],
+  "at": 0,
+  "studio": "guide"
+ },
+ {
+  "id": "pm-063-gotchas-block",
+  "section": "prompting",
+  "title": "بلوك <gotchas>: الأخطاء المعروفة مقدماً",
+  "what": "البرومبتات المحترفة بتحط أخطاء تقنية معروفة: will-change على حاجة الكاميرا بتكبرها بيخلي الكلام مغبش؛ opacity/filter على عنصر preserve-3d بيفرطحه؛ نص بيتبدل جوه شكل بيتحول محتاج توقيت دخول وخروج لوحده؛ والجراف والعنصر لازم من نفس الدالة.",
+  "how": [
+   "جمّع الأخطاء اللي قابلتنا في ملف ثابت وحطها في البرومبت",
+   "will-change: ممنوع على أي حاجة بتتعملها scale من الكاميرا",
+   "preserve-3d: fade الـwrapper مش العنصر",
+   "النص جوه الأشكال المتحولة: enter/exit منفصل",
+   "اقفل الـlayout قبل الأنيميشن عشان أطوال الأقسام متتغيرش"
+  ],
+  "source": "prompt-motion/twoclipping-6dd14e",
+  "examples": [
+   "https://prompt-motion.com/twoclipping-6dd14e",
+   "https://prompt-motion.com/twoclipping-5cba86",
+   "https://prompt-motion.com/pankajstwt-49978ed"
+  ],
+  "tags": [
+   "Product UI",
+   "Music",
+   "Phone",
+   "Photos"
+  ],
+  "at": 0,
+  "studio": "guide"
+ },
+ {
+  "id": "pm-064-source-of-truth-no-invent",
+  "section": "prompting",
+  "title": "مصدر الحقيقة: الريبو والموقع، وممنوع الاختراع",
+  "what": "برومبتات قوية بتبدأ بـ«افحص الريبو الحقيقي قبل ما تصمم»: ملفات التوكنز، اللوجو الأصلي، السكرينشوتس الأحدث، الكومبوننتس الفعلية. ومعاها: متخترعش فيتشرز ولا أرقام ولا أسماء عملاء، واقتبس الكلام كما هو. النتيجة صادقة وشبه البراند بجد.",
+  "how": [
+   "ادي مسارات ملفات البراند صراحة (tokens، logo، screenshots)",
+   "«متعيدش رسم اللوجو، استخدم الملف»",
+   "«ممنوع أرقام أو نسب أو أسماء مخترعة»",
+   "لو في مشروع قديم: «متكسروش، اعمل composition جديدة»",
+   "لـHOSSO: brand.md + اللوجو + الباليت الأسود والدهبي"
+  ],
+  "source": "prompt-motion/daniel-haida-8691d4",
+  "examples": [
+   "https://prompt-motion.com/daniel-haida-8691d4",
+   "https://prompt-motion.com/fractadev-149adc",
+   "https://prompt-motion.com/antonio-kodheli-490109",
+   "https://prompt-motion.com/ik-builds-b8bdcf"
+  ],
+  "tags": [
+   "Product UI",
+   "Charts",
+   "Music",
+   "Diagrams"
+  ],
+  "at": 0,
+  "studio": "guide"
+ },
+ {
+  "id": "pm-065-desired-reaction-framing",
+  "section": "prompting",
+  "title": "اوصف رد الفعل المطلوب و«ده مش…»",
+  "what": "بدل وصف تقني بس، البرومبت بيقول رد الفعل اللي عايزه عند المشاهد («استنى، ده تطبيق محاسبة ألماني؟!») ويقول بوضوح هو مش إيه («مش explainer عام، مش walkthrough، مش template») وبعدين معادلة مراجع («keynote × fintech × editorial»). بيرفع مستوى الطموح بشكل ملحوظ.",
+  "how": [
+   "سطر رد الفعل: «عايز المشاهد يقول…»",
+   "3 جمل «ده مش…» عشان تقفل الكليشيهات",
+   "معادلة مراجع من 3–4 عناصر",
+   "قواعد قصيرة صارمة: لقطة واحدة = فكرة واحدة، مساحة تتنفس، الـUI هو البطل",
+   "الإحساس في كلمات: «معدن غامق، دهب دافي، دقة، ثقة هادية»"
+  ],
+  "source": "prompt-motion/daniel-haida-8691d4",
+  "examples": [
+   "https://prompt-motion.com/daniel-haida-8691d4",
+   "https://prompt-motion.com/jhylee95-e1152f"
+  ],
+  "tags": [
+   "Product UI",
+   "Charts",
+   "Kinetic type",
+   "Music"
+  ],
+  "at": 0,
+  "studio": "guide"
+ },
+ {
+  "id": "pm-066-placeholder-template",
+  "section": "prompting",
+  "title": "برومبت تمبليت بـ{{متغيرات}}",
+  "what": "برومبت مكتوب مرة واحدة بمتغيرات: {{PRODUCT}}، {{AUDIENCE}}، {{COLORS}}، {{BANNED_WORDS}}، {{LOGO_FILE}}، أو [DESCRIBE WHAT YOU SELL]. بيتملي لكل عميل/موضوع في دقيقة. ده اللي الستوديو محتاجه عشان يعمل ريلز كتير بنفس الجودة.",
+  "how": [
+   "افصل الثابت (الستايل، القواعد) عن المتغير (الموضوع، النص)",
+   "المتغيرات في أقواس واضحة وبأسماء إنجليزي",
+   "قسم COPY: «اقرا الملف ده الأول» قبل كتابة النص",
+   "قسم RULES وCRAFT ثابتين",
+   "احفظ التمبليت في المكتبة وحدّثه بعد كل ريل"
+  ],
+  "source": "prompt-motion/ik-builds-b8bdcf",
+  "examples": [
+   "https://prompt-motion.com/ik-builds-b8bdcf",
+   "https://prompt-motion.com/alex-prompter-1ea044",
+   "https://prompt-motion.com/polydao-7a572b"
+  ],
+  "tags": [
+   "Diagrams",
+   "Music",
+   "Charts",
+   "Product UI"
+  ],
+  "at": 0,
+  "studio": "guide"
+ },
+ {
+  "id": "pm-067-reference-borrow-not-copy",
+  "section": "prompting",
+  "title": "ريفرنس: استعير التقنية وغيّر التصميم",
+  "what": "إديله فيديو ريفرنس (5 ثواني كفاية) وقوله يدرس النعومة والتوقيت ومدة اللقطات والخطوط، ياخد تقنيات، بس يغير التصميم كله بحيث يبان شغله هو. كمان ممكن «ادرس الشغل القديم بتاع البراند الأول».",
+  "how": [
+   "ارفع الريفرنس (أو اطلب منه ينزله)",
+   "اطلب تحليل: مدة كل لقطة، الـeasing، الانتقالات، الخطوط",
+   "«خد تقنيات بس غيّر الشكل بالكامل»",
+   "«ادرس تصاميم البراند السابقة» قبل البدء",
+   "قارن الإيقاع بتاعك بالريفرنس بعد الرندر"
+  ],
+  "source": "prompt-motion/lexnlin-038035",
+  "examples": [
+   "https://prompt-motion.com/lexnlin-038035",
+   "https://prompt-motion.com/ajith-io-ea7f2d",
+   "https://prompt-motion.com/abderrahmen-g-9e8ed0",
+   "https://prompt-motion.com/elliot-garreffa-f334bc"
+  ],
+  "tags": [
+   "Kinetic type",
+   "Photos",
+   "Shapes",
+   "Particles"
+  ],
+  "at": 0,
+  "studio": "guide"
+ },
+ {
+  "id": "pm-068-self-critique-loop",
+  "section": "prompting",
+  "title": "اطلب منه ينقد نفسه ويعيد",
+  "what": "«اسأل نفسك عن الخطة؛ لو مش حاسس إنها شغل محترف ابدأ من الأول»، «رندر، افحص الفريمات بنفسك، وصلّح أي تداخل أو قص أو استعجال قبل ما توريني»، «متقفش عند ستوري بورد أو صور، سلّم MP4». بيحول Claude من «أول محاولة» لـ«نسخة مراجعة».",
+  "how": [
+   "حط خطوة QA صريحة: render → inspect frames → fix",
+   "حدد إيه اللي يتفحص: تداخل، قص، نص مش مقروء، استعجال",
+   "«متسلّمش خطة أو صور؛ سلّم الفيديو النهائي»",
+   "لو عنده وقت: «اشتغل براحتك»",
+   "ممكن «ابحث عن أحدث تقنيات الموشن والصوت الأول»"
+  ],
+  "source": "prompt-motion/heyiammallik-e72d17",
+  "examples": [
+   "https://prompt-motion.com/heyiammallik-e72d17",
+   "https://prompt-motion.com/aschapmann-131210",
+   "https://prompt-motion.com/brainextends-e19ac3"
+  ],
+  "tags": [
+   "Product UI",
+   "Music",
+   "Kinetic type",
+   "Particles"
+  ],
+  "at": 0,
+  "studio": "guide"
+ },
+ {
+  "id": "pm-069-tools-from-zero",
+  "section": "prompting",
+  "title": "قوله يختار الأدوات بنفسه (أو ركّب السكيل)",
+  "what": "نمطين: «اشتغل كأنك مبتديش بأي أداة، متفترضش إن أدواتنا هي الأحسن» عشان يدور على أحسن حل؛ أو العكس: «ركّب سكيل HyperFrames الأول وبعدين /hyperframes …». وفي برومبتات بتقول صراحة: «لو مش قادر ترندر عندي، قول بصراحة».",
+  "how": [
+   "حدد: أداة معينة (HyperFrames/Remotion) أو حرية كاملة",
+   "لو حرية: «ابحث، ركّب اللي تحتاجه، ونضّف بعدها»",
+   "لو أداة: سمّي السكيل/الأمر صراحة",
+   "«قول بصراحة لو مش هتقدر تعمل MP4 هنا»",
+   "آخر خطوة: «سيب الفيديو النهائي بس وامسح الملفات المؤقتة»"
+  ],
+  "source": "prompt-motion/reflex-cloud-72ffe5",
+  "examples": [
+   "https://prompt-motion.com/reflex-cloud-72ffe5",
+   "https://prompt-motion.com/danilowm-d3720d",
+   "https://prompt-motion.com/rebutonepress-810f78",
+   "https://prompt-motion.com/pankajstwt-49978ed"
+  ],
+  "tags": [
+   "Kinetic type",
+   "Music",
+   "Product UI",
+   "Charts"
+  ],
+  "at": 0,
+  "studio": "guide"
+ },
+ {
+  "id": "pm-070-beats-in-one-timeline-file",
+  "section": "prompting",
+  "title": "كل التوقيتات في ملف واحد بالبيتس",
+  "what": "تنظيم مشروع محترف: كل cue عايش في timeline.ts بالبيتس (مش ثواني)، وكل نص في copy.ts، والمشاهد مفيهاش أي رقم سحري. كده تغيير الأغنية أو النص بيبقى سطر واحد. ينطبق على HyperFrames عندنا بنفس الفكرة.",
+  "how": [
+   "timeline.(js|json): BPM + قايمة events بالبيت",
+   "copy.(js|json): كل نص على الشاشة (عربي) في مكان واحد",
+   "دالة beat(n) = offset + n × 60/BPM",
+   "المشاهد تقرا من الملفين بس",
+   "لما المزيكا تتغير: غيّر BPM والـoffset وخلاص"
+  ],
+  "source": "prompt-motion/antonio-kodheli-490109",
+  "examples": [
+   "https://prompt-motion.com/antonio-kodheli-490109",
+   "https://prompt-motion.com/notdwd-c2037d"
+  ],
+  "tags": [
+   "Product UI",
+   "Music",
+   "Photos"
+  ],
+  "at": 0,
+  "studio": "guide"
+ }
+]
