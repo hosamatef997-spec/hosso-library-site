@@ -172,6 +172,16 @@
     },
     // overlays and scene effects: a clip of each, the name, and the exact key to write in the scene
     overlays() { demos(C.overlays || [], (d) => d.section === "overlays" ? `"${d.id}": { … }` : ""); },
+    // tools: what each one does for HOSSO, its status and where it lives
+    tools() {
+      const list = C.tools || [];
+      setCount(list.length);
+      list.forEach((t) => grid.append(h(`<article class="card"><div class="meta" style="padding:22px 22px 20px">
+        <div class="meta-row"><h3 style="font-size:22px">${esc(t.name)}</h3><span class="tag gold">${esc(t.status)}</span></div>
+        <div class="tags" style="margin:8px 0 12px"><span class="tag">${esc(t.kind)}</span></div>
+        <p>${esc(t.what)}</p><p style="color:var(--gold-hi);margin-top:10px">لينا: ${esc(t.use)}</p>
+        <div class="tags" style="margin-top:14px">${code("المكان", t.path)}${t.link ? `<a class="tag" href="${esc(t.link)}" ${/^https?:/.test(t.link) ? 'target="_blank" rel="noopener"' : ""}>افتح ↗</a>` : ""}</div></div></article>`)));
+    },
     // the editing assets pack: filter by folder, search by name; video previews play while on screen, the path copies
     assets() {
       const all = C.assets || [];
@@ -356,7 +366,7 @@
       draw();
     },
     home() {
-      const n = { fonts: C.fonts.length, pairs: C.pairs.length, motion: Object.keys(MOVES).length, transitions: C.transitions.length, scenes: C.scenes.length, stickers: C.stickers.length, sounds: C.sounds.length, typing: 6, ideas: (C.ideas || []).length, inspiration: (C.inspiration || []).length, backgrounds: C.backgrounds.length, overlays: (C.overlays || []).length, effects: (C.effects || []).length, carousels: (C.carousels || []).length };
+      const n = { fonts: C.fonts.length, pairs: C.pairs.length, motion: Object.keys(MOVES).length, transitions: C.transitions.length, scenes: C.scenes.length, stickers: C.stickers.length, sounds: C.sounds.length, typing: 6, ideas: (C.ideas || []).length, inspiration: (C.inspiration || []).length, backgrounds: C.backgrounds.length, tools: (C.tools || []).length, assets: (C.assets || []).length, overlays: (C.overlays || []).length, effects: (C.effects || []).length, carousels: (C.carousels || []).length };
       document.querySelectorAll("[data-n]").forEach((el) => (el.textContent = n[el.dataset.n] ?? ""));
       const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
       // each scene is its own small clip now: loop it, show its poster until it plays
