@@ -306,6 +306,15 @@
         $(".big-play", el).addEventListener("click", () => { out.textContent = ""; c.run(out); });
       });
     },
+    ready() {
+      const list = C.ready || [];
+      setCount(list.length);
+      list.forEach((v) => {
+        const el = h(`<article class="card"><div class="stage"><div class="phone"><video muted playsinline loop preload="none" style="object-fit:contain;background:#000" poster="${v.poster}" src="${v.video}"></video><button class="sound-toggle">SOUND OFF</button></div></div>
+          <div class="meta"><div class="meta-row"><h3>${esc(v.title)}</h3>${code("نسخ مكان الملف", v.file)}</div><p>${esc(v.info)}</p><div class="tags"><span class="tag gold">جاهز</span>${v.date ? `<span class="tag">${esc(v.date)}</span>` : ""}</div></div></article>`);
+        grid.append(el);
+      });
+    },
     backgrounds() {
       setCount(C.backgrounds.length);
       C.backgrounds.forEach((b) => {
@@ -401,7 +410,7 @@
       draw();
     },
     home() {
-      const n = { fonts: C.fonts.length, pairs: C.pairs.length, motion: Object.keys(MOVES).length, transitions: C.transitions.length, scenes: C.scenes.length, stickers: C.stickers.length, sounds: C.sounds.length, typing: 6, ideas: (C.ideas || []).length, inspiration: (C.inspiration || []).length, backgrounds: C.backgrounds.length, tools: (C.tools || []).length, assets: (C.assets || []).length, overlays: (C.overlays || []).length, effects: (C.effects || []).length, carousels: (C.carousels || []).length };
+      const n = { fonts: C.fonts.length, pairs: C.pairs.length, motion: Object.keys(MOVES).length, transitions: C.transitions.length, scenes: C.scenes.length, stickers: C.stickers.length, sounds: C.sounds.length, typing: 6, ideas: (C.ideas || []).length, inspiration: (C.inspiration || []).length, backgrounds: C.backgrounds.length, tools: (C.tools || []).length, assets: (C.assets || []).length, overlays: (C.overlays || []).length, effects: (C.effects || []).length, carousels: (C.carousels || []).length, ready: (C.ready || []).length };
       document.querySelectorAll("[data-n]").forEach((el) => (el.textContent = n[el.dataset.n] ?? ""));
       const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
       // each scene is its own small clip now: loop it, show its poster until it plays
