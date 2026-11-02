@@ -322,3 +322,11 @@ a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 .pm-actions { display: flex; flex-wrap: wrap; gap: 6px; }
 .pm-btn { direction: ltr; font: 700 12px var(--mono); color: var(--dim); border: 1px solid var(--line-2); padding: 5px 10px; border-radius: 8px; white-space: nowrap; transition: .2s; }
 .pm-btn:hover { color: var(--gold); border-color: rgba(173, 131, 48, 0.45); }
+
+/* cards follow the clip's shape (portrait / square / wide), each shape in its own grid */
+.phone.square { aspect-ratio: 1 / 1; }
+.phone.wide { aspect-ratio: 16 / 9; }
+.grid.square { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+.grid-sub { margin: 46px 0 18px; font: 600 26px "El Messiri", serif; color: var(--gold, #c9a44c); direction: rtl; }
+.grid-sub:first-child { margin-top: 8px; }
+@media (max-width: 720px) { .grid.square { grid-template-columns: 1fr; } }

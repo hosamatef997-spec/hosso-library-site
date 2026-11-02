@@ -2,6 +2,7 @@
 (() => {
   const C = window.CATALOG;
   const page = document.body.dataset.page;
+  const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
   const $ = (s, el = document) => el.querySelector(s);
   const h = (html) => { const t = document.createElement("template"); t.innerHTML = html.trim(); return t.content.firstElementChild; };
   const esc = (s = "") => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -156,13 +157,23 @@
     },
     scenes() {
       setCount(C.scenes.length);
-      // search by name or by what it does
+      // one grid per clip shape, so every card has the shape of its clip: portrait 9:16, square, wide 16:9
+      const shape = (ar) => (!ar ? "tall" : ar > 1.2 ? "wide" : ar > 0.8 ? "square" : "tall");
+      const grids = { tall: grid };
+      const after = grid;
+      [["square", "مربع 1:1"], ["wide", "بالعرض 16:9"]].forEach(([k, title], i) => {
+        if (!C.scenes.some((s) => s.clip && shape(s.clip.ar) === k)) return;
+        const head = h(`<h2 class="grid-sub">${title}</h2>`), g = h(`<section class="grid ${k === "wide" ? "wide" : "square"}"></section>`);
+        (i === 0 ? after : grids.square || after).after(head); head.after(g); grids[k] = g;
+      });
+      if (grids.square || grids.wide) grid.before(h(`<h2 class="grid-sub">بالطول 9:16</h2>`));
       const q = $("#q");
-      if (q) q.addEventListener("input", () => { const t = q.value.trim().toLowerCase(); [...grid.children].forEach((el, i) => { const s = C.scenes[i]; el.style.display = !t || `${s.id} ${s.info}`.toLowerCase().includes(t) ? "" : "none"; }); });
+      if (q) q.addEventListener("input", () => { const t = q.value.trim().toLowerCase(); $$(".grid .card[data-k]").forEach((el) => { el.style.display = !t || el.dataset.k.includes(t) ? "" : "none"; }); });
       C.scenes.forEach((s) => {
-        const el = h(`<article class="card"><div class="stage"><div class="phone">${s.clip ? `<video muted playsinline loop preload="none" poster="${s.clip.poster}" src="${s.clip.video}"></video><button class="sound-toggle">SOUND OFF</button>` : '<div class="no-clip">لسه مفيش كليب مترندر للمشهد ده<br/>(بيتعمل في ريل التجربة الجاي)</div>'}</div></div>
+        const k = shape(s.clip && s.clip.ar);
+        const el = h(`<article class="card" data-k="${esc(`${s.id} ${s.name || ""} ${s.info}`.toLowerCase())}"><div class="stage"><div class="phone ${k}">${s.clip ? `<video muted playsinline loop preload="none" poster="${s.clip.poster}" src="${s.clip.video}"></video><button class="sound-toggle">SOUND OFF</button>` : '<div class="no-clip">لسه مفيش كليب مترندر للمشهد ده<br/>(بيتعمل في ريل التجربة الجاي)</div>'}</div></div>
           <div class="meta"><div class="meta-row"><h3>${esc(s.name || s.id)}</h3>${code(s.key || `"type": "${s.id}"`)}</div><p>${esc(s.info)}</p>${s.clip ? `<div class="tags">${s.effect ? `<span class="tag gold">مؤثر</span>` : ""}${s.tag ? `<span class="tag gold">${esc(s.tag)}</span>` : ""}<span class="tag">${s.effect || s.tag ? esc(s.clip.from) : `من ${esc(s.clip.from)}`}</span>${s.clip.date ? `<span class="tag">${esc(s.clip.date)}</span>` : ""}</div>` : ""}</div></article>`);
-        grid.append(el);
+        (grids[k] || grid).append(el);
         const v = $("video", el);
         if (!v) return;
         v.addEventListener("timeupdate", () => { if (v.currentTime >= s.clip.end - 0.05) v.currentTime = s.clip.start; });
@@ -309,10 +320,16 @@
     ready() {
       const list = C.ready || [];
       setCount(list.length);
+      const wideG = h(`<section class="grid wide"></section>`);
+      if (list.some((v) => v.ar > 1.2)) { grid.before(h(`<h2 class="grid-sub">بالطول 9:16</h2>`)); grid.after(wideG); grid.after(h(`<h2 class="grid-sub">بالعرض 16:9</h2>`)); }
       list.forEach((v) => {
-        const el = h(`<article class="card"><div class="stage"><div class="phone"><video muted playsinline loop preload="none" style="object-fit:contain;background:#000" poster="${v.poster}" src="${v.video}"></video><button class="sound-toggle">SOUND OFF</button></div></div>
-          <div class="meta"><div class="meta-row"><h3>${esc(v.title)}</h3>${code("نسخ مكان الملف", v.file)}</div><p>${esc(v.info)}</p><div class="tags"><span class="tag gold">جاهز</span>${v.date ? `<span class="tag">${esc(v.date)}</span>` : ""}</div></div></article>`);
-        grid.append(el);
+        const wide = v.ar > 1.2;
+        const el = h(`<article class="card"><div class="stage"><div class="phone ${wide ? "wide" : "tall"}"><video muted playsinline loop preload="none" poster="${v.poster}" src="${v.video}"></video><button class="sound-toggle">SOUND OFF</button></div></div>
+          <div class="meta"><div class="meta-row"><h3>${esc(v.title)}</h3>${v.file ? code("نسخ مكان الملف", v.file) : ""}</div><p>${esc(v.info)}</p><div class="tags"><span class="tag gold">جاهز</span>${v.date ? `<span class="tag">${esc(v.date)}</span>` : ""}</div></div></article>`);
+        (wide ? wideG : grid).append(el);
+        const vid = $("video", el);
+        onView(el, () => { if (vid.preload === "none") vid.preload = "auto"; vid.play().catch(() => {}); }, () => vid.pause());
+        $(".sound-toggle", el).addEventListener("click", (e) => { vid.muted = !vid.muted; e.target.textContent = vid.muted ? "SOUND OFF" : "SOUND ON"; });
       });
     },
     backgrounds() {
