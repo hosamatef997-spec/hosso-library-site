@@ -365,6 +365,41 @@
       document.querySelectorAll(".chip").forEach((c) => c.addEventListener("click", () => { document.querySelectorAll(".chip").forEach((x) => x.classList.toggle("on", x === c)); only = c.dataset.f; draw(); }));
       draw();
     },
+    // prompt-motion.com reference shelf (private library only): other creators' Claude motion videos + the exact prompt, credited to each creator
+    promptmotion() {
+      const list = window.PROMPTMOTION || [];
+      const AR = { "Kinetic type": "كلام متحرك", Shapes: "أشكال", Music: "موسيقى", "Product UI": "واجهات منتجات", Particles: "جزيئات", Diagrams: "رسوم توضيحية", Charts: "رسوم بيانية", Characters: "شخصيات", Photos: "صور", Phone: "موبايل", Code: "كود" };
+      const tagsBox = $("#tags");
+      const all = [...new Set(list.flatMap((x) => x.tags))].sort((a, b) => list.filter((x) => x.tags.includes(b)).length - list.filter((x) => x.tags.includes(a)).length);
+      tagsBox.innerHTML = `<button class="chip on" data-tag="all">الكل ${list.length}</button>` + all.map((t) => `<button class="chip" data-tag="${esc(t)}">${esc(AR[t] || t)} ${list.filter((x) => x.tags.includes(t)).length}</button>`).join("")
+        + `<button class="chip" data-tag="__skill">سكيلات ${list.filter((x) => x.skill).length}</button>`;
+      let tag = "all", q = "";
+      const draw = () => {
+        grid.innerHTML = "";
+        const shown = list.filter((x) => (tag === "all" || (tag === "__skill" ? !!x.skill : x.tags.includes(tag))) && (!q || [x.title, x.prompt, x.creator, x.handle, ...x.tags, ...x.tags.map((t) => AR[t] || "")].join(" ").toLowerCase().includes(q)));
+        setCount(shown.length);
+        if (!shown.length) grid.append(h('<div class="empty" style="grid-column:1/-1">مفيش برومبت بالكلمة دي.</div>'));
+        shown.forEach((x) => {
+          const ar = x.w && x.h ? Math.max(x.w / x.h, 0.8) : 16 / 9;
+          const el = h(`<article class="card pm-card"><div class="stage"><div class="pm-box" style="aspect-ratio:${ar.toFixed(3)}"><video muted playsinline loop preload="none" poster="${x.poster}" src="${x.video}"></video></div><span class="code pm-type">${x.type === "Skill" ? "SKILL" : "PROMPT"}</span></div>
+            <div class="meta"><h3 dir="auto">${esc(x.title)}</h3>
+            <a class="pm-credit" href="${esc(x.post)}" target="_blank" rel="noopener"><b>${esc(x.creator)}</b> <span>@${esc(x.handle)}</span> <i>البوست الأصلي ↗</i></a>
+            <div class="tags">${x.tags.map((t) => `<span class="tag">${esc(AR[t] || t)}</span>`).join("")}${x.model ? `<span class="tag soon">${esc(x.model)}${x.effort ? " · " + esc(x.effort) : ""}</span>` : ""}${Object.entries(x.details || {}).map(([k, v]) => `<span class="tag">${esc(k)}: ${esc(v)}</span>`).join("")}${x.posted ? `<span class="tag">${esc(x.posted)}</span>` : ""}</div>
+            ${x.skill?.install ? `<pre class="pm-prompt pm-install">${esc(x.skill.install)}</pre>` : ""}
+            <pre class="pm-prompt" dir="auto">${esc(x.prompt)}</pre>
+            <div class="pm-actions"><button class="code" data-copy="${esc(x.prompt)}">انسخ البرومبت</button>${x.prompt.length > 420 || x.prompt.split("\n").length > 7 ? '<button class="pm-btn pm-more">اعرض كله</button>' : ""}${x.skill?.repo ? `<a class="pm-btn" href="${esc(x.skill.repo)}" target="_blank" rel="noopener">الريبو ↗</a>` : ""}<a class="pm-btn" href="${esc(x.url)}" target="_blank" rel="noopener">prompt-motion ↗</a></div></div></article>`);
+          grid.append(el);
+          const v = $("video", el);
+          el.addEventListener("mouseenter", () => { v.preload = "auto"; v.play().catch(() => {}); });
+          el.addEventListener("mouseleave", () => v.pause());
+          const more = $(".pm-more", el);
+          if (more) more.addEventListener("click", () => { const open = el.classList.toggle("open"); more.textContent = open ? "اقفله" : "اعرض كله"; });
+        });
+      };
+      $("#q").addEventListener("input", (e) => { q = e.target.value.trim().toLowerCase(); draw(); });
+      tagsBox.addEventListener("click", (e) => { const b = e.target.closest("[data-tag]"); if (!b) return; tagsBox.querySelectorAll(".chip").forEach((c) => c.classList.toggle("on", c === b)); tag = b.dataset.tag; draw(); });
+      draw();
+    },
     home() {
       const n = { fonts: C.fonts.length, pairs: C.pairs.length, motion: Object.keys(MOVES).length, transitions: C.transitions.length, scenes: C.scenes.length, stickers: C.stickers.length, sounds: C.sounds.length, typing: 6, ideas: (C.ideas || []).length, inspiration: (C.inspiration || []).length, backgrounds: C.backgrounds.length, tools: (C.tools || []).length, assets: (C.assets || []).length, overlays: (C.overlays || []).length, effects: (C.effects || []).length, carousels: (C.carousels || []).length };
       document.querySelectorAll("[data-n]").forEach((el) => (el.textContent = n[el.dataset.n] ?? ""));
