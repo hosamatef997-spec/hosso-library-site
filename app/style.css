@@ -330,3 +330,73 @@ a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 .grid-sub { margin: 46px 0 18px; font: 600 26px "El Messiri", serif; color: var(--gold, #c9a44c); direction: rtl; }
 .grid-sub:first-child { margin-top: 8px; }
 @media (max-width: 720px) { .grid.square { grid-template-columns: 1fr; } }
+
+/* =====================================================================================================================
+   Identity H «كحلي وشامبين» — Hossam fixed it 2026-11-06 for the series, the site's inner pages and this library.
+   Same values as design/REFERENCE.md and design/brand.mjs. Fonts are local: Beiruti (Arabic) + Bricolage Grotesque (Latin).
+   Font cards keep their own faces (set inline), so only the library's own chrome changes here.
+   ===================================================================================================================== */
+@font-face { font-family: "Beiruti"; src: url("../assets/fonts/brand/beiruti-var-arabic.woff2") format("woff2"); font-weight: 200 900; font-display: swap; unicode-range: U+0600-06FF, U+0750-077F, U+0870-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FE74, U+FE76-FEFC; }
+@font-face { font-family: "Beiruti"; src: url("../assets/fonts/brand/beiruti-var-latin.woff2") format("woff2"); font-weight: 200 900; font-display: swap; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Bricolage Grotesque"; src: url("../assets/fonts/brand/bricolage-grotesque-var-latin.woff2") format("woff2"); font-weight: 200 800; font-display: swap; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+:root {
+  --bg: #0F1B33; --panel: #172440; --card: #172440; --line: #2B3B5E; --line-2: rgba(90, 110, 147, .6);
+  --text: #F4EFE6; --dim: #A9B1C2; --mute: rgba(169, 177, 194, .72);
+  --gold: #D8B878; --gold-hi: #ECD3A0; --gold-lo: rgba(216, 184, 120, .5); --glow: rgba(216, 184, 120, .3);
+  --deep: #08101F; --slate-a: rgba(90, 110, 147, .28);
+  --ui: "Beiruti", "Bricolage Grotesque", "Cairo", system-ui, sans-serif; --serif: "Bricolage Grotesque", "Beiruti", sans-serif; --accent: "Bricolage Grotesque", sans-serif;
+  color-scheme: dark;
+}
+html { background: var(--bg); }
+body { background: radial-gradient(1200px 640px at 70% -10%, rgba(90, 110, 147, .32), transparent 62%), var(--bg); }
+::selection { background: var(--gold); color: var(--deep); }
+h1, h2, .group-title { font-family: var(--ui); font-weight: 800; letter-spacing: 0; }
+
+/* top bar + buttons: solid champagne with navy text */
+.top { background: rgba(15, 27, 51, .9); }
+.top .brand span { font-family: var(--accent); font-weight: 500; letter-spacing: .18em; color: var(--gold); }
+.top .nav a.on { color: var(--deep); background: var(--gold); }
+.home-link { font-family: var(--accent); color: var(--gold); }
+.tag.gold, .chip.on, .h-btn.gold, .big-play, .code:hover, .code.done, .h-kind { background: var(--gold); color: var(--deep); border-color: var(--gold); }
+.chip.on { background: rgba(216, 184, 120, .12); color: var(--gold); }
+.code { color: var(--gold); background: rgba(216, 184, 120, .08); border-color: rgba(216, 184, 120, .3); }
+.tag.soon { border-color: rgba(216, 184, 120, .45); }
+.pm-btn:hover { border-color: rgba(216, 184, 120, .45); }
+
+/* cards, stages and boxes: Panel cards on Navy, Deep inside */
+.card { background: var(--panel); }
+.card .stage { background: radial-gradient(circle at 50% 120%, var(--slate-a), transparent 60%), var(--deep); }
+.mini .box { background: rgba(23, 36, 64, .9); border-color: var(--line); }
+.mini.b .box { border-color: rgba(216, 184, 120, .6); }
+.replay, .sound-toggle { background: rgba(8, 16, 31, .7); }
+.type-stage .term, .prompt, .pm-prompt, .pm-box { background: var(--deep); }
+.snd .bar { background: linear-gradient(90deg, rgba(216, 184, 120, 0), rgba(216, 184, 120, .26)); }
+.tile { background: linear-gradient(160deg, #172440, #08101F 70%); }
+.tile:hover { box-shadow: 0 0 80px rgba(216, 184, 120, .12); }
+.grid-sub { font-family: var(--ui); font-weight: 800; color: var(--gold); }
+
+/* home */
+.h-copy h1 { font-family: var(--ui); font-weight: 800; }
+.h-copy h1 em { font-family: var(--accent); font-weight: 700; }
+.h-lead b, .h-n b, .h-row i { font-family: var(--accent); }
+.h-btn, .h-cap h2, .h-rest h3, .h-new h3, .h-row b, .h-room h2 { font-family: var(--ui); }
+.h-cap h2, .h-rest h3, .h-new h3, .h-room h2 { font-weight: 800; }
+.h-row b { font-weight: 700; }
+.h-phone { box-shadow: 0 40px 90px rgba(0, 0, 0, .55), 0 0 0 6px rgba(216, 184, 120, .05); }
+.h-phone:nth-child(2) { box-shadow: 0 40px 90px rgba(0, 0, 0, .55), 0 0 60px rgba(216, 184, 120, .18); }
+.h-type { background: radial-gradient(circle at 50% 45%, var(--slate-a), transparent 65%); }
+.h-rooms { background: radial-gradient(900px 420px at 50% 0%, var(--slate-a), transparent 70%), var(--panel); }
+.h-screen { background: var(--deep); }
+.h-ideas figcaption { background: var(--deep); }
+.h-fonts { background: radial-gradient(circle at 50% 45%, var(--slate-a), transparent 65%), var(--deep); }
+.h-fname { font-family: var(--accent); letter-spacing: .14em; color: var(--gold); }
+.h-up.font .h-kind, .h-up.sound .h-kind { background: transparent; color: var(--gold); border-color: var(--gold-lo); }
+@media (hover: hover) and (pointer: fine) {
+  .grid .card:hover .stage { box-shadow: 0 34px 80px rgba(0, 0, 0, .6), 0 0 0 1px rgba(216, 184, 120, .55); }
+}
+
+/* carousels as Instagram posts */
+.ig-post { background: var(--deep); }
+.ig-post header b, .ig-count, .ig-cap b { font-family: var(--accent); }
+.ig-nav { background: rgba(244, 239, 230, .9); color: var(--deep); }
+.ig-dots i { background: var(--line); }
