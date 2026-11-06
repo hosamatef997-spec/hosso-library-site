@@ -400,3 +400,99 @@ h1, h2, .group-title { font-family: var(--ui); font-weight: 800; letter-spacing:
 .ig-post header b, .ig-count, .ig-cap b { font-family: var(--accent); }
 .ig-nav { background: rgba(244, 239, 230, .9); color: var(--deep); }
 .ig-dots i { background: var(--line); }
+
+/* =====================================================================================================================
+   Glass «زجاجي» — Hossam 2026-11-06: «اللينكات والموقع والمكتبة… بنظام زجاجي زي الآيفون… متغيرش الخط والألوان».
+   Same material as the site's inner pages (hosso-online/brand-pages.css, glass block): translucent ivory fills, a 1px rim,
+   an edge-light ring, a soft deep shadow and a backdrop blur, over a slow field of slate and champagne light.
+   Buttons = his pick 3 «شامبين سايل», flat: a translucent champagne gradient, no shine, no shadow, ivory text.
+   The motion previews (.stage, .mini, .phone, .h-screen video) and the font cards' own faces stay exactly as they are.
+   ===================================================================================================================== */
+:root {
+  --g-fill: linear-gradient(170deg, rgba(244,239,230,.15), rgba(244,239,230,.05) 46%, rgba(244,239,230,.07));
+  --g-rim: rgba(244,239,230,.10);
+  --g-edge: inset 0 1px 0 rgba(255,255,255,.22);
+  --g-shadow: 0 22px 54px rgba(4,9,20,.42), 0 2px 6px rgba(4,9,20,.25);
+  --g-blur: blur(22px) saturate(165%);
+  --g-champ: linear-gradient(180deg, rgba(236,211,160,.86) 0%, rgba(216,184,120,.60) 55%, rgba(216,184,120,.46) 100%);
+  --g-champ-blur: blur(16px) sepia(.65) saturate(1.35) brightness(1.2);
+  --spring: cubic-bezier(.34, 1.56, .64, 1);
+}
+/* the light behind the glass */
+body::before {
+  content: ""; position: fixed; inset: -18vmax; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(38vmax 38vmax at 14% 22%, rgba(90,110,147,.62), rgba(90,110,147,0) 62%),
+    radial-gradient(30vmax 30vmax at 88% 40%, rgba(216,184,120,.18), rgba(216,184,120,0) 64%),
+    radial-gradient(44vmax 44vmax at 36% 86%, rgba(90,110,147,.45), rgba(90,110,147,0) 62%),
+    radial-gradient(28vmax 28vmax at 94% 94%, rgba(216,184,120,.10), rgba(216,184,120,0) 64%);
+}
+@media (prefers-reduced-motion: no-preference) {
+  body::before { animation: g-drift 46s ease-in-out infinite alternate; }
+  @keyframes g-drift { from { transform: translate3d(0, 0, 0) scale(1); } to { transform: translate3d(3vmax, -2.5vmax, 0) scale(1.08); } }
+}
+html { background: #0F1B33; }
+body { background: transparent; }
+
+/* the top bar: frosted glass with a light rim */
+.top { background: rgba(15,27,51,.5); border-bottom: 1px solid var(--g-rim); box-shadow: var(--g-edge), 0 10px 30px rgba(4,9,20,.3);
+  -webkit-backdrop-filter: blur(26px) saturate(175%); backdrop-filter: blur(26px) saturate(175%); }
+.home-link { border-color: var(--g-rim); background: rgba(244,239,230,.06); }
+
+/* panels: one material */
+.card, .h-panel, .h-rooms, .tile, .h-prev, .ig-post {
+  background: var(--g-fill); border: 1px solid var(--g-rim); box-shadow: var(--g-edge), var(--g-shadow);
+  -webkit-backdrop-filter: var(--g-blur); backdrop-filter: var(--g-blur);
+}
+.card { border-radius: 24px; }
+.h-panel, .tile, .h-rooms { border-radius: 28px; }
+.h-prev { border-radius: 18px; }
+/* the glass edge: light catches the top corner and fades round the rim */
+.card::before, .h-panel::before, .h-rooms::before, .tile::before, .h-prev::before {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px; pointer-events: none; z-index: 4;
+  background: linear-gradient(145deg, rgba(255,255,255,.5), rgba(255,255,255,.1) 28%, rgba(255,255,255,0) 52%, rgba(216,184,120,.08) 78%, rgba(216,184,120,.3));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+.h-rooms { position: relative; }
+.card .stage { border-bottom-color: var(--g-rim); }
+.h-cap { border-top-color: var(--g-rim); }
+.card:hover, .tile:hover { border-color: rgba(216,184,120,.45); box-shadow: var(--g-edge), 0 26px 64px rgba(4,9,20,.5), 0 0 50px rgba(216,184,120,.10); }
+.h-panel:hover, .h-up:hover .h-prev, .h-up:focus-visible .h-prev { border-color: rgba(216,184,120,.45); }
+.h-row { border-bottom-color: rgba(244,239,230,.08); }
+.chip, .tag, .h-btn:not(.gold), .code, .replay, .sound-toggle { border-color: var(--g-rim); }
+.chip, .h-btn:not(.gold) { background: var(--g-fill); -webkit-backdrop-filter: var(--g-blur); backdrop-filter: var(--g-blur); box-shadow: var(--g-edge); }
+.replay, .sound-toggle { background: rgba(8,16,31,.45); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.prompt, .pm-prompt, .pm-box, .type-stage .term { border-radius: 14px; border-color: var(--g-rim); box-shadow: inset 0 2px 10px rgba(0,0,0,.25); }
+
+/* the champagne buttons: his pick 3 «شامبين سايل», flat */
+.tag.gold, .chip.on, .h-btn.gold, .big-play, .h-kind, .top .nav a.on, .code:hover, .code.done {
+  background: var(--g-champ); border: 1px solid rgba(236,211,160,.7); color: #F4EFE6; font-weight: 800; text-shadow: 0 1px 3px rgba(8,16,31,.45);
+  box-shadow: none; -webkit-backdrop-filter: var(--g-champ-blur); backdrop-filter: var(--g-champ-blur);
+}
+.big-play svg { fill: currentColor; }
+.h-btn.gold:hover, .big-play:hover, .tag.gold:hover { color: #FFFFFF; border-color: rgba(236,211,160,.9);
+  background: linear-gradient(180deg, rgba(236,211,160,.94) 0%, rgba(216,184,120,.70) 55%, rgba(216,184,120,.56) 100%); }
+/* font and sound items keep their outline kind label */
+.h-up.font .h-kind, .h-up.sound .h-kind { background: transparent; color: var(--gold); border-color: var(--gold-lo); text-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; font-weight: 400; }
+
+/* press: a quick shrink under the finger and a spring back */
+.h-btn, .big-play, .chip, .tag.gold, .top .nav a, .home-link, .code, .replay, .sound-toggle, .pm-btn {
+  transition: transform .5s var(--spring), background .2s, border-color .2s, color .2s; }
+.h-btn:active, .big-play:active, .chip:active, .tag.gold:active, .top .nav a:active, .home-link:active, .code:active, .replay:active, .sound-toggle:active, .pm-btn:active {
+  transform: scale(.97); transition-duration: .12s; }
+.card, .tile, .h-panel, .h-up { transition: transform .5s var(--spring), border-color .25s, box-shadow .25s; }
+.card:active, .tile:active, .h-panel:active, .h-up:active { transform: scale(.985); transition-duration: .12s; }
+@media (prefers-reduced-motion: reduce) {
+  .card, .tile, .h-panel, .h-up, .h-btn, .big-play, .chip, .tag.gold, .top .nav a, .home-link, .code, .replay, .sound-toggle, .pm-btn { transition: none; }
+  .card:active, .tile:active, .h-panel:active, .h-up:active, .h-btn:active, .big-play:active, .chip:active, .tag.gold:active, .top .nav a:active, .home-link:active, .code:active, .replay:active, .sound-toggle:active, .pm-btn:active { transform: none; }
+}
+/* iOS «Reduce Transparency»: solid panels and solid champagne, no blur */
+@media (prefers-reduced-transparency: reduce) {
+  .top, .card, .h-panel, .h-rooms, .tile, .h-prev, .ig-post, .chip, .h-btn:not(.gold) { background: #172440; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .tag.gold, .chip.on, .h-btn.gold, .big-play, .h-kind, .top .nav a.on, .code:hover, .code.done { background: #D8B878; color: #08101F; text-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .card, .h-panel, .h-rooms, .tile, .h-prev, .ig-post { background: rgba(23,36,64,.92); }
+  .top { background: rgba(15,27,51,.94); }
+}
