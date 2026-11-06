@@ -231,11 +231,11 @@
       list.forEach((c) => {
         const n = c.slides.length;
         const el = h(`<article class="ig-post">
-          <header><img src="${C.portrait}" alt=""/><div><b>hossovisuals.ae</b><small>${esc(c.style)}</small></div><span class="ig-count">1/${n}</span></header>
+          <header><img src="${C.portrait}" alt=""/><div><b>hossovisuals.ai</b><small>${esc(c.style)}</small></div><span class="ig-count">1/${n}</span></header>
           <div class="ig-view"><div class="ig-track">${c.slides.map((s) => `<img loading="lazy" src="${s}" alt=""/>`).join("")}</div>
             <button class="ig-nav prev" aria-label="السابق">‹</button><button class="ig-nav next" aria-label="التالي">›</button></div>
           <div class="ig-bar"><span class="ig-acts">${ICON.heart}${ICON.comment}${ICON.share}</span><span class="ig-dots">${c.slides.map((_, i) => `<i class="${i ? "" : "on"}"></i>`).join("")}</span><span class="ig-save">${ICON.save}</span></div>
-          <p class="ig-cap"><b>hossovisuals.ae</b> ${esc(c.title)}</p></article>`);
+          <p class="ig-cap"><b>hossovisuals.ai</b> ${esc(c.title)}</p></article>`);
         grid.append(el);
         const track = el.querySelector(".ig-track"), dots = el.querySelectorAll(".ig-dots i"), count = el.querySelector(".ig-count");
         let k = 0;
