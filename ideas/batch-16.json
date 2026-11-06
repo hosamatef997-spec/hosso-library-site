@@ -537,8 +537,9 @@
     ],
     "source": "DezYrhDooJN",
     "at": 1.5,
-    "studio": "todo",
-    "fit": 5
+    "studio": "built",
+    "fit": 5,
+    "builder": "zones"
   },
   {
     "id": "059-full-timeline-proof",
@@ -553,8 +554,9 @@
     ],
     "source": "DezYrhDooJN",
     "at": 25,
-    "studio": "todo",
-    "fit": 5
+    "studio": "built",
+    "fit": 5,
+    "builder": "timeline"
   },
   {
     "id": "060-mascot-rise-intro",
@@ -617,8 +619,9 @@
     ],
     "source": "swipe/061",
     "at": 1,
-    "studio": "todo",
-    "fit": 5
+    "studio": "built",
+    "fit": 5,
+    "builder": "soundline"
   },
   {
     "id": "061-series-part-number-title",
