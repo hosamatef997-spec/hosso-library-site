@@ -29,9 +29,58 @@ main.wrap { position: relative; z-index: 1; }
 html { background: #0F1B33; }
 body { position: relative; }
 .cl-room { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
-.cl-shape { position: absolute; display: block; height: auto; -webkit-user-select: none; user-select: none; }
+.cl-shape { position: absolute; display: block; will-change: transform; }
+.cl-shape img { display: block; width: 100%; height: auto; -webkit-user-select: none; user-select: none; }
 .cl-shape.mid { width: clamp(120px, 15vw, 210px); }
-.cl-shape.near { width: clamp(170px, 22vw, 300px); filter: blur(7px); opacity: .92; }
-.cl-shape.far { width: clamp(78px, 9vw, 128px); filter: blur(1.6px); opacity: .82; }
-.cl-shape.left { left: 0; transform: translateX(-44%) rotate(-8deg); }
-.cl-shape.right { right: 0; transform: translateX(44%) rotate(9deg); }
+.cl-shape.near { width: clamp(170px, 22vw, 300px); }
+.cl-shape.near img { filter: blur(7px); opacity: .92; }
+.cl-shape.far { width: clamp(78px, 9vw, 128px); }
+.cl-shape.far img { filter: blur(1.6px); opacity: .82; }
+.cl-shape.left { left: 0; } .cl-shape.left img { translate: -44% 0; rotate: -8deg; }
+.cl-shape.right { right: 0; } .cl-shape.right img { translate: 44% 0; rotate: 9deg; }
+
+/* ---------- life in the room (R131 «الخلفية ساكتة»): each shape drifts on its own slow ellipse (cover-look.js sets
+   --ax --ay --r --fd --fdel per shape), a key light crosses the room and the grid catches it ---------- */
+@keyframes cl-drift {
+  0%    { transform: translate3d(0, calc(var(--ay) * -1), 0) rotate(0deg); }
+  12.5% { transform: translate3d(calc(var(--ax) * .707), calc(var(--ay) * -.707), 0) rotate(calc(var(--r) * .707)); }
+  25%   { transform: translate3d(var(--ax), 0, 0) rotate(var(--r)); }
+  37.5% { transform: translate3d(calc(var(--ax) * .707), calc(var(--ay) * .707), 0) rotate(calc(var(--r) * .707)); }
+  50%   { transform: translate3d(0, var(--ay), 0) rotate(0deg); }
+  62.5% { transform: translate3d(calc(var(--ax) * -.707), calc(var(--ay) * .707), 0) rotate(calc(var(--r) * -.707)); }
+  75%   { transform: translate3d(calc(var(--ax) * -1), 0, 0) rotate(calc(var(--r) * -1)); }
+  87.5% { transform: translate3d(calc(var(--ax) * -.707), calc(var(--ay) * -.707), 0) rotate(calc(var(--r) * -.707)); }
+  100%  { transform: translate3d(0, calc(var(--ay) * -1), 0) rotate(0deg); }
+}
+.cl-shape img, .cl-objs img { animation: cl-drift var(--fd, 16s) linear var(--fdel, 0s) infinite; will-change: transform; }
+
+.cl-light { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+/* the cool rim light, far and slow */
+.cl-light .cl-rim { position: absolute; left: -25vmax; bottom: -30vmax; width: 80vmax; height: 80vmax; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(110,138,196,.13), rgba(110,138,196,0)); animation: cl-rim 47s ease-in-out infinite alternate; }
+@keyframes cl-rim { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(38vw, -24vh, 0); } }
+/* the warm key light; inside it the grid drawn in champagne moves the other way, so the lit lines sit on the real grid */
+.cl-light .cl-key { position: absolute; left: 0; top: 0; width: clamp(520px, 72vmax, 1080px); aspect-ratio: 1; margin: calc(clamp(520px, 72vmax, 1080px) / -2) 0 0 calc(clamp(520px, 72vmax, 1080px) / -2);
+  overflow: hidden; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(216,184,120,.105), rgba(216,184,120,.03) 60%, rgba(216,184,120,0));
+  -webkit-mask-image: radial-gradient(closest-side, #000 0%, rgba(0,0,0,.55) 45%, transparent 100%);
+          mask-image: radial-gradient(closest-side, #000 0%, rgba(0,0,0,.55) 45%, transparent 100%);
+  animation: cl-key 38s ease-in-out infinite alternate; }
+.cl-light .cl-lit { position: absolute; left: calc(clamp(520px, 72vmax, 1080px) / 2); top: calc(clamp(520px, 72vmax, 1080px) / 2); width: 100vw; height: 100vh;
+  background-image: linear-gradient(rgba(216,184,120,.2) 1px, transparent 1px), linear-gradient(90deg, rgba(216,184,120,.2) 1px, transparent 1px);
+  background-size: 64px 64px; background-position: center top; animation: cl-lit 38s ease-in-out infinite alternate; }
+@keyframes cl-key {
+  0%   { transform: translate3d(82vw, 10vh, 0); }
+  50%  { transform: translate3d(24vw, 34vh, 0); }
+  100% { transform: translate3d(66vw, 78vh, 0); }
+}
+@keyframes cl-lit {
+  0%   { transform: translate3d(-82vw, -10vh, 0); }
+  50%  { transform: translate3d(-24vw, -34vh, 0); }
+  100% { transform: translate3d(-66vw, -78vh, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cl-shape img, .cl-objs img, .cl-light .cl-rim, .cl-light .cl-key, .cl-light .cl-lit { animation: none; }
+  .cl-light { display: none; }
+}

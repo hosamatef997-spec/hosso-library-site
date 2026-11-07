@@ -51,12 +51,64 @@
     var gap = W < 700 ? 780 : 880, layer = document.createElement("div");
     layer.className = "cl-room"; layer.setAttribute("aria-hidden", "true");
     for (var y = start, k = 0; y < H - 420 && k < 9; y += gap, k++) {
-      var im = document.createElement("img");
+      // a holder for the scroll/pointer depth, the image inside drifts on its own slow ellipse (R131 «الخلفية ساكتة»)
+      var box = document.createElement("div"), im = document.createElement("img"), s = seed(k + topic.length * 7);
       im.src = MEDIA + set[k % set.length] + ".webp"; im.alt = ""; im.loading = "lazy"; im.decoding = "async";
-      im.className = "cl-shape " + DEPTH[k % 3] + (k % 2 ? " left" : " right"); im.style.top = Math.round(y) + "px";
-      layer.appendChild(im);
+      box.className = "cl-shape " + DEPTH[k % 3] + (k % 2 ? " left" : " right"); box.style.top = Math.round(y) + "px";
+      box.setAttribute("data-depth", DEPTH[k % 3]); drift(im, s, DEPTH[k % 3]);
+      box.appendChild(im); layer.appendChild(box);
     }
     document.body.appendChild(layer);
+    life();
+  }
+
+  // ---------- life in the room (Hossam 2026-11-07 R131 «الخلفية ساكتة كده… حاجات تضيف حياة») ----------
+  // 1) a slow key light crosses the room and the grid lines catch it where it passes (compositor-only: the lit grid
+  //    counter-moves inside the moving light, so its lines stay exactly on the grid);  2) every shape drifts on its own
+  //    slow ellipse;  3) depth: near shapes travel faster than the page when you scroll, far ones slower, and on a
+  //    computer they lean a little toward the mouse.  Nothing moves for people who ask the system for less motion.
+  var CALM = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function seed(n) { var x = Math.sin(n * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); }
+  function drift(el, s, depth) {
+    var amp = depth === "near" ? 30 : depth === "mid" ? 20 : 12;
+    el.style.setProperty("--ax", (amp * (0.6 + s * 0.5)).toFixed(1) + "px");
+    el.style.setProperty("--ay", (amp * (0.9 + s * 0.4)).toFixed(1) + "px");
+    el.style.setProperty("--r", (2.2 + s * 2.6).toFixed(1) + "deg");
+    var dur = 10 + s * 6; el.style.setProperty("--fd", dur.toFixed(1) + "s"); el.style.setProperty("--fdel", (-s * dur).toFixed(1) + "s");
+  }
+  function light() {
+    if (document.querySelector(".cl-light")) return;
+    var L = document.createElement("div"); L.className = "cl-light"; L.setAttribute("aria-hidden", "true");
+    L.innerHTML = '<i class="cl-rim"></i><div class="cl-key"><div class="cl-lit"></div></div>';
+    document.body.insertBefore(L, document.body.firstChild);
+  }
+  function fitLit() { var g = document.querySelector(".cl-lit"); if (g) { g.style.width = document.documentElement.clientWidth + "px"; g.style.height = window.innerHeight + "px"; } }
+  // the hero shapes of the episode pages drift too
+  function heroDrift() { document.querySelectorAll(".cl-objs img").forEach(function (im, i) { if (!im.style.getPropertyValue("--fd")) drift(im, seed(i + 41), im.classList.contains("soft") ? "near" : "mid"); }); }
+  var boxes = [], mx = 0, my = 0, tx = 0, ty = 0, ticking = false, wired = false;
+  var F = { near: { s: -0.16, m: 18 }, mid: { s: -0.05, m: 9 }, far: { s: 0.1, m: 5 } };
+  function frame() {
+    ticking = false; tx += (mx - tx) * 0.08; ty += (my - ty) * 0.08;
+    var vh = window.innerHeight, mid = window.scrollY + vh / 2;
+    boxes.forEach(function (b) {
+      var c = b.el.offsetTop + b.el.offsetHeight / 2, d = c - mid;
+      if (Math.abs(d) > vh * 1.4) return;   // off screen: leave it
+      var f = F[b.depth] || F.mid;
+      b.el.style.transform = "translate3d(" + (tx * f.m).toFixed(1) + "px," + (d * f.s + ty * f.m).toFixed(1) + "px,0)";
+    });
+    if (Math.abs(mx - tx) > 0.002 || Math.abs(my - ty) > 0.002) tick();
+  }
+  function tick() { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
+  function life() {
+    if (CALM) return;
+    light(); fitLit(); heroDrift();
+    boxes = [].slice.call(document.querySelectorAll(".cl-room .cl-shape")).map(function (el) { return { el: el, depth: el.getAttribute("data-depth") }; });
+    tick();
+    if (wired) return; wired = true;
+    window.addEventListener("scroll", tick, { passive: true });
+    if (window.matchMedia("(pointer: fine)").matches) window.addEventListener("pointermove", function (e) {
+      mx = e.clientX / window.innerWidth - 0.5; my = e.clientY / window.innerHeight - 0.5; tick();
+    }, { passive: true });
   }
   function all() { document.querySelectorAll(".cl-head").forEach(fit); room(); }
   var timer; window.addEventListener("resize", function () { clearTimeout(timer); timer = setTimeout(all, 80); });
