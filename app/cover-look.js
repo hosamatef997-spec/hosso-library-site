@@ -36,7 +36,29 @@
     p.setAttribute("transform", "rotate(-3 " + cx.toFixed(0) + " " + cy.toFixed(0) + ")");
     p.style.strokeWidth = Math.max(3, Math.min(6, b.height * 0.045)).toFixed(1);
   }
-  function all() { document.querySelectorAll(".cl-head").forEach(fit); }
+  // the carousel's 3D room on the web too (Hossam 2026-11-07, R126 «نفس الفكرة على الموقع والمكتبة واللينكات»): a few shapes from
+  // the page topic peek in from the screen edges down the page, behind the glass cards; near ones soft, far ones a little soft
+  var SETS = { lenses: ["disc-face", "disc-edge", "disc-face", "disc-edge"], keys: ["key-slash", "key-enter", "glyph-slash", "disc-edge"],
+    coins: ["coin-face", "coin-edge", "disc-edge", "coin-face"] };
+  var DEPTH = ["mid", "near", "far"], MEDIA = "assets/cover/";   // copy of hossovisuals.online/cover-look.js, shapes from library/assets/cover/
+  function room() {
+    var old = document.querySelector(".cl-room"); if (old) old.remove();
+    var tag = document.querySelector("[data-props]"), topic = tag ? tag.getAttribute("data-props") : "lenses", set = SETS[topic] || SETS.lenses;
+    var H = document.body.offsetHeight, W = document.documentElement.clientWidth;
+    var head = document.querySelector(".page-head") || document.querySelector(".hero") || document.querySelector(".h-hero, .head") || document.querySelector("main > section"), start = 0;
+    if (head) start = head.getBoundingClientRect().bottom + window.scrollY + (W < 700 ? 120 : 160);
+    if (!start || start < 500 || start > H * 0.6) start = 700;
+    var gap = W < 700 ? 780 : 880, layer = document.createElement("div");
+    layer.className = "cl-room"; layer.setAttribute("aria-hidden", "true");
+    for (var y = start, k = 0; y < H - 420 && k < 9; y += gap, k++) {
+      var im = document.createElement("img");
+      im.src = MEDIA + set[k % set.length] + ".webp"; im.alt = ""; im.loading = "lazy"; im.decoding = "async";
+      im.className = "cl-shape " + DEPTH[k % 3] + (k % 2 ? " left" : " right"); im.style.top = Math.round(y) + "px";
+      layer.appendChild(im);
+    }
+    document.body.appendChild(layer);
+  }
+  function all() { document.querySelectorAll(".cl-head").forEach(fit); room(); }
   var timer; window.addEventListener("resize", function () { clearTimeout(timer); timer = setTimeout(all, 80); });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(all); else window.addEventListener("load", all);
   all();

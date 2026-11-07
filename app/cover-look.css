@@ -24,3 +24,14 @@ main.wrap { position: relative; z-index: 1; }
 .head .kicker { font: 600 15px "Bricolage Grotesque", var(--accent), sans-serif; letter-spacing: .06em; color: #D8B878; }
 .head h1 .cl-blk { display: inline-block; background: #D8B878; color: #0F1B33; padding: .02em .22em .1em; line-height: 1.12; border-radius: .2em; }
 .h-rest h3, .h-new-head h3 { font-weight: 800; }
+
+/* the 3D room down the page, as on hossovisuals.online (R126): shapes peek in from the screen edges behind the content */
+html { background: #0F1B33; }
+body { position: relative; }
+.cl-room { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.cl-shape { position: absolute; display: block; height: auto; -webkit-user-select: none; user-select: none; }
+.cl-shape.mid { width: clamp(120px, 15vw, 210px); }
+.cl-shape.near { width: clamp(170px, 22vw, 300px); filter: blur(7px); opacity: .92; }
+.cl-shape.far { width: clamp(78px, 9vw, 128px); filter: blur(1.6px); opacity: .82; }
+.cl-shape.left { left: 0; transform: translateX(-44%) rotate(-8deg); }
+.cl-shape.right { right: 0; transform: translateX(44%) rotate(9deg); }
