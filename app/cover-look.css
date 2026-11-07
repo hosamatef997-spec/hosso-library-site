@@ -1,0 +1,26 @@
+/* HOSSO «cover look» for the motion library, 2026-11-07 — the carousel cover Hossam picked (dashboard R114, R120),
+   the same language as hossovisuals.online (/cover-look.css there): a faint grid on the navy, the home title in two big
+   lines (an ivory outline line, then a champagne block), every section title on the champagne block. Script: cover-look.js. */
+.cl-grid { position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image: linear-gradient(rgba(169,177,194,.075) 1px, transparent 1px), linear-gradient(90deg, rgba(169,177,194,.075) 1px, transparent 1px);
+  background-size: 64px 64px; background-position: center top;
+  -webkit-mask-image: radial-gradient(ellipse 85% 70% at 50% 32%, #000 30%, transparent 100%);
+          mask-image: radial-gradient(ellipse 85% 70% at 50% 32%, #000 30%, transparent 100%); }
+main.wrap { position: relative; z-index: 1; }
+
+/* home: «مكتبة» outlined, «HOSSO» on the block */
+.h-copy.cl-head { position: relative; }
+.cl-head .cl-text { position: relative; width: 100%; }
+.cl-title { margin: 0; color: #F4EFE6; font-family: var(--ui), "Beiruti", sans-serif; font-weight: 800; line-height: 1.08; }
+.cl-title .cl-row { display: block; }
+.cl-title .cl-row + .cl-row { margin-top: .4rem; }
+.cl-fit { display: inline-block; white-space: nowrap; font-size: clamp(56px, 9vw, 120px); }
+.cl-title .cl-row.l2 .cl-fit { background: #D8B878; color: #0F1B33; padding: .02em .2em .1em; line-height: 1.12; }
+.cl-title bdi { unicode-bidi: isolate; font-family: "Bricolage Grotesque", var(--accent), sans-serif; font-weight: 700; letter-spacing: -.02em; }
+.cl-title .cl-row.l1 .cl-fit.cl-outline { filter: url(#cl-ring); }
+.cl-head .h-lead { margin-top: 1.6rem; }
+
+/* section pages: the champagne kicker and the title on the block */
+.head .kicker { font: 600 15px "Bricolage Grotesque", var(--accent), sans-serif; letter-spacing: .06em; color: #D8B878; }
+.head h1 .cl-blk { display: inline-block; background: #D8B878; color: #0F1B33; padding: .02em .22em .1em; line-height: 1.12; }
+.h-rest h3, .h-new-head h3 { font-weight: 800; }
