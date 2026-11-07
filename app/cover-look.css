@@ -15,12 +15,12 @@ main.wrap { position: relative; z-index: 1; }
 .cl-title .cl-row { display: block; }
 .cl-title .cl-row + .cl-row { margin-top: .4rem; }
 .cl-fit { display: inline-block; white-space: nowrap; font-size: clamp(56px, 9vw, 120px); }
-.cl-title .cl-row.l2 .cl-fit { background: #D8B878; color: #0F1B33; padding: .02em .2em .1em; line-height: 1.12; }
+.cl-title .cl-row.l2 .cl-fit { background: #D8B878; color: #0F1B33; padding: .02em .2em .1em; line-height: 1.12; border-radius: .2em; }
 .cl-title bdi { unicode-bidi: isolate; font-family: "Bricolage Grotesque", var(--accent), sans-serif; font-weight: 700; letter-spacing: -.02em; }
 .cl-title .cl-row.l1 .cl-fit.cl-outline { filter: url(#cl-ring); }
 .cl-head .h-lead { margin-top: 1.6rem; }
 
 /* section pages: the champagne kicker and the title on the block */
 .head .kicker { font: 600 15px "Bricolage Grotesque", var(--accent), sans-serif; letter-spacing: .06em; color: #D8B878; }
-.head h1 .cl-blk { display: inline-block; background: #D8B878; color: #0F1B33; padding: .02em .22em .1em; line-height: 1.12; }
+.head h1 .cl-blk { display: inline-block; background: #D8B878; color: #0F1B33; padding: .02em .22em .1em; line-height: 1.12; border-radius: .2em; }
 .h-rest h3, .h-new-head h3 { font-weight: 800; }
