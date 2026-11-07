@@ -44,8 +44,9 @@
   ],
   "source": "khaam.hq/DfOI_F6o7Fr",
   "at": 0.1,
-  "studio": "todo",
-  "fit": 5
+  "studio": "built",
+  "fit": 5,
+  "builder": "slots"
  },
  {
   "id": "077-highlight-keyword-block",
@@ -123,7 +124,7 @@
    "اربطها بوعد واضح في الكابشن عشان الناس تعرف هتاخد إيه."
   ],
   "source": "liamjohnston.ai/DfNU--SEiEs",
-  "at": 26.0,
+  "at": 26,
   "studio": "guide",
   "fit": 3
  },
@@ -203,7 +204,7 @@
    "ظبّط توقيت الظهور مع نطق الكلمة بالظبط"
   ],
   "source": "saoudalajme/DfMomH_odct",
-  "at": 1.0,
+  "at": 1,
   "studio": "todo",
   "fit": 4
  },
@@ -235,7 +236,7 @@
    "خلي الذهبي هو لون الهايلايت بدل الأزرق عشان يطابق ستايل الاستوديو"
   ],
   "source": "DdZPXX6tQgH",
-  "at": 1.0,
+  "at": 1,
   "studio": "todo",
   "fit": 4
  },
@@ -315,7 +316,7 @@
    "ضيف كروت UI عايمة جنبه بتشرح النقطة (زي كارت الخط أو الإيراد)"
   ],
   "source": "adilet.fndr/DdyqycEINNe",
-  "at": 3.0,
+  "at": 3,
   "studio": "todo",
   "fit": 4
  },
@@ -347,7 +348,7 @@
    "تابع عدد الكومنتات بالكلمة كمقياس بيع"
   ],
   "source": "majed_alzaabi_/DfPcKUJDz9B",
-  "at": 38.0,
+  "at": 38,
   "studio": "guide",
   "fit": 4
  },
@@ -395,7 +396,7 @@
    "للصفحة التقنية: «جربت +100 أداة AI في سنة» وقدّم اللي يستاهل"
   ],
   "source": "mohamed.abdou90/DfPog_5Mk3g",
-  "at": 3.0,
+  "at": 3,
   "studio": "todo",
   "fit": 4
  },
@@ -473,7 +474,7 @@
    "اربط التوقيت بجملة الكابشن، وخلي الألوان أسود وذهبي بدل البرتقالي"
   ],
   "source": "saoudalajme/DfPhPYwoVpm",
-  "at": 1.0,
+  "at": 1,
   "studio": "todo",
   "fit": 5
  },
@@ -553,7 +554,7 @@
    "لوّن الخطوط والشارات بالدهبي على الأسود عشان تبقى من هويتك"
   ],
   "source": "liamjohnston.ai/DfPenENE23_",
-  "at": 10.0,
+  "at": 10,
   "studio": "todo",
   "fit": 4
  },
@@ -570,8 +571,9 @@
   ],
   "source": "khaam.hq/DfQLeSvMpf6",
   "at": 0.5,
-  "studio": "todo",
-  "fit": 5
+  "studio": "built",
+  "fit": 5,
+  "builder": "slots"
  },
  {
   "id": "088-stamp-highlight-tag",
@@ -585,7 +587,7 @@
    "استخدمه مرة واحدة بس في الشاشة عشان يفضل مؤثر"
   ],
   "source": "khaam.hq/DfQLeSvMpf6",
-  "at": 1.0,
+  "at": 1,
   "studio": "todo",
   "fit": 4
  },
@@ -633,7 +635,7 @@
    "كرر نفس الستايل في كل فيديوهات المعلومة التقنية عشان تبقى هوية"
   ],
   "source": "weslativfx/DfPr2-yNMSA",
-  "at": 1.0,
+  "at": 1,
   "studio": "todo",
   "fit": 4
  },
